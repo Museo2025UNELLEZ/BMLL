@@ -5,7 +5,7 @@
 package DAO;
 
 import Modelo.Usuario;
-import controlador.ConexionDB;
+import controlador.conexionSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,13 +20,13 @@ public class UsuarioDAO {
                 u.apellido,
                 u.cedula,
                 u.usuario,
-                u.is_admin,
+                u.is_admin
             FROM usuarios u
             JOIN roles r ON r.id = u.rol_id
             WHERE u.usuario = ?
               AND u.password = ?
         """;   
-        try(Connection con = ConexionDB.getConnection();
+        try(Connection con = conexionSQL.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
             
            ps.setString(1, usuario);

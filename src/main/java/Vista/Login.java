@@ -3,7 +3,9 @@ package Vista;
 
 import Modelo.Usuario;
 import controlador.ControlLogin;
+import java.awt.Image;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -13,6 +15,12 @@ public class Login extends javax.swing.JFrame {
  
     public Login() {
         initComponents();
+        CargarLogo();
+        System.out.println(
+    getClass().getResource("/archivos/Recorte.png")
+);
+
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +35,7 @@ public class Login extends javax.swing.JFrame {
         lbl_clave = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btn_entrar = new javax.swing.JButton();
+        lbl_icono = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +81,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 180, -1));
+        jPanel1.add(lbl_icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 430, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,6 +99,21 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void CargarLogo(){
+        ImageIcon icon = new ImageIcon(getClass().getResource("/archivos/Recorte.png"));
+        
+        Image img = icon.getImage().getScaledInstance(lbl_icono.getWidth(),lbl_icono.getHeight(), Image.SCALE_SMOOTH);
+        
+        lbl_icono.setIcon(new ImageIcon(img));
+    }
+    private void AbrirMenu(){
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.setLocationRelativeTo(null);
+        menu.setVisible(true);
+        this.dispose();
+        
+    }
     private void box_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_usuarioActionPerformed
@@ -104,7 +129,7 @@ public class Login extends javax.swing.JFrame {
             Usuario u = control.autenticar(user, pass); 
 
             if (u != null) {
-                JOptionPane.showMessageDialog(this, "Bienvenido " + u.getUsuario());
+                AbrirMenu();
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o clave incorrectos");
             }
@@ -158,10 +183,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbl_clave;
+    private javax.swing.JLabel lbl_icono;
     private javax.swing.JLabel lbl_usuario;
     // End of variables declaration//GEN-END:variables
     
      public void open() {
+        SwingUtilities.invokeLater(() -> setLocationRelativeTo(null));
         SwingUtilities.invokeLater(() -> setVisible(true));
     }
 

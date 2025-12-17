@@ -17,7 +17,7 @@ public class Usuario {
     private String password;
     private int is_admin;
 
-    public Usuario(int id, String nombre, String apellido, String cedula, String usuario, String password, int rol_id, int is_admin) {
+    public Usuario(int id, String nombre, String apellido, String cedula, String usuario, int rol_id) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -27,9 +27,6 @@ public class Usuario {
         this.is_admin = is_admin;
     }
 
-    public Usuario(int aInt, String string, String string0, String string1, String string2, int aInt1) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     public int getId() {
         return id;
