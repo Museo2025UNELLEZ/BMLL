@@ -1,5 +1,6 @@
 package com.museodelosllanos.bmll;
 
+import Vista.Consultas;
 /**
  *
  * @author luise
@@ -7,6 +8,10 @@ package com.museodelosllanos.bmll;
 public class BMLL {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+         // Instantiate the Consultas form
+        Consultas consul = new Consultas();
+
+        // Open the form safely on the EDT
+        consul.open();
     }
 }
