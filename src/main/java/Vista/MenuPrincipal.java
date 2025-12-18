@@ -28,16 +28,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btn_consultar = new javax.swing.JButton();
+        btn_agregar = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
+        btn_actualizar = new javax.swing.JButton();
+        btn_ajustes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(901, 634));
         setMinimumSize(new java.awt.Dimension(901, 634));
-        setPreferredSize(new java.awt.Dimension(901, 634));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setMaximumSize(new java.awt.Dimension(901, 634));
@@ -50,20 +49,42 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setText("BMLL");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
 
-        jButton1.setText("Consultar Libro");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 300, 200));
+        btn_consultar.setBackground(new java.awt.Color(255, 204, 255));
+        btn_consultar.setForeground(new java.awt.Color(102, 255, 102));
+        btn_consultar.setText("Consultar Libro");
+        btn_consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_consultarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 300, 200));
 
-        jButton2.setText("Agregar Libros");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 300, 200));
+        btn_agregar.setText("Agregar Libros");
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 300, 200));
 
-        jButton3.setText("Eliminar Libro");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 300, 200));
+        btn_eliminar.setText("Eliminar Libro");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 300, 200));
 
-        jButton4.setText("Actualizar posicion Libro");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 300, 200));
+        btn_actualizar.setText("Actualizar posicion Libro");
+        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 300, 200));
 
-        jButton5.setText("Ajustes");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, -1, -1));
+        btn_ajustes.setText("Ajustes");
+        jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,6 +99,50 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
+        // TODO add your handling code here:
+        
+        Consultas consul = new Consultas();
+        consul.setLocationRelativeTo(null);
+        consul.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_btn_consultarActionPerformed
+
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        // TODO add your handling code here:
+        
+        AgregarLibro ag = new AgregarLibro();
+        ag.setLocationRelativeTo(null);
+        ag.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_btn_agregarActionPerformed
+
+    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
+        // TODO add your handling code here:
+        
+        BuscarLibroActualizar actu = new BuscarLibroActualizar();
+        actu.setLocationRelativeTo(null);
+        actu.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_btn_actualizarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        // TODO add your handling code here:
+        
+        EliminarLibro eli = new EliminarLibro();
+        eli.setLocationRelativeTo(null);
+        eli.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,11 +180,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btn_actualizar;
+    private javax.swing.JButton btn_agregar;
+    private javax.swing.JButton btn_ajustes;
+    private javax.swing.JButton btn_consultar;
+    private javax.swing.JButton btn_eliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

@@ -11,8 +11,13 @@ public class conexionSQL {
     private static String dbUsername = "root";
     private static String dbPassword = "";
 
-    public static Connection getConnection() throws SQLException
-    {
-        return DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+    public static Connection getConnection(){
+        Connection con = null;
+        try{
+            con = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return con;
     }
 }
