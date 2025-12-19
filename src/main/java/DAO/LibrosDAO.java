@@ -19,28 +19,46 @@ public class LibrosDAO {
         this.con = con;
     }
     
-    public List<Libro> ListarLibros(){
-        
-        List<Libro> lista = new ArrayList<>();
-        
-        String sql ="SELECT titulo,autor,n_copias,estante_id,tomo FROM libros";
-        
-        try(PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()){
-            
-            
-            while(rs.next()){
+public List<Libro> ListarLibros(String titulo){
+    List<Libro> lista = new ArrayList<>();
+
+    StringBuilder sql = new StringBuilder(
+        "SELECT l.titulo, l.autor, l.n_copias, l.tomo, " +
+        "CONCAT(e.codigo, '-', e.n_filas) AS posicion " +
+        "FROM libros l " +
+        "JOIN estanterias e ON l.estante_id = e.id " +
+        "WHERE 1=1"
+    ); // Cambio de la sentencia sql para incluir el codigo del estante con la fila
+
+    // Buscar/filtrar por titulo y limita los resultados a 50
+    
+    if (titulo != null && !titulo.trim().isEmpty()) {
+        sql.append(" AND l.titulo LIKE ?  LIMIT 50");
+    } 
+
+    try (PreparedStatement ps = con.prepareStatement(sql.toString())) {
+        if (titulo != null && !titulo.trim().isEmpty()) {
+            ps.setString(1, "%" + titulo + "%");
+        }
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
                 lista.add(new Libro(
-                rs.getString("titulo"),
-                rs.getString("autor"),
-                rs.getInt("n_copias"),
-                rs.getInt("estante_id"),
-                rs.getString("tomo")
+                    rs.getString("titulo"),
+                    rs.getString("autor"),
+                    rs.getInt("n_copias"),
+                    rs.getString("posicion"),
+                    rs.getString("tomo")
                 ));
             }
-        }catch(SQLException e){
-            e.printStackTrace();
         }
-        return lista;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return lista;
+}
+
+
+
 }
