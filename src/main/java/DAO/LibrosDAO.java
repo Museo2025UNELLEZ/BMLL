@@ -46,9 +46,9 @@ public List<Libro> ListarLibros(String titulo){
                 lista.add(new Libro(
                     rs.getString("titulo"),
                     rs.getString("autor"),
+                    rs.getString("tomo"),
                     rs.getInt("n_copias"),
-                    rs.getString("posicion"),
-                    rs.getString("tomo")
+                    rs.getString("posicion")
                 ));
             }
         }
