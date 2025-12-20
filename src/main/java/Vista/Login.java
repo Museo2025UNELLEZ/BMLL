@@ -16,6 +16,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         CargarLogo();
+        getRootPane().setDefaultButton(btn_entrar);
 
         
     }
@@ -80,6 +81,11 @@ public class Login extends javax.swing.JFrame {
                 btn_entrarActionPerformed(evt);
             }
         });
+        btn_entrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btn_entrarKeyPressed(evt);
+            }
+        });
         jPanel1.add(btn_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 180, -1));
         jPanel1.add(lbl_icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 430, 270));
 
@@ -138,7 +144,6 @@ public class Login extends javax.swing.JFrame {
             Usuario u = control.autenticar(user, pass); 
 
             if (u != null) {
-                System.out.println(u);
                 AbrirMenu();
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o clave incorrectos");
@@ -159,6 +164,10 @@ public class Login extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void btn_entrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_entrarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_entrarKeyPressed
 
     /**
      * @param args the command line arguments

@@ -16,8 +16,8 @@ public class controlLibro {
         this.dao = new LibrosDAO(con);
     }
     
-    public List<Libro> obtenerLibros(){
-        return dao.ListarLibros();
+    public List<Libro> obtenerLibros(String titulo){
+        return dao.ListarLibros(titulo);
     }
     
 }

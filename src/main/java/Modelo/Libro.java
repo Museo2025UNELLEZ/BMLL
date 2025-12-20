@@ -14,14 +14,16 @@ public class Libro {
     private int n_copias;
     private int estante_id;
     private String tomo;
+    private String posicion;
 
-    public Libro(String titulo, String autor, int n_copias, int estante_id, String tomo) {
+    public Libro(String titulo, String autor, String tomo, int n_copias, String posicion) {
         this.titulo = titulo;
         this.autor = autor;
-        this.n_copias = n_copias;
-        this.estante_id = estante_id;
         this.tomo = tomo;
+        this.n_copias = n_copias;
+        this.posicion = posicion;
     }
+
 
     public String getTitulo() {
         return titulo;
@@ -41,6 +43,10 @@ public class Libro {
 
     public String getTomo() {
         return tomo;
+    }
+
+    public String getPosicion() {
+        return posicion;
     }
     
     
