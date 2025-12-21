@@ -127,8 +127,8 @@
                     <Column editable="false" title="autor" type="java.lang.String"/>
                     <Column editable="false" title="tomo" type="java.lang.String"/>
                     <Column editable="false" title="cantidad" type="java.lang.String"/>
-                    <Column editable="true" title="posicion" type="java.lang.Object"/>
-                    <Column editable="false" title="accion" type="java.lang.String"/>
+                    <Column editable="false" title="posicion" type="java.lang.Object"/>
+                    <Column editable="true" title="accion" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

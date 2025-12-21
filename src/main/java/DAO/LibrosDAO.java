@@ -58,7 +58,9 @@ public List<Libro> ListarLibros(String titulo){
 
     return lista;
 }
-
+public void eliminarlibro(String titulo){
+    StringBuilder sql = new StringBuilder("DELETE * WHERE titulo ="+titulo+"");
+}
 
 
 }

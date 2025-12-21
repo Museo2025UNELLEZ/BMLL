@@ -72,7 +72,7 @@ public class EliminarLibro extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -193,6 +193,16 @@ public class EliminarLibro extends javax.swing.JFrame {
             "eliminar"
         });
         }
+       int colBoton = tb_consulta.getColumnCount() - 1;
+
+        // Asignar renderer y editor
+        tb_consulta.getColumnModel().getColumn(colBoton)
+                .setCellRenderer(new Renderizarboton());
+        tb_consulta.getColumnModel().getColumn(colBoton)
+                .setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta));
+
+        // Ajustar altura de filas
+        tb_consulta.setRowHeight(30);
     }
     
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
@@ -208,8 +218,7 @@ public class EliminarLibro extends javax.swing.JFrame {
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         // TODO add your handling code here:
-        tb_consulta.getColumn("Acción").setCellRenderer(new Renderizarboton());
-        tb_consulta.getColumn("Acción").setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta, control));
+   
         cargarLibros();
     }//GEN-LAST:event_btn_buscarActionPerformed
 
