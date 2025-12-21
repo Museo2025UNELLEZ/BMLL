@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class LibrosDAO {
     
@@ -23,7 +24,7 @@ public List<Libro> ListarLibros(String titulo){
     List<Libro> lista = new ArrayList<>();
 
     StringBuilder sql = new StringBuilder(
-        "SELECT l.titulo, l.autor, l.n_copias, l.tomo, " +
+        "SELECT l.id, l.titulo, l.autor, l.n_copias, l.tomo, " +
         "CONCAT(e.codigo, '-', e.n_filas) AS posicion " +
         "FROM libros l " +
         "JOIN estanterias e ON l.estante_id = e.id " +
@@ -44,6 +45,7 @@ public List<Libro> ListarLibros(String titulo){
         try (ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 lista.add(new Libro(
+                    rs.getInt("id"),
                     rs.getString("titulo"),
                     rs.getString("autor"),
                     rs.getString("tomo"),
@@ -58,8 +60,25 @@ public List<Libro> ListarLibros(String titulo){
 
     return lista;
 }
-public void eliminarlibro(String titulo){
-    StringBuilder sql = new StringBuilder("DELETE * WHERE titulo ="+titulo+"");
+public int eliminarlibro(int id){
+    int res = 0;
+    StringBuilder sql = new StringBuilder("DELETE FROM libros WHERE id = ?");
+    
+    try(PreparedStatement ps = con.prepareStatement(sql.toString())){
+        ps.setInt(1,id);
+        int filasAfectadas = ps.executeUpdate();
+        
+        if(filasAfectadas>0){
+            res = 1; 
+        }
+        else{
+            res=0;
+        }
+        
+    }catch(SQLException e){
+        e.printStackTrace();
+    }
+        return res;
 }
 
 

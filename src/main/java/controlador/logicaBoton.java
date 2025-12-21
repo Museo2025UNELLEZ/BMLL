@@ -25,10 +25,10 @@ public class logicaBoton extends DefaultCellEditor{
     private int row;
     private controlLibro control;
     
-    public logicaBoton(JCheckBox checkBox, JTable tabla){
+    public logicaBoton(JCheckBox checkBox, JTable tabla, controlLibro control){
         super(checkBox);
         this.tabla = tabla;
-        this.boton = boton;
+        this.control = control;
         
         boton = new JButton("Eliminar");
         boton.setBackground(Color.red);
@@ -44,9 +44,16 @@ public class logicaBoton extends DefaultCellEditor{
     @Override public Object getCellEditorValue() {
         int opcion = JOptionPane.showConfirmDialog(tabla, "¿Seguro que deseas eliminar este libro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
     if (opcion == JOptionPane.YES_OPTION) { 
-        String titulo = (String) tabla.getValueAt(row, 0);
         
-        control.eliminarPorTitulo(titulo); 
+        int id = (int) tabla.getValueAt(row, 0);
+        int verif = control.eliminarPorId(id); 
+        
+        if(verif>0){
+            JOptionPane.showMessageDialog(tabla,"El libro fue eliminado EXISTOSAMENTE","EXITO",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(tabla,"Hubo un error y no se pudo eliminar el libro seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+        }
         
     ((DefaultTableModel) tabla.getModel()).removeRow(row); } return null; }
     

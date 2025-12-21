@@ -9,6 +9,7 @@ package Modelo;
  * @author Admin
  */
 public class Libro {
+    private int id;
     private String titulo;
     private String autor;
     private int n_copias;
@@ -16,7 +17,8 @@ public class Libro {
     private String tomo;
     private String posicion;
 
-    public Libro(String titulo, String autor, String tomo, int n_copias, String posicion) {
+    public Libro(int id,String titulo, String autor, String tomo, int n_copias, String posicion) {
+        this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.tomo = tomo;
@@ -24,6 +26,9 @@ public class Libro {
         this.posicion = posicion;
     }
 
+    public int getId() {
+        return id;
+    }
 
     public String getTitulo() {
         return titulo;

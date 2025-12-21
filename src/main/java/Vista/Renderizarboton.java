@@ -12,10 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-/**
- *
- * @author luise
- */
+
 public class Renderizarboton extends JButton implements TableCellRenderer {
     public Renderizarboton(){
         setOpaque(true);

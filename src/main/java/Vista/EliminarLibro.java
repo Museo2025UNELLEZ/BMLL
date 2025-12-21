@@ -185,6 +185,7 @@ public class EliminarLibro extends javax.swing.JFrame {
         
        for (Libro l : libros) {
         modelo.addRow(new Object[]{
+            l.getId(),
             l.getTitulo(),
             l.getAutor(),
             l.getTomo(),
@@ -193,15 +194,19 @@ public class EliminarLibro extends javax.swing.JFrame {
             "eliminar"
         });
         }
-       int colBoton = tb_consulta.getColumnCount() - 1;
+       
+       //oculta la columna id para pasarla al boton eliminar
+        tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
+        tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
+        tb_consulta.getColumnModel().getColumn(0).setWidth(0);
+       
+        int colBoton = tb_consulta.getColumnCount() - 1;
 
         // Asignar renderer y editor
-        tb_consulta.getColumnModel().getColumn(colBoton)
-                .setCellRenderer(new Renderizarboton());
-        tb_consulta.getColumnModel().getColumn(colBoton)
-                .setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta));
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta,control));
 
-        // Ajustar altura de filas
+        
         tb_consulta.setRowHeight(30);
     }
     
