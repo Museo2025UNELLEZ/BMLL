@@ -25,7 +25,7 @@ public class logicaBoton extends DefaultCellEditor{
     private int row;
     private controlLibro control;
     
-    public logicaBoton(JCheckBox checkBox, JTable tabla, SystemColor control){
+    public logicaBoton(JCheckBox checkBox, JTable tabla){
         super(checkBox);
         this.tabla = tabla;
         this.boton = boton;
@@ -46,7 +46,7 @@ public class logicaBoton extends DefaultCellEditor{
     if (opcion == JOptionPane.YES_OPTION) { 
         String titulo = (String) tabla.getValueAt(row, 0);
         
-        control.eliminarPorLibro(titulo); 
+        control.eliminarPorTitulo(titulo); 
         
     ((DefaultTableModel) tabla.getModel()).removeRow(row); } return null; }
     

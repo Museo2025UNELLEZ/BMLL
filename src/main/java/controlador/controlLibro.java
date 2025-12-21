@@ -20,8 +20,8 @@ public class controlLibro {
         return dao.ListarLibros(titulo);
     }
     
-    public void eliminarPorLibro(String titulo){
-        
+    public void eliminarPorTitulo(String titulo){
+        dao.eliminarlibro(titulo);
    }
     
 }
