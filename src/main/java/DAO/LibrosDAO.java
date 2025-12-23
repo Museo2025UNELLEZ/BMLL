@@ -20,6 +20,38 @@ public class LibrosDAO {
         this.con = con;
     }
     
+// Listar categorías
+public List<String> listarCategorias(){
+    List<String> lista = new ArrayList<>();
+    String sql = "SELECT nombre FROM categorias ORDER BY nombre";
+
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            lista.add(rs.getString("nombre"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
+
+// Listar estanterías
+public List<String> listarEstanterias(){
+    List<String> lista = new ArrayList<>();
+    String sql = "SELECT codigo FROM estanterias ORDER BY codigo";
+
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            lista.add(rs.getString("codigo"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
+    
 public List<Libro> ListarLibros(String titulo){
     List<Libro> lista = new ArrayList<>();
 
@@ -43,15 +75,15 @@ public List<Libro> ListarLibros(String titulo){
         }
 
         try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                lista.add(new Libro(
-                    rs.getInt("id"),
-                    rs.getString("titulo"),
-                    rs.getString("autor"),
-                    rs.getString("tomo"),
-                    rs.getInt("n_copias"),
-                    rs.getString("posicion")
-                ));
+            while (rs.next()) {    
+                Libro l = new Libro();
+                l.setId(rs.getInt("id"));
+                l.setTitulo(rs.getString("titulo"));
+                l.setAutor(rs.getString("autor"));
+                l.setTomo(rs.getString("tomo"));
+                l.setN_copias(rs.getInt("n_copias"));
+                l.setPosicion(rs.getString("posicion"));
+                lista.add(l);
             }
         }
     } catch (SQLException e) {
@@ -80,6 +112,69 @@ public int eliminarlibro(int id){
     }
         return res;
 }
+
+ public Libro obtenerLibroPorId(int id){
+        Libro libro = null;
+        String sql = "SELECT * FROM libros WHERE id = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    libro = new Libro();
+                    libro.setId(rs.getInt("id"));
+                    libro.setTitulo(rs.getString("titulo"));
+                    libro.setAutor(rs.getString("autor"));
+                    libro.setCategoria_id(rs.getInt("categoria_id"));
+                    libro.setIsbn(rs.getString("isbn"));
+                    libro.setN_copias(rs.getInt("n_copias"));
+                    libro.setEstante_id(rs.getInt("estante_id"));
+                    libro.setFila(rs.getInt("fila"));
+                    libro.setFecha_publicacion(rs.getDate("fecha_publicacion"));
+                    libro.setEditorial(rs.getString("editorial"));
+                    libro.setTomo(rs.getString("tomo"));
+                    libro.setEdicion(rs.getString("edicion"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return libro;
+    }
+
+public int actualizarLibro(Libro libro){
+    int res = 0;
+    String sql = "UPDATE libros SET titulo=?, autor=?, categoria_id=?, isbn=?, " +
+                 "n_copias=?, estante_id=?, fila=?, fecha_publicacion=?, editorial=?, tomo=?, edicion=? " +
+                 "WHERE id=?";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, libro.getTitulo());
+        ps.setString(2, libro.getAutor());
+        ps.setInt(3, libro.getCategoria_id());
+        ps.setString(4, libro.getIsbn());
+        ps.setInt(5, libro.getN_copias());
+        ps.setInt(6, libro.getEstante_id());
+        ps.setInt(7, libro.getFila());
+        ps.setDate(8, libro.getFecha_publicacion()); // java.sql.Date
+        ps.setString(9, libro.getEditorial());
+        ps.setString(10, libro.getTomo());
+        ps.setString(11, libro.getEdicion());
+        ps.setInt(12, libro.getId());
+
+        int filasAfectadas = ps.executeUpdate();
+        if (filasAfectadas > 0) {
+            res = 1; // éxito
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return res;
+}
+
 
 
 }

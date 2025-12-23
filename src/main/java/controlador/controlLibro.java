@@ -24,5 +24,22 @@ public class controlLibro {
         int num = dao.eliminarlibro(id);
         return num;
    }
+
+    public Libro obtenerLibroPorId(int id){
+        return dao.obtenerLibroPorId(id);
+    }
+    
+    // Delegar al DAO
+    public List<String> listarCategorias(){
+        return dao.listarCategorias();  // ✅ usar el objeto dao
+    }
+
+    public List<String> listarEstanterias(){
+        return dao.listarEstanterias(); // ✅ usar el objeto dao
+    }
+    
+    public int actualizarLibro(Libro libro){
+        return dao.actualizarLibro(libro);
+    }
     
 }

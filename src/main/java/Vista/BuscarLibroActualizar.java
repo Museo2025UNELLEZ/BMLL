@@ -5,10 +5,12 @@
 package Vista;
 
 import Modelo.Libro;
+import controlador.LogicaBotonActualizar;
 import controlador.conexionSQL;
 import controlador.controlLibro;
 import java.sql.Connection;
 import java.util.List;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -63,14 +65,14 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "Posicion", "Cantidad", "Autor", "Editorial"
+                "Titulo", "Autor", "Cantidad", "Posicion", "Acción"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -183,13 +185,28 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         
        for (Libro l : libros) {
         modelo.addRow(new Object[]{
+            l.getId(),
             l.getTitulo(),
             l.getAutor(),
-            l.getTomo(),
             l.getN_copias(),
             l.getPosicion(),
+            "Actualizar"  // Botón         
         });
         }
+       
+       // Ocultar columna id
+        tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
+        tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
+        tb_consulta.getColumnModel().getColumn(0).setWidth(0);
+
+        int colBoton = tb_consulta.getColumnCount() - 1;
+
+        // Asignar renderer y editor para botón actualizar
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new RenderizarBotonActualizar());
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new LogicaBotonActualizar(new JCheckBox(), tb_consulta, control));
+
+        tb_consulta.setRowHeight(30);
+
     }
     
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
