@@ -75,19 +75,7 @@ public class LogicaBotonActualizar extends DefaultCellEditor {
         boton.setBackground(Color.blue);
         boton.setForeground(Color.WHITE);
 
-        boton.addActionListener(e -> {
-            fireEditingStopped(); // cierra la edición de la celda
-
-            int id = (int) tabla.getValueAt(row, 0);
-            Libro libro = control.obtenerLibroPorId(id);
-
-            if(libro != null){
-                ActualizarLibro ventana = new ActualizarLibro(control, libro);
-                ventana.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(tabla,"No se pudo cargar el libro","Error",JOptionPane.ERROR_MESSAGE);
-            }
-});
+        boton.addActionListener(e -> fireEditingStopped());
 
     }
 

@@ -8,6 +8,7 @@ import DAO.LibrosDAO;
 import Modelo.Libro;
 import java.util.List;
 import java.sql.Connection;
+import java.util.Map;
 
 public class controlLibro {
     private final LibrosDAO dao;
@@ -32,6 +33,14 @@ public class controlLibro {
     // Delegar al DAO
     public List<String> listarCategorias(){
         return dao.listarCategorias();  // ✅ usar el objeto dao
+    }
+    
+    public Map<Integer, String> listarCategoriasMap() {
+    return dao.listarCategoriasMap();
+    }
+
+    public Map<Integer, String> listarEstanteriasMap(){
+        return dao.listarEstanteriasMap();
     }
 
     public List<String> listarEstanterias(){

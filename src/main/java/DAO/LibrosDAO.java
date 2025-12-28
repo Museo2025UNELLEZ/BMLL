@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 public class LibrosDAO {
@@ -50,6 +52,34 @@ public List<String> listarEstanterias(){
         e.printStackTrace();
     }
     return lista;
+}
+
+public Map<Integer, String> listarCategoriasMap() {
+    Map<Integer, String> categorias = new HashMap<>();
+    String sql = "SELECT id, nombre FROM categorias";
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            categorias.put(rs.getInt("id"), rs.getString("nombre"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return categorias;
+}
+
+public Map<Integer, String> listarEstanteriasMap() {
+    Map<Integer, String> estanterias = new HashMap<>();
+    String sql = "SELECT id, codigo FROM estanterias";
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            estanterias.put(rs.getInt("id"), rs.getString("codigo"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return estanterias;
 }
     
 public List<Libro> ListarLibros(String titulo){

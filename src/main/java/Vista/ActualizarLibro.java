@@ -6,6 +6,7 @@ package Vista;
 
 import Modelo.Libro;
 import controlador.controlLibro;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,20 +16,34 @@ import javax.swing.JOptionPane;
 public class ActualizarLibro extends javax.swing.JFrame {
     private controlLibro control;
     private Libro libro;
+    private Map<Integer, String> categorias;
+    private Map<Integer, String> estanterias;
 
     public ActualizarLibro(controlLibro control, Libro libro) {
         initComponents(); // inicializa los textfields y combobox
         this.control = control;
         this.libro = libro;
         
+        categorias = control.listarCategoriasMap();
+        estanterias = control.listarEstanteriasMap();
+        
+        for (String nombre : categorias.values()) {
+            comboCategoria.addItem(nombre);
+        }
+        comboCategoria.setSelectedItem(categorias.get(libro.getCategoria_id()));
+
+        for (String codigo : estanterias.values()) {
+            comboEstanteria.addItem(codigo);
+        }
+        comboEstanteria.setSelectedItem(estanterias.get(libro.getEstante_id()));
+        
+        /*
         for(String cat : control.listarCategorias()){
             comboCategoria.addItem(cat);
         }
         for(String est : control.listarEstanterias()){
             comboEstanteria.addItem(est);
-        }
-
-
+        }*/
         
         // Cargar datos en los campos
         txtTitulo.setText(libro.getTitulo());
@@ -40,10 +55,19 @@ public class ActualizarLibro extends javax.swing.JFrame {
         txtIsbn.setText(libro.getIsbn());
         txtFila.setText(String.valueOf(libro.getFila()));
         txtEdicion.setText(libro.getEdicion());
-        
+        /*
         // Seleccionar el ID correcto del libro
-        comboCategoria.setSelectedItem(String.valueOf(libro.getCategoria_id()));
-        comboEstanteria.setSelectedItem(String.valueOf(libro.getEstante_id()));
+        Map<Integer, String> categorias = control.listarCategoriasMap();
+        for (String nombre : categorias.values()) {
+            comboCategoria.addItem(nombre);
+        }
+        comboCategoria.setSelectedItem(categorias.get(libro.getCategoria_id()));
+
+        Map<Integer, String> estanterias = control.listarEstanteriasMap();
+        for (String codigo : estanterias.values()) {
+            comboEstanteria.addItem(codigo);
+        }
+        comboEstanteria.setSelectedItem(estanterias.get(libro.getEstante_id()));*/
 
     }
 
@@ -157,6 +181,11 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 630, 260, -1));
 
         btn_Volver.setText("Volver");
+        btn_Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VolverActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 280, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -232,12 +261,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
     
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         // TODO add your handling code here:
-        
-        BuscarLibroActualizar tablaActualizar = new BuscarLibroActualizar();
-        tablaActualizar.setLocationRelativeTo(null);
-        tablaActualizar.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btn_volverActionPerformed
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
@@ -252,9 +276,27 @@ public class ActualizarLibro extends javax.swing.JFrame {
         libro.setFila(Integer.parseInt(txtFila.getText()));
         libro.setEdicion(txtEdicion.getText());
 
-        // Obtener el ID seleccionado en los combos
-        libro.setCategoria_id(Integer.parseInt(comboCategoria.getSelectedItem().toString()));
-        libro.setEstante_id(Integer.parseInt(comboEstanteria.getSelectedItem().toString()));
+        // Obtener el nombre/código seleccionado
+        String categoriaNombre = comboCategoria.getSelectedItem().toString();
+        String estanteriaCodigo = comboEstanteria.getSelectedItem().toString();
+        
+        // Buscar el ID correspondiente en el Map
+        int categoriaId = categorias.entrySet()
+            .stream()
+            .filter(e -> e.getValue().equals(categoriaNombre))
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .orElse(0);
+
+        int estanteriaId = estanterias.entrySet()
+            .stream()
+            .filter(e -> e.getValue().equals(estanteriaCodigo))
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .orElse(0);
+
+    libro.setCategoria_id(categoriaId);
+    libro.setEstante_id(estanteriaId);
 
         // Llamar al control para actualizar
         int resultado = control.actualizarLibro(libro);
@@ -267,9 +309,13 @@ public class ActualizarLibro extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_actualizarActionPerformed
-public ActualizarLibro() {
+
+    private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_VolverActionPerformed
+/*public ActualizarLibro() {
     initComponents(); // inicializa los textfields y combobox
-}
+}*/
 
     /**
      * @param args the command line arguments
@@ -302,7 +348,7 @@ public ActualizarLibro() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ActualizarLibro().setVisible(true);
+                //new ActualizarLibro().setVisible(true);
             }
         });
     }
