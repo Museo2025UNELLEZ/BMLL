@@ -1,6 +1,8 @@
 
 package Vista;
 
+import DAO.CategoriaDAO;
+import Modelo.Categorias;
 import Modelo.Libro;
 import controlador.conexionSQL;
 import controlador.controlLibro;
@@ -20,6 +22,8 @@ public class Consultas extends javax.swing.JFrame {
     public Consultas() {
         initComponents();
         con = conexionSQL.getConnection();
+        cargarCategorias();
+        
     }
 
     /**
@@ -93,7 +97,6 @@ public class Consultas extends javax.swing.JFrame {
         });
 
         combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        combo_categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novela", "historia", "relato", "politica", " " }));
 
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -107,27 +110,25 @@ public class Consultas extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_volver)
-                .addGap(308, 308, 308)
-                .addComponent(lbl_consulta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(btn_volver)
+                        .addGap(308, 308, 308)
+                        .addComponent(lbl_consulta))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbl_titulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_titulo)
+                                .addGap(18, 18, 18)
+                                .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,6 +189,17 @@ public class Consultas extends javax.swing.JFrame {
         }
     }
     
+    private void cargarCategorias(){
+        CategoriaDAO dao = new CategoriaDAO();
+        try{
+           for(Categorias c : dao.ListarCategorias()){
+              combo_categorias.addItem(c);
+           } 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         // TODO add your handling code here:
         
@@ -243,7 +255,7 @@ public class Consultas extends javax.swing.JFrame {
     private javax.swing.JTextField box_titulo;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_volver;
-    private javax.swing.JComboBox<String> combo_categorias;
+    private javax.swing.JComboBox<Categorias> combo_categorias;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_consulta;

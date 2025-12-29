@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import DAO.CategoriaDAO;
+import Modelo.Categorias;
 import Modelo.Libro;
 import controlador.LogicaBotonActualizar;
 import controlador.conexionSQL;
@@ -25,6 +27,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
     public BuscarLibroActualizar() {
         initComponents();
         con = conexionSQL.getConnection();
+        cargarCategorias();
         
     }
 
@@ -44,7 +47,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         box_titulo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btn_buscar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        combo_categorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,8 +102,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novela", "historia", "relato", "politica", " " }));
+        combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +135,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,7 +150,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
                     .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(btn_buscar)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -209,6 +211,17 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
 
     }
     
+     private void cargarCategorias(){
+        CategoriaDAO dao = new CategoriaDAO();
+        try{
+           for(Categorias c : dao.ListarCategorias()){
+              combo_categorias.addItem(c);
+           } 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         // TODO add your handling code here:
         
@@ -265,7 +278,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
     private javax.swing.JTextField box_titulo;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_volver;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Categorias> combo_categorias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
