@@ -24,7 +24,14 @@
     <version>8.3.0</version>
 </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+    <dependency>
+          <groupId>com.toedter</groupId>
+          <artifactId>jcalendar</artifactId>
+          <version>1.4</version>
+      </dependency>
     </dependencies>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
