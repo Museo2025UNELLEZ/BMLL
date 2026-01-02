@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
-
+import com.toedter.calendar.JCalendar;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Dimension;
+import com.toedter.calendar.JDateChooser;
 import controlador.conexionSQL;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -11,7 +17,12 @@ import javax.swing.DefaultComboBoxModel;
 import java.sql.Connection;               
 import java.sql.Statement;                
 import java.sql.ResultSet;                
-import java.sql.SQLException;              
+import java.sql.SQLException;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.UIManager;
+import javax.swing.JComponent;
+
 
 
 /**
@@ -21,9 +32,75 @@ import java.sql.SQLException;
 public class AgregarLibro extends javax.swing.JFrame {
     private Connection con;
     
+    private JDateChooser dateChooser;
+    
   
     public AgregarLibro() {
         initComponents();
+        jDayChooser1.setVisible(false);
+        jMonthChooser3.setVisible(false);
+        jYearChooser1.setVisible(false);
+        jButtonFecha.addActionListener(e -> {
+            boolean visible = !jYearChooser1.isVisible();
+            jYearChooser1.setVisible(visible);
+            jMonthChooser3.setVisible(visible);
+            jDayChooser1.setVisible(visible);
+        });
+        // Método para actualizar el campo de texto
+        Runnable actualizar = () -> {
+        int year = jYearChooser1.getYear();
+        int month = jMonthChooser3.getMonth() + 1; // MonthChooser empieza en 0
+        int day = jDayChooser1.getDay();
+        jTextFieldFecha.setText(
+            String.format("%04d-%02d-%02d", year, month, day)
+    );
+};
+
+// Listeners
+jYearChooser1.addPropertyChangeListener("year", e -> actualizar.run());
+jMonthChooser3.addPropertyChangeListener("month", e -> actualizar.run());
+jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
+
+
+        /*Jcalendar funcional y codigo para Ajustar el tamaño de la interfaz del calendario, pero sin poder ajustar el tamaño del combobox
+        año y fecha. para volver a usarlo solo quitar los "/*" del comentario
+        UIManager.put("ComboBox.font", new Font("SansSerif", Font.PLAIN, 16));
+        UIManager.put("Spinner.font", new Font("SansSerif", Font.PLAIN, 16));
+        UIManager.put("ComboBox.minimumSize", new Dimension(150, 35));
+        UIManager.put("Spinner.minimumSize", new Dimension(100, 35));/*
+        initComponents();
+        dateChooser = new JDateChooser();
+        dateChooser.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(dateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 250, 30));
+        JTextField editor = (JTextField) dateChooser.getDateEditor().getUiComponent();
+        editor.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        editor.setPreferredSize(new Dimension(150, 30));
+        for (Component comp : dateChooser.getComponents()) {
+            if (comp instanceof JButton) {
+                JButton boton = (JButton) comp;
+                boton.setPreferredSize(new Dimension(30, 30));
+            }    
+        }
+        JCalendar calendario = dateChooser.getJCalendar();
+        calendario.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        calendario.setPreferredSize(new Dimension(350, 300));
+        JComboBox<?> comboMes = (JComboBox<?>)calendario.getMonthChooser().getComboBox();
+        comboMes.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        comboMes.setPreferredSize(new Dimension(120, 30));
+        Component compAnio = calendario.getYearChooser().getSpinner();
+        if (compAnio instanceof JSpinner) {
+            JSpinner spinnerAnio = (JSpinner) compAnio;
+            spinnerAnio.setFont(new Font("SansSerif", Font.PLAIN, 16));
+            JComponent editorAnio = spinnerAnio.getEditor();
+            if (editorAnio instanceof JSpinner.DefaultEditor) {
+                JTextField tf = ((JSpinner.DefaultEditor) editorAnio).getTextField();
+                tf.setFont(new Font("SansSerif", Font.PLAIN, 16));
+                tf.setPreferredSize(new Dimension(100, 35)); 
+            }
+        }*/
+       
+        
+  
         try {
             con = conexionSQL.getConnection();
         
@@ -92,13 +169,17 @@ public class AgregarLibro extends javax.swing.JFrame {
         jTextFieldEdicion = new javax.swing.JTextField();
         jTextFieldAutor = new javax.swing.JTextField();
         jTextFieldCopias = new javax.swing.JTextField();
-        jTextFieldFecha = new javax.swing.JTextField();
         jComboBoxCategorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
         jTextFieldCodigo = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
+        jTextFieldFecha = new javax.swing.JTextField();
+        jMonthChooser3 = new com.toedter.calendar.JMonthChooser();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jButtonFecha = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,10 +299,6 @@ public class AgregarLibro extends javax.swing.JFrame {
         jTextFieldCopias.setText("jTextField1");
         jPanel1.add(jTextFieldCopias, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 320, -1));
 
-        jTextFieldFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldFecha.setText("jTextField1");
-        jPanel1.add(jTextFieldFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 320, -1));
-
         jComboBoxCategorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBoxCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
         jPanel1.add(jComboBoxCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 400, 40));
@@ -257,12 +334,26 @@ public class AgregarLibro extends javax.swing.JFrame {
         jLabel12.setText("Posicion");
         jLabel12.setToolTipText("");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 560, -1, -1));
+        jPanel1.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, -1, 160));
+
+        jTextFieldFecha.setText("jTextField1");
+        jTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFechaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, 80, 30));
+        jPanel1.add(jMonthChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 130, 50));
+        jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 200, 110, 50));
+
+        jButtonFecha.setText("jButton3");
+        jPanel1.add(jButtonFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 250, 50, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +411,20 @@ public class AgregarLibro extends javax.swing.JFrame {
             String isbn = jTextFieldISBN.getText();
             String tomo = jTextFieldTomo.getText();
             String copias = jTextFieldCopias.getText();
-            String fechaPublicacion = jTextFieldFecha.getText();
+            
+            /*Pedazo de codigo para que la base de datos tome los datos del jcalendar que tambien esta 
+            en comentario mas arriba. para hacerlo funcionar, borrar los "/*" de comentario
+            java.util.Date fecha = dateChooser.getDate();
+            java.sql.Date fechaSQL = null;
+            if (fecha != null) {
+                fechaSQL = new java.sql.Date(fecha.getTime());
+            }*/
+            String fechaTexto = jTextFieldFecha.getText();
+            java.sql.Date fechaSQL = null;
+            if (!fechaTexto.isEmpty()) {
+                fechaSQL = java.sql.Date.valueOf(fechaTexto); // convierte yyyy-MM-dd
+    }
+
             String fila = jTextFieldFila.getText();
             String edicion = jTextFieldEdicion.getText();
             String categoria = (String) jComboBoxCategorias.getSelectedItem();
@@ -361,7 +465,7 @@ public class AgregarLibro extends javax.swing.JFrame {
             ps.setInt(7, estanteriaId);
             ps.setString(8, fila);
             ps.setString(9, posicion);
-            ps.setString(10, fechaPublicacion);
+            ps.setDate(10, fechaSQL);
             ps.setString(11, editorial);
             ps.setString(12, tomo);
             ps.setString(13, edicion);
@@ -393,6 +497,10 @@ public class AgregarLibro extends javax.swing.JFrame {
     private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCodigoActionPerformed
+
+    private void jTextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,8 +541,10 @@ public class AgregarLibro extends javax.swing.JFrame {
     private javax.swing.JButton btn_volver;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonFecha;
     private javax.swing.JComboBox<String> jComboBoxCategorias;
     private javax.swing.JComboBox<String> jComboBoxEstanterias;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -447,6 +557,7 @@ public class AgregarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private com.toedter.calendar.JMonthChooser jMonthChooser3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField11;
@@ -460,5 +571,6 @@ public class AgregarLibro extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldISBN;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTomo;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
 }
