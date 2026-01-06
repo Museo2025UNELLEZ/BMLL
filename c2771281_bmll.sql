@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.11
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 14-12-2025 a las 21:39:12
--- Versión del servidor: 8.0.42
--- Versión de PHP: 7.4.33
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 06-01-2026 a las 22:07:02
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,9 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `c2771281_bmll`
 --
-CREATE DATABASE IF NOT EXISTS `c2771281_bmll` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
-;
-USE `c2771281_bmll`;
 
 -- --------------------------------------------------------
 
@@ -32,7 +28,7 @@ USE `c2771281_bmll`;
 --
 
 CREATE TABLE `categorias` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -90,9 +86,9 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `estanterias` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `codigo` varchar(3) NOT NULL,
-  `n_filas` int NOT NULL
+  `n_filas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -120,16 +116,16 @@ INSERT INTO `estanterias` (`id`, `codigo`, `n_filas`) VALUES
 --
 
 CREATE TABLE `libros` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `cod_identificador` varchar(6) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `autor` varchar(255) DEFAULT NULL,
-  `categoria_id` int NOT NULL,
+  `categoria_id` int(11) NOT NULL,
   `isbn` varchar(20) NOT NULL,
-  `n_copias` int NOT NULL DEFAULT '1',
-  `estante_id` int NOT NULL,
-  `fila` int NOT NULL,
-  `posicion` int NOT NULL,
+  `n_copias` int(11) NOT NULL DEFAULT 1,
+  `estante_id` int(11) NOT NULL,
+  `fila` int(11) NOT NULL,
+  `posicion` int(11) NOT NULL,
   `fecha_publicacion` date DEFAULT NULL,
   `editorial` varchar(150) DEFAULT NULL,
   `tomo` varchar(25) DEFAULT NULL,
@@ -643,7 +639,8 @@ INSERT INTO `libros` (`id`, `cod_identificador`, `titulo`, `autor`, `categoria_i
 (611, 'AB', 'Poesias Andres Bello', 'Andres Bello', 21, '0000', 1, 11, 3, 0, '1952-01-01', 'Obras Completas De Andres Bello', '1', 'primera'),
 (612, 'E1-065', 'Un millón de pájaros muertos', 'Chicho', 21, '000000', 1, 6, 1, 87, '2003-12-11', 'El árbol editores', NULL, ''),
 (613, 'BA0082', 'Carlos Prada', 'María Eugenia Zambrano', 1, '978-980-7039-58-1', 2, 1, 2, 83, '2008-11-22', 'COLECCION ARTE VENEZOLANO', NULL, ''),
-(614, '698199', 'Apuntes para la Historia del Agua', 'Wilfredo Bolívar', 17, 'BH172', 1, 13, 2, 0, '2000-12-11', 'LITORAMA', NULL, 'Primera');
+(614, '698199', 'Apuntes para la Historia del Agua', 'Wilfredo Bolívar', 17, 'BH172', 1, 13, 2, 0, '2000-12-11', 'LITORAMA', NULL, 'Primera'),
+(619, 'c-1001', 'prueba3', 'luis', 13, '4357892759', 10, 4, 4, 5, '2025-12-09', 'eriberto', '5', '2da');
 
 -- --------------------------------------------------------
 
@@ -652,10 +649,10 @@ INSERT INTO `libros` (`id`, `cod_identificador`, `titulo`, `autor`, `categoria_i
 --
 
 CREATE TABLE `logs` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `action` varchar(100) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -665,20 +662,20 @@ CREATE TABLE `logs` (
 --
 
 CREATE TABLE `revistas` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `cod_identificador` varchar(6) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `autor` varchar(255) DEFAULT NULL,
-  `categoria_id` int NOT NULL,
+  `categoria_id` int(11) NOT NULL,
   `issn` varchar(20) NOT NULL,
-  `n_copias` int NOT NULL DEFAULT '1',
-  `estante_id` int NOT NULL,
-  `fila` int NOT NULL,
-  `posicion` int NOT NULL,
+  `n_copias` int(11) NOT NULL DEFAULT 1,
+  `estante_id` int(11) NOT NULL,
+  `fila` int(11) NOT NULL,
+  `posicion` int(11) NOT NULL,
   `fecha_publicacion` date DEFAULT NULL,
   `editorial` varchar(150) DEFAULT NULL,
-  `volumen` int DEFAULT NULL,
-  `numero` int DEFAULT NULL,
+  `volumen` int(11) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
   `periodicidad` enum('DIARIA','SEMANAL','MENSUAL','BIMESTRAL','TRIMESTRAL','ANUAL') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -706,10 +703,17 @@ INSERT INTO `revistas` (`id`, `cod_identificador`, `titulo`, `autor`, `categoria
 --
 
 CREATE TABLE `roles` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `rol` varchar(100) NOT NULL,
-  `permisos` json NOT NULL
+  `permisos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`permisos`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `rol`, `permisos`) VALUES
+(1, 'Administrador', '[\"crear\",\"editar\",\"eliminar\"]');
 
 -- --------------------------------------------------------
 
@@ -718,15 +722,22 @@ CREATE TABLE `roles` (
 --
 
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
   `cedula` varchar(10) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `rol_id` int NOT NULL,
-  `is_admin` tinyint(1) DEFAULT '0'
+  `rol_id` int(11) NOT NULL,
+  `is_admin` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `usuario`, `password`, `rol_id`, `is_admin`) VALUES
+(3, 'luis', 'rojas', '28068018', 'burrx23', '1234', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -796,43 +807,43 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `estanterias`
 --
 ALTER TABLE `estanterias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=615;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=621;
 
 --
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `revistas`
 --
 ALTER TABLE `revistas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
