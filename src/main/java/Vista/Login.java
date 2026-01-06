@@ -2,6 +2,7 @@
 package Vista;
 
 import Modelo.Usuario;
+import com.formdev.flatlaf.FlatLightLaf;
 import controlador.ControlLogin;
 import java.awt.Image;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ public class Login extends javax.swing.JFrame {
 
  
     public Login() {
+        FlatLightLaf.setup();
         initComponents();
         CargarLogo();
         getRootPane().setDefaultButton(btn_entrar);
