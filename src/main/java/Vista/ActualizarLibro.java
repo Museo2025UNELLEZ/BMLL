@@ -21,6 +21,30 @@ public class ActualizarLibro extends javax.swing.JFrame {
 
     public ActualizarLibro(controlLibro control, Libro libro) {
         initComponents(); // inicializa los textfields y combobox
+        
+        jDayChooser1.setVisible(false);
+        jMonthChooser3.setVisible(false);
+        jYearChooser1.setVisible(false);
+        fechaBoton.addActionListener(e -> {
+            boolean visible = !jYearChooser1.isVisible();
+            jYearChooser1.setVisible(visible);
+            jMonthChooser3.setVisible(visible);
+            jDayChooser1.setVisible(visible);
+        });
+        // Método para actualizar el campo de texto
+        Runnable actualizar = () -> {
+        int year = jYearChooser1.getYear();
+        int month = jMonthChooser3.getMonth() + 1; // MonthChooser empieza en 0
+        int day = jDayChooser1.getDay();
+        txtFecha.setText(
+            String.format("%04d-%02d-%02d", year, month, day)
+    );
+};    
+        // Listeners
+        jYearChooser1.addPropertyChangeListener("year", e -> actualizar.run());
+        jMonthChooser3.addPropertyChangeListener("month", e -> actualizar.run());
+        jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
+        
         this.control = control;
         this.libro = libro;
         
@@ -106,6 +130,10 @@ public class ActualizarLibro extends javax.swing.JFrame {
         txtFecha = new javax.swing.JTextField();
         comboCategoria = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
+        jMonthChooser3 = new com.toedter.calendar.JMonthChooser();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        fechaBoton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -227,7 +255,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
 
         txtFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtFecha.setText("jTextField1");
-        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 320, -1));
+        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 255, 120, 40));
 
         comboCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
@@ -240,12 +268,18 @@ public class ActualizarLibro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel1.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 250, -1, 160));
+        jPanel1.add(jMonthChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 130, 50));
+        jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 110, 50));
+
+        fechaBoton.setText("Fecha");
+        jPanel1.add(fechaBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,6 +295,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
     
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         // TODO add your handling code here:
+        BuscarLibroActualizar buscar = new BuscarLibroActualizar();
+        buscar.setVisible(true);
+        buscar.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btn_volverActionPerformed
 
@@ -303,6 +340,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
 
         if(resultado == 1){
             JOptionPane.showMessageDialog(this, "Libro actualizado correctamente");
+            BuscarLibroActualizar buscar = new BuscarLibroActualizar();
+            buscar.setVisible(true);
+            buscar.setLocationRelativeTo(null);
             this.dispose(); // cerrar ventana
         } else {
             JOptionPane.showMessageDialog(this, "Error al actualizar el libro", "Error", JOptionPane.ERROR_MESSAGE);
@@ -311,6 +351,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
+        BuscarLibroActualizar buscar = new BuscarLibroActualizar();
+        buscar.setVisible(true);
+        buscar.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btn_VolverActionPerformed
 /*public ActualizarLibro() {
@@ -358,6 +401,8 @@ public class ActualizarLibro extends javax.swing.JFrame {
     private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox<String> comboCategoria;
     private javax.swing.JComboBox<String> comboEstanteria;
+    private javax.swing.JButton fechaBoton;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -368,8 +413,10 @@ public class ActualizarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private com.toedter.calendar.JMonthChooser jMonthChooser3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCopias;
     private javax.swing.JTextField txtEdicion;

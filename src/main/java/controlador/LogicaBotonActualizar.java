@@ -9,11 +9,13 @@ import Vista.ActualizarLibro;
 import java.awt.Color;
 import java.awt.Component;
 import static java.awt.SystemColor.control;
+import java.awt.Window;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -93,9 +95,16 @@ public class LogicaBotonActualizar extends DefaultCellEditor {
         Libro libro = control.obtenerLibroPorId(id);
 
         if(libro != null){
+            // Cerrar la ventana que contiene la tabla
+            Window parentWindow = SwingUtilities.getWindowAncestor(tabla);
+            if (parentWindow != null) {
+                parentWindow.dispose();
+            }
+    
             // Abrir la ventana de actualización
             ActualizarLibro ventana = new ActualizarLibro(control, libro);
             ventana.setVisible(true);
+            ventana.setLocationRelativeTo(null);
         } else {
             JOptionPane.showMessageDialog(tabla,"No se pudo cargar el libro","Error",JOptionPane.ERROR_MESSAGE);
         }

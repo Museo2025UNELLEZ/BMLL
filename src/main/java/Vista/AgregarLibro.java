@@ -347,6 +347,11 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
         jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 200, 110, 50));
 
         jButtonFecha.setText("jButton3");
+        jButtonFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFechaActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 250, 50, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -501,6 +506,10 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
     private void jTextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFechaActionPerformed
+
+    private void jButtonFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonFechaActionPerformed
 
     /**
      * @param args the command line arguments
