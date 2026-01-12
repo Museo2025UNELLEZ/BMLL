@@ -4,17 +4,107 @@
  */
 package Vista;
 
+import Modelo.Libro;
+import controlador.controlLibro;
+import java.util.Map;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luise
  */
 public class ActualizarLibro extends javax.swing.JFrame {
+    private controlLibro control;
+    private Libro libro;
+    private Map<Integer, String> categorias;
+    private Map<Integer, String> estanterias;
+    // estado previo de búsqueda para restaurar al volver
+    private String prevSearchTitle = null;
+    private int prevSearchCategoryId = -1;
+
+    public ActualizarLibro(controlLibro control, Libro libro) {
+        initComponents(); // inicializa los textfields y combobox
+        
+        jDayChooser1.setVisible(false);
+        jMonthChooser3.setVisible(false);
+        jYearChooser1.setVisible(false);
+        fechaBoton.addActionListener(e -> {
+            boolean visible = !jYearChooser1.isVisible();
+            jYearChooser1.setVisible(visible);
+            jMonthChooser3.setVisible(visible);
+            jDayChooser1.setVisible(visible);
+        });
+        // Método para actualizar el campo de texto
+        Runnable actualizar = () -> {
+        int year = jYearChooser1.getYear();
+        int month = jMonthChooser3.getMonth() + 1; // MonthChooser empieza en 0
+        int day = jDayChooser1.getDay();
+        txtFecha.setText(
+            String.format("%04d-%02d-%02d", year, month, day)
+    );
+};    
+        // Listeners
+        jYearChooser1.addPropertyChangeListener("year", e -> actualizar.run());
+        jMonthChooser3.addPropertyChangeListener("month", e -> actualizar.run());
+        jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
+        
+        this.control = control;
+        this.libro = libro;
+        
+        categorias = control.listarCategoriasMap();
+        estanterias = control.listarEstanteriasMap();
+        
+        for (String nombre : categorias.values()) {
+            comboCategoria.addItem(nombre);
+        }
+        comboCategoria.setSelectedItem(categorias.get(libro.getCategoria_id()));
+
+        for (String codigo : estanterias.values()) {
+            comboEstanteria.addItem(codigo);
+        }
+        comboEstanteria.setSelectedItem(estanterias.get(libro.getEstante_id()));
+        
+        /*
+        for(String cat : control.listarCategorias()){
+            comboCategoria.addItem(cat);
+        }
+        for(String est : control.listarEstanterias()){
+            comboEstanteria.addItem(est);
+        }*/
+        
+        // Cargar datos en los campos
+        txtTitulo.setText(libro.getTitulo());
+        txtAutor.setText(libro.getAutor());
+        txtEditorial.setText(libro.getEditorial());
+        txtCopias.setText(String.valueOf(libro.getN_copias()));
+        txtFecha.setText(libro.getFecha_publicacion().toString());
+        txtTomo.setText(libro.getTomo());
+        txtIsbn.setText(libro.getIsbn());
+        txtFila.setText(String.valueOf(libro.getFila()));
+        txtEdicion.setText(libro.getEdicion());
+        /*
+        // Seleccionar el ID correcto del libro
+        Map<Integer, String> categorias = control.listarCategoriasMap();
+        for (String nombre : categorias.values()) {
+            comboCategoria.addItem(nombre);
+        }
+        comboCategoria.setSelectedItem(categorias.get(libro.getCategoria_id()));
+
+        Map<Integer, String> estanterias = control.listarEstanteriasMap();
+        for (String codigo : estanterias.values()) {
+            comboEstanteria.addItem(codigo);
+        }
+        comboEstanteria.setSelectedItem(estanterias.get(libro.getEstante_id()));*/
+
+    }
 
     /**
-     * Creates new form AgregarLibro
+     * Nueva sobrecarga que recibe el estado previo de búsqueda (texto y categoría)
      */
-    public ActualizarLibro() {
-        initComponents();
+    public ActualizarLibro(controlLibro control, Libro libro, String prevTitle, int prevCategoryId) {
+        this(control, libro);
+        this.prevSearchTitle = prevTitle;
+        this.prevSearchCategoryId = prevCategoryId;
     }
 
     /**
@@ -32,26 +122,30 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboEstanteria = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_actualizar = new javax.swing.JButton();
+        javax.swing.JButton btn_Volver = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        txtFila = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
+        txtEditorial = new javax.swing.JTextField();
+        txtIsbn = new javax.swing.JTextField();
+        txtTomo = new javax.swing.JTextField();
+        txtEdicion = new javax.swing.JTextField();
+        txtAutor = new javax.swing.JTextField();
+        txtCopias = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
+        comboCategoria = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
+        jMonthChooser3 = new com.toedter.calendar.JMonthChooser();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        fechaBoton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -89,9 +183,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jLabel4.setText("ISBN");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 410, 40));
+        comboEstanteria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboEstanteria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
+        jPanel1.add(comboEstanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 410, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -118,56 +212,66 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jLabel11.setText("Editorial");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
-        jButton1.setText("Guardar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 630, 260, -1));
+        btn_actualizar.setText("Guardar");
+        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 630, 260, -1));
 
-        jButton2.setText("Volver");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 280, -1));
+        btn_Volver.setText("Volver");
+        btn_Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 280, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Edicion");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField1.setText("jTextField1");
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 320, -1));
+        txtFila.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtFila.setText("jTextField1");
+        jPanel1.add(txtFila, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 320, -1));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setText("jTextField1");
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 320, -1));
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTitulo.setText("jTextField1");
+        jPanel1.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 320, -1));
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField3.setText("jTextField1");
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, -1));
+        txtEditorial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtEditorial.setText("jTextField1");
+        jPanel1.add(txtEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, -1));
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField4.setText("jTextField1");
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 320, -1));
+        txtIsbn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtIsbn.setText("jTextField1");
+        jPanel1.add(txtIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 320, -1));
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField5.setText("jTextField1");
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 320, -1));
+        txtTomo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTomo.setText("jTextField1");
+        jPanel1.add(txtTomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 320, -1));
 
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField7.setText("jTextField1");
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 320, -1));
+        txtEdicion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtEdicion.setText("jTextField1");
+        jPanel1.add(txtEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 320, -1));
 
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField8.setText("jTextField1");
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 320, -1));
+        txtAutor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtAutor.setText("jTextField1");
+        jPanel1.add(txtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 320, -1));
 
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField9.setText("jTextField1");
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 320, -1));
+        txtCopias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtCopias.setText("jTextField1");
+        jPanel1.add(txtCopias, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 320, -1));
 
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField10.setText("jTextField1");
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 320, -1));
+        txtFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtFecha.setText("jTextField1");
+        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 255, 120, 40));
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 400, 40));
+        comboCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
+        jPanel1.add(comboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 400, 40));
 
         btn_volver.setText("volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -176,12 +280,18 @@ public class ActualizarLibro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel1.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 250, -1, 160));
+        jPanel1.add(jMonthChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 130, 50));
+        jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 110, 50));
+
+        fechaBoton.setText("Fecha");
+        jPanel1.add(fechaBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,16 +303,86 @@ public class ActualizarLibro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         // TODO add your handling code here:
-        
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
-        
+        BuscarLibroActualizar buscar = new BuscarLibroActualizar();
+        buscar.setVisible(true);
+        buscar.setLocationRelativeTo(null);
         this.dispose();
-        
     }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
+        // Actualizar los datos del objeto libro con lo que el usuario editó
+        libro.setTitulo(txtTitulo.getText());
+        libro.setAutor(txtAutor.getText());
+        libro.setEditorial(txtEditorial.getText());
+        libro.setN_copias(Integer.parseInt(txtCopias.getText()));
+        libro.setFecha_publicacion(java.sql.Date.valueOf(txtFecha.getText())); // formato yyyy-MM-dd
+        libro.setTomo(txtTomo.getText());
+        libro.setIsbn(txtIsbn.getText());
+        libro.setFila(Integer.parseInt(txtFila.getText()));
+        libro.setEdicion(txtEdicion.getText());
+
+        // Obtener el nombre/código seleccionado
+        String categoriaNombre = comboCategoria.getSelectedItem().toString();
+        String estanteriaCodigo = comboEstanteria.getSelectedItem().toString();
+        
+        // Buscar el ID correspondiente en el Map
+        int categoriaId = categorias.entrySet()
+            .stream()
+            .filter(e -> e.getValue().equals(categoriaNombre))
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .orElse(0);
+
+        int estanteriaId = estanterias.entrySet()
+            .stream()
+            .filter(e -> e.getValue().equals(estanteriaCodigo))
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .orElse(0);
+
+    libro.setCategoria_id(categoriaId);
+    libro.setEstante_id(estanteriaId);
+
+        // Llamar al control para actualizar
+        int resultado = control.actualizarLibro(libro);
+
+        if(resultado == 1){
+            JOptionPane.showMessageDialog(this, "Libro actualizado correctamente");
+            // volver a la pantalla BuscarLibroActualizar restaurando el estado previo si existe
+            BuscarLibroActualizar buscar;
+            if (prevSearchTitle != null || prevSearchCategoryId > 0) {
+                buscar = new BuscarLibroActualizar(prevSearchTitle, prevSearchCategoryId);
+            } else {
+                buscar = new BuscarLibroActualizar();
+            }
+            buscar.setLocationRelativeTo(null);
+            buscar.setVisible(true);
+            this.dispose(); // cerrar ventana
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el libro", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btn_actualizarActionPerformed
+
+    private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
+        // volver a la pantalla BuscarLibroActualizar restaurando estado previo si lo tenemos
+        BuscarLibroActualizar buscar;
+        if (prevSearchTitle != null || prevSearchCategoryId > 0) {
+            buscar = new BuscarLibroActualizar(prevSearchTitle, prevSearchCategoryId);
+        } else {
+            buscar = new BuscarLibroActualizar();
+        }
+        buscar.setLocationRelativeTo(null);
+        buscar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_VolverActionPerformed
+/*public ActualizarLibro() {
+    initComponents(); // inicializa los textfields y combobox
+}*/
 
     /**
      * @param args the command line arguments
@@ -235,17 +415,18 @@ public class ActualizarLibro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ActualizarLibro().setVisible(true);
+                //new ActualizarLibro().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_actualizar;
     private javax.swing.JButton btn_volver;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> comboCategoria;
+    private javax.swing.JComboBox<String> comboEstanteria;
+    private javax.swing.JButton fechaBoton;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -256,16 +437,18 @@ public class ActualizarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private com.toedter.calendar.JMonthChooser jMonthChooser3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
+    private javax.swing.JTextField txtAutor;
+    private javax.swing.JTextField txtCopias;
+    private javax.swing.JTextField txtEdicion;
+    private javax.swing.JTextField txtEditorial;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtFila;
+    private javax.swing.JTextField txtIsbn;
+    private javax.swing.JTextField txtTitulo;
+    private javax.swing.JTextField txtTomo;
     // End of variables declaration//GEN-END:variables
 }

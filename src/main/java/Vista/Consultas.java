@@ -1,11 +1,15 @@
 
 package Vista;
 
+import DAO.CategoriaDAO;
+import Modelo.Categorias;
 import Modelo.Libro;
 import controlador.conexionSQL;
 import controlador.controlLibro;
 import java.sql.Connection;
 import java.util.List;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -16,10 +20,24 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Consultas extends javax.swing.JFrame {
     private Connection con;
+    private controlador.controlLibro control;
+    // guarda la última categoria válida seleccionada para evitar borrar accidentalmente el campo de título
+    private int lastSelectedCategoryId = -1;
     
     public Consultas() {
         initComponents();
         con = conexionSQL.getConnection();
+        // crear y reutilizar una sola instancia del controlador para ahorrar recursos
+        control = new controlador.controlLibro(con);
+
+        cargarCategorias();
+
+        // registrar el listener desde un método separado para mantener el constructor limpio
+        // (se registra después de cargar las categorías para evitar disparos en la inicialización)
+        setupCategoriaListener();
+        // permitir que Enter en el campo de texto dispare el botón Buscar (mejora UX)
+        box_titulo.addActionListener(evt -> btn_buscar.doClick());
+        
     }
 
     /**
@@ -93,7 +111,6 @@ public class Consultas extends javax.swing.JFrame {
         });
 
         combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        combo_categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novela", "historia", "relato", "politica", " " }));
 
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -107,27 +124,25 @@ public class Consultas extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_volver)
-                .addGap(308, 308, 308)
-                .addComponent(lbl_consulta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(btn_volver)
+                        .addGap(308, 308, 308)
+                        .addComponent(lbl_consulta))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbl_titulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_titulo)
+                                .addGap(18, 18, 18)
+                                .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,20 +186,78 @@ public class Consultas extends javax.swing.JFrame {
         
         String Titulo = box_titulo.getText().trim();
         
+        List<Libro> libros = control.obtenerLibros(Titulo);
+        actualizarTabla(libros);
+    }
+    
+    private void cargarCategorias(){
+        CategoriaDAO dao = new CategoriaDAO();
+        try{
+           // añadir opción por defecto que no debe disparar búsqueda
+           combo_categorias.addItem(new Modelo.Categorias(-1, "Seleccione una categoria"));
+           for(Categorias c : dao.ListarCategorias()){
+              combo_categorias.addItem(c);
+           } 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // Registro del ItemListener en un método separado para mantener el constructor limpio
+    private void setupCategoriaListener() {
+        combo_categorias.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    Object obj = e.getItem();
+                    if (obj instanceof Categorias) {
+                        Categorias c = (Categorias) obj;
+                        int newId = c.getId();
+                        // si es placeholder o la misma categoría que ya estaba seleccionada, no hacer nada
+                        if (newId <= 0 || newId == lastSelectedCategoryId) {
+                            return;
+                        }
+                        // nueva selección válida: limpiar el campo y cargar
+                        box_titulo.setText("");
+                        cargarLibrosPorCategoria();
+                        lastSelectedCategoryId = newId;
+                    }
+                }
+            }
+        });
+    }
+
+    private void cargarLibrosPorCategoria(){
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "Error de conexión");
+            return;
+        }
+
+        Categorias cat = (Categorias) combo_categorias.getSelectedItem();
+        // si es la opción por defecto, no hacer nada
+        if (cat == null || cat.getId() <= 0) return;
+
+        List<Libro> libros = control.obtenerLibrosPorCategoria(cat.getId());
+        actualizarTabla(libros);
+    }
+
+    // Actualiza la tabla a partir de una lista de libros (null/empty check dentro)
+    private void actualizarTabla(List<Libro> libros) {
         DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
         modelo.setRowCount(0);
-        
-        controlLibro control = new controlLibro(con);
-        List<Libro> libros = control.obtenerLibros(Titulo);
-        
-       for (Libro l : libros) {
-        modelo.addRow(new Object[]{
-            l.getTitulo(),
-            l.getAutor(),
-            l.getTomo(),
-            l.getN_copias(),
-            l.getPosicion(),
-        });
+
+        if (libros == null || libros.isEmpty()) {
+            return;
+        }
+
+        for (Libro l : libros) {
+            modelo.addRow(new Object[]{
+                l.getTitulo(),
+                l.getAutor(),
+                l.getTomo(),
+                l.getN_copias(),
+                l.getPosicion(),
+            });
         }
     }
     
@@ -243,7 +316,7 @@ public class Consultas extends javax.swing.JFrame {
     private javax.swing.JTextField box_titulo;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_volver;
-    private javax.swing.JComboBox<String> combo_categorias;
+    private javax.swing.JComboBox<Categorias> combo_categorias;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_consulta;
@@ -253,5 +326,13 @@ public class Consultas extends javax.swing.JFrame {
 
     public void open() {
         SwingUtilities.invokeLater(() -> setVisible(true));
+    }
+
+    /**
+     * Permite habilitar/deshabilitar el botón "Volver" desde código externo.
+     * Útil para usuarios sin permisos de navegación completa.
+     */
+    public void setVolverEnabled(boolean enabled) {
+        btn_volver.setEnabled(enabled);
     }
 }

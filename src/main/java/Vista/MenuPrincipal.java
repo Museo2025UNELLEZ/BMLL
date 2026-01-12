@@ -84,6 +84,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 300, 200));
 
         btn_ajustes.setText("Ajustes");
+        btn_ajustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ajustesActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,6 +148,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_btn_eliminarActionPerformed
+
+    private void btn_ajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ajustesActionPerformed
+        Ajustes aj = new Ajustes();
+        aj.setLocationRelativeTo(null);
+        aj.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btn_ajustesActionPerformed
 
     /**
      * @param args the command line arguments

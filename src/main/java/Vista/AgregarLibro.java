@@ -3,18 +3,113 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
+import com.toedter.calendar.JCalendar;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Dimension;
+import com.toedter.calendar.JDateChooser;
+import controlador.conexionSQL;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import javax.swing.DefaultComboBoxModel;   
+import java.sql.Connection;               
+import java.sql.Statement;                
+import java.sql.ResultSet;                
+import java.sql.SQLException;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.UIManager;
+import javax.swing.JComponent;
+
+
 
 /**
  *
  * @author luise
  */
 public class AgregarLibro extends javax.swing.JFrame {
-
-    /**
-     * Creates new form AgregarLibro
-     */
+    private Connection con;
+    
+    private JDateChooser dateChooser;
+    
+  
     public AgregarLibro() {
+        
+
+        
+        UIManager.put("ComboBox.font", new Font("SansSerif", Font.PLAIN, 16));
+        UIManager.put("Spinner.font", new Font("SansSerif", Font.PLAIN, 16));
+        UIManager.put("ComboBox.minimumSize", new Dimension(150, 35));
+        UIManager.put("Spinner.minimumSize", new Dimension(100, 35));
         initComponents();
+        dateChooser = new JDateChooser();
+        dateChooser.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(dateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 250, 30));
+        JTextField editor = (JTextField) dateChooser.getDateEditor().getUiComponent();
+        editor.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        editor.setPreferredSize(new Dimension(150, 30));
+        for (Component comp : dateChooser.getComponents()) {
+            if (comp instanceof JButton) {
+                JButton boton = (JButton) comp;
+                boton.setPreferredSize(new Dimension(30, 30));
+            }    
+        }
+        JCalendar calendario = dateChooser.getJCalendar();
+        calendario.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        calendario.setPreferredSize(new Dimension(350, 300));
+        JComboBox<?> comboMes = (JComboBox<?>)calendario.getMonthChooser().getComboBox();
+        comboMes.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        comboMes.setPreferredSize(new Dimension(120, 30));
+        Component compAnio = calendario.getYearChooser().getSpinner();
+        if (compAnio instanceof JSpinner) {
+            JSpinner spinnerAnio = (JSpinner) compAnio;
+            spinnerAnio.setFont(new Font("SansSerif", Font.PLAIN, 16));
+            JComponent editorAnio = spinnerAnio.getEditor();
+            if (editorAnio instanceof JSpinner.DefaultEditor) {
+                JTextField tf = ((JSpinner.DefaultEditor) editorAnio).getTextField();
+                tf.setFont(new Font("SansSerif", Font.PLAIN, 16));
+                tf.setPreferredSize(new Dimension(100, 35)); 
+            }
+        }
+       
+        
+  
+        try {
+            con = conexionSQL.getConnection();
+        
+            DefaultComboBoxModel<String> modeloCategorias = new DefaultComboBoxModel<>();
+            Statement stCat = con.createStatement();
+            ResultSet rsCat = stCat.executeQuery("SELECT nombre FROM categorias");
+            while (rsCat.next()) {
+                modeloCategorias.addElement(rsCat.getString("nombre"));
+            }
+            jComboBoxCategorias.setModel(modeloCategorias);
+            rsCat.close();
+            stCat.close();
+            
+            DefaultComboBoxModel<String> modeloEstanterias = new DefaultComboBoxModel<>();
+            Statement stEst = con.createStatement();
+            ResultSet rsEst = stEst.executeQuery("SELECT codigo FROM estanterias");
+            while (rsEst.next()) {
+                modeloEstanterias.addElement(rsEst.getString("codigo"));
+            }
+            jComboBoxEstanterias.setModel(modeloEstanterias);
+            rsEst.close();
+            stEst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar combos: " + e.getMessage());
+        }    
+        
+        
+        
+        
+      
+        
+      
+         
     }
 
     /**
@@ -32,7 +127,7 @@ public class AgregarLibro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxEstanterias = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -41,17 +136,20 @@ public class AgregarLibro extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jTextFieldFila = new javax.swing.JTextField();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jTextFieldEditorial = new javax.swing.JTextField();
+        jTextFieldISBN = new javax.swing.JTextField();
+        jTextFieldTomo = new javax.swing.JTextField();
+        jTextFieldEdicion = new javax.swing.JTextField();
+        jTextFieldAutor = new javax.swing.JTextField();
+        jTextFieldCopias = new javax.swing.JTextField();
+        jComboBoxCategorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        jTextFieldCodigo = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -89,9 +187,9 @@ public class AgregarLibro extends javax.swing.JFrame {
         jLabel4.setText("ISBN");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 410, 40));
+        jComboBoxEstanterias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBoxEstanterias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
+        jPanel1.add(jComboBoxEstanterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 410, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -119,6 +217,11 @@ public class AgregarLibro extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 630, 260, -1));
 
         jButton2.setText("Volver");
@@ -129,45 +232,46 @@ public class AgregarLibro extends javax.swing.JFrame {
         jLabel5.setText("Edicion");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField1.setText("jTextField1");
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 320, -1));
+        jTextFieldFila.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldFila.setText("jTextField1");
+        jTextFieldFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFilaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldFila, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 320, -1));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setText("jTextField1");
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 320, -1));
+        jTextFieldNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldNombre.setText("jTextField1");
+        jPanel1.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 320, -1));
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField3.setText("jTextField1");
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, -1));
+        jTextFieldEditorial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldEditorial.setText("jTextField1");
+        jPanel1.add(jTextFieldEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, -1));
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField4.setText("jTextField1");
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 320, -1));
+        jTextFieldISBN.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldISBN.setText("jTextField1");
+        jPanel1.add(jTextFieldISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 320, -1));
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField5.setText("jTextField1");
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 320, -1));
+        jTextFieldTomo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldTomo.setText("jTextField1");
+        jPanel1.add(jTextFieldTomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 320, -1));
 
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField7.setText("jTextField1");
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 320, -1));
+        jTextFieldEdicion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldEdicion.setText("jTextField1");
+        jPanel1.add(jTextFieldEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 320, -1));
 
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField8.setText("jTextField1");
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 320, -1));
+        jTextFieldAutor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldAutor.setText("jTextField1");
+        jPanel1.add(jTextFieldAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 320, -1));
 
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField9.setText("jTextField1");
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 320, -1));
+        jTextFieldCopias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldCopias.setText("jTextField1");
+        jPanel1.add(jTextFieldCopias, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 320, -1));
 
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField10.setText("jTextField1");
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 320, -1));
-
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 400, 40));
+        jComboBoxCategorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBoxCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
+        jPanel1.add(jComboBoxCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 400, 40));
 
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -177,11 +281,35 @@ public class AgregarLibro extends javax.swing.JFrame {
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
+        jTextFieldCodigo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextFieldCodigo.setText("jTextField6");
+        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCodigoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 320, -1));
+
+        jTextField11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField11.setText("jTextField11");
+        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 560, 320, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Codigo ID");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 120, 50));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Posicion");
+        jLabel12.setToolTipText("");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 560, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +331,124 @@ public class AgregarLibro extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_btn_volverActionPerformed
+
+    public class ItemCombo {
+    private int id;
+    private String nombre;
+
+    public ItemCombo(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    // Esto hace que el combo muestre el nombre
+    @Override
+    public String toString() {
+        return nombre;
+    }
+}
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Connection con = null;
+        try {
+            con = conexionSQL.getConnection();
+            String titulo = jTextFieldNombre.getText();
+            String autor = jTextFieldAutor.getText();
+            String editorial = jTextFieldEditorial.getText();
+            String isbn = jTextFieldISBN.getText();
+            String tomo = jTextFieldTomo.getText();
+            String copias = jTextFieldCopias.getText();
+            
+            
+            java.util.Date fecha = dateChooser.getDate();
+            java.sql.Date fechaSQL = null;
+            if (fecha != null) {
+                fechaSQL = new java.sql.Date(fecha.getTime());
+            }
+            
+    
+
+            String fila = jTextFieldFila.getText();
+            String edicion = jTextFieldEdicion.getText();
+            String categoria = (String) jComboBoxCategorias.getSelectedItem();
+            String estanteria = (String) jComboBoxEstanterias.getSelectedItem();
+            String codIdentificador = jTextFieldCodigo.getText();
+            String posicion =jTextField11.getText();
+
+            int categoriaId = -1;
+            PreparedStatement psCat = con.prepareStatement("SELECT id FROM categorias WHERE nombre = ?");
+            psCat.setString(1, categoria);
+            ResultSet rsCat = psCat.executeQuery();
+            if (rsCat.next()) {
+                categoriaId = rsCat.getInt("id");
+            }
+            rsCat.close();
+            psCat.close();
+            
+            int estanteriaId = -1;
+            PreparedStatement psEst = con.prepareStatement("SELECT id FROM estanterias WHERE codigo = ?");
+            psEst.setString(1, estanteria);
+            ResultSet rsEst = psEst.executeQuery();
+            if (rsEst.next()) {
+                estanteriaId = rsEst.getInt("id");
+            }
+            rsEst.close();
+            psEst.close();
+            
+            
+            String sql = "INSERT INTO libros (cod_identificador,titulo, autor, categoria_id, isbn, n_copias, estante_id,  fila, posicion, fecha_publicacion, editorial, tomo, edicion) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, codIdentificador);
+            ps.setString(2, titulo);
+            ps.setString(3, autor);
+            ps.setInt(4, categoriaId);
+            ps.setString(5, isbn);
+            ps.setString(6, copias);
+            ps.setInt(7, estanteriaId);
+            ps.setString(8, fila);
+            ps.setString(9, posicion);
+            ps.setDate(10, fechaSQL);
+            ps.setString(11, editorial);
+            ps.setString(12, tomo);
+            ps.setString(13, edicion);
+            
+            
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Libro guardado correctamente.");
+            } else {    
+                javax.swing.JOptionPane.showMessageDialog(this, "No se pudo guardar el libro.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar libro: " + e.getMessage());
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFilaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFilaActionPerformed
+
+    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,28 +489,31 @@ public class AgregarLibro extends javax.swing.JFrame {
     private javax.swing.JButton btn_volver;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxCategorias;
+    private javax.swing.JComboBox<String> jComboBoxEstanterias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextFieldAutor;
+    private javax.swing.JTextField jTextFieldCodigo;
+    private javax.swing.JTextField jTextFieldCopias;
+    private javax.swing.JTextField jTextFieldEdicion;
+    private javax.swing.JTextField jTextFieldEditorial;
+    private javax.swing.JTextField jTextFieldFila;
+    private javax.swing.JTextField jTextFieldISBN;
+    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldTomo;
     // End of variables declaration//GEN-END:variables
 }

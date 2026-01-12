@@ -24,11 +24,70 @@
     <version>8.3.0</version>
 </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+    <dependency>
+          <groupId>com.toedter</groupId>
+          <artifactId>jcalendar</artifactId>
+          <version>1.4</version>
+      </dependency>
+      
+         <!-- https://mvnrepository.com/artifact/com.formdev/flatlaf -->
+   <dependency>
+       <groupId>com.formdev</groupId>
+       <artifactId>flatlaf</artifactId>
+       <version>3.7</version>
+   </dependency>
+      
     </dependencies>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.museodelosllanos.bmll.BMLL</exec.mainClass>
     </properties>
+    
+    <!-- un monton de lineas de codigo para hacer que la build funcione -->
+    
+    <build>
+        <plugins>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.5.0</version> 
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.museodelosllanos.bmll.BMLL</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            
+            <!-- un monton de lineas de codigo para hacer que la build funcione, este para las librerías -->
+            
+            <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.museodelosllanos.bmll.BMLL</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+        </plugins>
+    </build>
 </project>

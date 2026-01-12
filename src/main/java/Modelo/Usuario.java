@@ -14,16 +14,14 @@ public class Usuario {
     private String apellido;
     private String cedula;
     private String usuario;
-    private String password;
     private int is_admin;
 
-    public Usuario(int id, String nombre, String apellido, String cedula, String usuario, int rol_id) {
+    public Usuario(int id, String nombre, String apellido, String cedula, String usuario, int is_admin) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
         this.usuario = usuario;
-        this.password = password;
         this.is_admin = is_admin;
     }
 
@@ -46,10 +44,6 @@ public class Usuario {
 
     public String getUsuario() {
         return usuario;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public int getIs_admin() {
