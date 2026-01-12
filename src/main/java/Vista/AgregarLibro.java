@@ -156,10 +156,7 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldFila = new javax.swing.JTextField();
         jTextFieldNombre = new javax.swing.JTextField();
@@ -173,13 +170,15 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
         btn_volver = new javax.swing.JButton();
         jTextFieldCodigo = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jDayChooser1 = new com.toedter.calendar.JDayChooser();
         jTextFieldFecha = new javax.swing.JTextField();
         jMonthChooser3 = new com.toedter.calendar.JMonthChooser();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jButtonFecha = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -194,160 +193,182 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 38)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 38)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Agregar Libro");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(242, 130, 37));
         jLabel2.setText("Numero de copias");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, -1, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, 30));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Titulo");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel3.setText("Editorial");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("ISBN");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel4.setText("Codigo ID");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
 
-        jComboBoxEstanterias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBoxEstanterias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBoxEstanterias.setForeground(new java.awt.Color(0, 113, 114));
         jComboBoxEstanterias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
-        jPanel1.add(jComboBoxEstanterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 410, 40));
+        jComboBoxEstanterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEstanteriasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxEstanterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 320, 40));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(242, 130, 37));
         jLabel6.setText("Autor");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 70, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 70, -1));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(242, 130, 37));
         jLabel8.setText("Fila");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(242, 130, 37));
         jLabel9.setText("Fecha de publicacion");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, -1, 30));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("tomo");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, 20));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Editorial");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
-
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 113, 114));
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 630, 260, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 625, 260, -1));
 
-        jButton2.setText("Volver");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 280, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(242, 130, 37));
         jLabel5.setText("Edicion");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, -1, -1));
 
         jTextFieldFila.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldFila.setText("jTextField1");
         jTextFieldFila.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFilaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldFila, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 320, -1));
+        jPanel1.add(jTextFieldFila, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, 320, -1));
 
         jTextFieldNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldNombre.setText("jTextField1");
-        jPanel1.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 320, -1));
+        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 320, -1));
 
         jTextFieldEditorial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldEditorial.setText("jTextField1");
-        jPanel1.add(jTextFieldEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, -1));
+        jTextFieldEditorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEditorialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 320, -1));
 
         jTextFieldISBN.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldISBN.setText("jTextField1");
-        jPanel1.add(jTextFieldISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 320, -1));
+        jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldISBNActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 320, -1));
 
         jTextFieldTomo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldTomo.setText("jTextField1");
-        jPanel1.add(jTextFieldTomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 320, -1));
+        jPanel1.add(jTextFieldTomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 320, -1));
 
         jTextFieldEdicion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldEdicion.setText("jTextField1");
-        jPanel1.add(jTextFieldEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 320, -1));
+        jTextFieldEdicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEdicionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 320, -1));
 
         jTextFieldAutor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldAutor.setText("jTextField1");
-        jPanel1.add(jTextFieldAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 320, -1));
+        jPanel1.add(jTextFieldAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 320, -1));
 
         jTextFieldCopias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldCopias.setText("jTextField1");
-        jPanel1.add(jTextFieldCopias, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 320, -1));
+        jPanel1.add(jTextFieldCopias, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 320, -1));
 
-        jComboBoxCategorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBoxCategorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBoxCategorias.setForeground(new java.awt.Color(0, 113, 114));
         jComboBoxCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
-        jPanel1.add(jComboBoxCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 400, 40));
+        jPanel1.add(jComboBoxCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 320, 40));
 
+        btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 625, 260, -1));
 
         jTextFieldCodigo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextFieldCodigo.setText("jTextField6");
         jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCodigoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 320, -1));
+        jPanel1.add(jTextFieldCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 320, -1));
 
         jTextField11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField11.setText("jTextField11");
-        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 560, 320, -1));
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, 320, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Codigo ID");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 120, 50));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(242, 130, 37));
         jLabel12.setText("Posicion");
         jLabel12.setToolTipText("");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 560, -1, -1));
-        jPanel1.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, -1, 160));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, -1));
+        jPanel1.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 440, 180, 120));
 
-        jTextFieldFecha.setText("jTextField1");
         jTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFechaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, 80, 30));
-        jPanel1.add(jMonthChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 130, 50));
-        jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 200, 110, 50));
+        jPanel1.add(jTextFieldFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 530, 130, 30));
+        jPanel1.add(jMonthChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 480, 130, 30));
+        jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 129, 30));
 
         jButtonFecha.setText("jButton3");
-        jPanel1.add(jButtonFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 250, 50, -1));
+        jPanel1.add(jButtonFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 530, 129, 30));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel13.setText("Titulo");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel11.setText("ISBN");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel10.setText("Tomo");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -357,9 +378,7 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -502,6 +521,30 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFechaActionPerformed
 
+    private void jTextFieldEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEditorialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEditorialActionPerformed
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11ActionPerformed
+
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void jTextFieldISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldISBNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldISBNActionPerformed
+
+    private void jComboBoxEstanteriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstanteriasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEstanteriasActionPerformed
+
+    private void jTextFieldEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEdicionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEdicionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -540,7 +583,6 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_volver;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonFecha;
     private javax.swing.JComboBox<String> jComboBoxCategorias;
     private javax.swing.JComboBox<String> jComboBoxEstanterias;
@@ -549,12 +591,12 @@ jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private com.toedter.calendar.JMonthChooser jMonthChooser3;

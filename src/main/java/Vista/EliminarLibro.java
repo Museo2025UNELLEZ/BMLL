@@ -9,12 +9,14 @@ import Modelo.Libro;
 import controlador.conexionSQL;
 import controlador.controlLibro;
 import controlador.logicaBoton;
+import java.awt.Image;
 import static java.awt.SystemColor.control;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 /**
  *
@@ -26,6 +28,7 @@ public class EliminarLibro extends javax.swing.JFrame {
     public EliminarLibro() {
         initComponents();
         con = conexionSQL.getConnection();
+        CargarLogo ();
     }
 
     /**
@@ -46,17 +49,22 @@ public class EliminarLibro extends javax.swing.JFrame {
         btn_buscar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        lbl_x = new javax.swing.JLabel();
+        lbl_delete = new javax.swing.JLabel();
+        lbl_curva = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Eliminar Libros");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 15, -1, -1));
 
-        tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
-        tb_consulta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -65,7 +73,7 @@ public class EliminarLibro extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "autor", "tomo", "cantidad", "posicion", "accion"
+                "Titulo", "Autor", "Tomo", "Cantidad", "Posicion", "Accion"
             }
         ) {
             Class[] types = new Class [] {
@@ -87,72 +95,47 @@ public class EliminarLibro extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Titulo de libro: ");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 112, 866, -1));
+        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 70, 395, -1));
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel2.setText("Titulo de libro: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 66, -1, -1));
+
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 67, 104, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 113, 114));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novela", "historia", "relato", "politica", " " }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 67, 106, -1));
 
+        btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 25, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(btn_volver)
-                .addGap(308, 308, 308)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btn_volver))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btn_buscar)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        lbl_x.setText("jLabel3");
+        jPanel1.add(lbl_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 180, 170));
+
+        lbl_delete.setText("jLabel3");
+        jPanel1.add(lbl_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 180, 170));
+
+        lbl_curva.setText("jLabel3");
+        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 940, 470));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +150,23 @@ public class EliminarLibro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     
+    private void CargarLogo(){
+         
+        ImageIcon icn = new ImageIcon(getClass().getResource("/archivos/luis4.png"));
+        Image in = icn.getImage().getScaledInstance(lbl_curva.getWidth(),lbl_curva.getHeight(), Image.SCALE_SMOOTH);
+        lbl_curva.setIcon(new ImageIcon(in));
+        
+        
+        ImageIcon icw = new ImageIcon(getClass().getResource("/archivos/xred.png"));
+        Image iw = icw.getImage().getScaledInstance(lbl_x.getWidth(),lbl_x.getHeight(), Image.SCALE_SMOOTH);
+        lbl_x.setIcon(new ImageIcon(iw));
+        
+        ImageIcon icc = new ImageIcon(getClass().getResource("/archivos/B1.png"));
+        Image ic = icc.getImage().getScaledInstance(lbl_delete.getWidth(),lbl_delete.getHeight(), Image.SCALE_SMOOTH);
+        lbl_delete.setIcon(new ImageIcon(ic));
+    }
+    
     private void cargarLibros(){
         
         if (con == null) {
@@ -274,6 +273,9 @@ public class EliminarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_delete;
+    private javax.swing.JLabel lbl_x;
     private javax.swing.JTable tb_consulta;
     // End of variables declaration//GEN-END:variables
 

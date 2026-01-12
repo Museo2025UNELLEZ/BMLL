@@ -28,6 +28,10 @@ public class ActualizarLibro extends javax.swing.JFrame {
         Image im = ico.getImage().getScaledInstance(lbl_libros.getWidth(),lbl_libros.getHeight(), Image.SCALE_SMOOTH);
         lbl_libros.setIcon(new ImageIcon(im));
         
+        ImageIcon icw = new ImageIcon(getClass().getResource("/archivos/Lapiz.png"));
+        Image iw = icw.getImage().getScaledInstance(lbl_lapiz.getWidth(),lbl_lapiz.getHeight(), Image.SCALE_SMOOTH);
+        lbl_lapiz.setIcon(new ImageIcon(iw));
+        
         ImageIcon icn = new ImageIcon(getClass().getResource("/archivos/luis4.png"));
         Image in = icn.getImage().getScaledInstance(lbl_curva.getWidth(),lbl_curva.getHeight(), Image.SCALE_SMOOTH);
         lbl_curva.setIcon(new ImageIcon(in));
@@ -120,6 +124,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
         comboCategoria = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
         lbl_libros = new javax.swing.JLabel();
+        lbl_lapiz = new javax.swing.JLabel();
         lbl_curva = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -159,6 +164,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
 
         comboEstanteria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboEstanteria.setForeground(new java.awt.Color(0, 113, 114));
         comboEstanteria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
         jPanel1.add(comboEstanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 320, 40));
 
@@ -221,6 +227,11 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jPanel1.add(txtTomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 320, -1));
 
         txtEdicion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtEdicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEdicionActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 510, 320, -1));
 
         txtAutor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -233,6 +244,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 320, -1));
 
         comboCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboCategoria.setForeground(new java.awt.Color(0, 113, 114));
         comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
         jPanel1.add(comboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 320, 40));
 
@@ -248,6 +260,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
 
         lbl_libros.setText("jLabel7");
         jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 590, 510));
+
+        lbl_lapiz.setText("jLabel7");
+        jPanel1.add(lbl_lapiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 320, 310));
 
         lbl_curva.setText("jLabel7");
         jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1120, 570));
@@ -320,6 +335,10 @@ public class ActualizarLibro extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_actualizarActionPerformed
+
+    private void txtEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdicionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEdicionActionPerformed
 /*public ActualizarLibro() {
     initComponents(); // inicializa los textfields y combobox
 }*/
@@ -378,6 +397,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_lapiz;
     private javax.swing.JLabel lbl_libros;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCopias;

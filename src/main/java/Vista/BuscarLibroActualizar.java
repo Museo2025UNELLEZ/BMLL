@@ -51,6 +51,8 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         btn_buscar = new javax.swing.JButton();
         combo_categorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        lbl_libros = new javax.swing.JLabel();
+        lbl_globo = new javax.swing.JLabel();
         lbl_curva = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,8 +65,8 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         jLabel1.setText("Actualizar Libro");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 15, -1, -1));
 
-        tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
-        tb_consulta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -113,10 +115,12 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         });
         jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 66, 104, -1));
 
-        combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 66, 106, -1));
+        combo_categorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        combo_categorias.setForeground(new java.awt.Color(0, 113, 114));
+        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 66, 130, -1));
 
         btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +128,12 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
+
+        lbl_libros.setText("jLabel3");
+        jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, -30, 200, 200));
+
+        lbl_globo.setText("jLabel3");
+        jPanel1.add(lbl_globo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 180, 170));
 
         lbl_curva.setText("jLabel3");
         jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 940, 470));
@@ -146,6 +156,15 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         ImageIcon icn = new ImageIcon(getClass().getResource("/archivos/luis4.png"));
         Image in = icn.getImage().getScaledInstance(lbl_curva.getWidth(),lbl_curva.getHeight(), Image.SCALE_SMOOTH);
         lbl_curva.setIcon(new ImageIcon(in));
+        
+        
+        ImageIcon icw = new ImageIcon(getClass().getResource("/archivos/globo.png"));
+        Image iw = icw.getImage().getScaledInstance(lbl_globo.getWidth(),lbl_globo.getHeight(), Image.SCALE_SMOOTH);
+        lbl_globo.setIcon(new ImageIcon(iw));
+        
+        ImageIcon icc = new ImageIcon(getClass().getResource("/archivos/Vizcalla2.png"));
+        Image ic = icc.getImage().getScaledInstance(lbl_libros.getWidth(),lbl_libros.getHeight(), Image.SCALE_SMOOTH);
+        lbl_libros.setIcon(new ImageIcon(ic));
     }
     private void cargarLibros(){
         
@@ -261,6 +280,8 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_globo;
+    private javax.swing.JLabel lbl_libros;
     private javax.swing.JTable tb_consulta;
     // End of variables declaration//GEN-END:variables
 

@@ -52,7 +52,6 @@ public class Login extends javax.swing.JFrame {
 
         box_usuario.setBackground(new java.awt.Color(244, 226, 222));
         box_usuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        box_usuario.setForeground(new java.awt.Color(0, 0, 0));
         box_usuario.setBorder(null);
         box_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +66,6 @@ public class Login extends javax.swing.JFrame {
 
         box_clave.setBackground(new java.awt.Color(244, 226, 222));
         box_clave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        box_clave.setForeground(new java.awt.Color(0, 0, 0));
         box_clave.setBorder(null);
         jPanel1.add(box_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 310, -1));
 
@@ -105,7 +103,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 180, -1));
 
         lbl_difuminado.setText("j");
-        jPanel1.add(lbl_difuminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 310, 260));
+        jPanel1.add(lbl_difuminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 450, 340));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
