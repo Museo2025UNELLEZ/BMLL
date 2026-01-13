@@ -1,17 +1,15 @@
 
-package Vista;
+package Vista.Vista_copia;
 
 import DAO.CategoriaDAO;
 import Modelo.Categorias;
 import Modelo.Libro;
 import controlador.conexionSQL;
 import controlador.controlLibro;
+import java.awt.Image;
 import java.sql.Connection;
 import java.util.List;
-// image loading via ImageHelper
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-// image loading via ImageHelper
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -22,24 +20,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Consultas extends javax.swing.JFrame {
     private Connection con;
-    private controlador.controlLibro control;
-    // guarda la última categoria válida seleccionada para evitar borrar accidentalmente el campo de título
-    private int lastSelectedCategoryId = -1;
     
     public Consultas() {
         initComponents();
-        CargarLogo();
         con = conexionSQL.getConnection();
-        // crear y reutilizar una sola instancia del controlador para ahorrar recursos
-        control = new controlador.controlLibro(con);
-
         cargarCategorias();
-
-        // registrar el listener desde un método separado para mantener el constructor limpio
-        // (se registra después de cargar las categorías para evitar disparos en la inicialización)
-        setupCategoriaListener();
-        // permitir que Enter en el campo de texto dispare el botón Buscar (mejora UX)
-        box_titulo.addActionListener(evt -> btn_buscar.doClick());
+        CargarLogo();
         
     }
 
@@ -61,18 +47,23 @@ public class Consultas extends javax.swing.JFrame {
         btn_buscar = new javax.swing.JButton();
         combo_categorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        lbl_libros = new javax.swing.JLabel();
+        lbl_lupa = new javax.swing.JLabel();
+        lbl_curva = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    lbl_consulta.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    lbl_consulta.setForeground(new java.awt.Color(242, 130, 37));
+        lbl_consulta.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_consulta.setForeground(new java.awt.Color(242, 130, 37));
         lbl_consulta.setText("Consulta Libros");
+        jPanel1.add(lbl_consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 15, -1, -1));
 
-    tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-    tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
-    tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
+        tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
+        tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -83,14 +74,14 @@ public class Consultas extends javax.swing.JFrame {
                 "Titulo", "Autor", "Tomo", "Cantidad", "Posicion"
             }
         ) {
-            Class<?>[] types = new Class<?> [] {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
-            public Class<?> getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
@@ -102,9 +93,13 @@ public class Consultas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-    lbl_titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-    lbl_titulo.setForeground(new java.awt.Color(242, 130, 37));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 111, 866, -1));
+        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 69, 420, -1));
+
+        lbl_titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_titulo.setForeground(new java.awt.Color(242, 130, 37));
         lbl_titulo.setText("Titulo de libro: ");
+        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 65, -1, -1));
 
         btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
@@ -114,34 +109,29 @@ public class Consultas extends javax.swing.JFrame {
                 btn_buscarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(618, 66, 104, -1));
 
-    combo_categorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    combo_categorias.setForeground(new java.awt.Color(0, 113, 114));
+        combo_categorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        combo_categorias.setForeground(new java.awt.Color(0, 113, 114));
+        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 66, 172, -1));
 
-    btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    btn_volver.setForeground(new java.awt.Color(0, 113, 114));
-    btn_volver.setText("Volver");
+        btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
+        btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(lbl_consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 15, -1, -1));
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 111, 866, -1));
-        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 69, 420, -1));
-        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 65, -1, -1));
-        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(618, 66, 104, -1));
-        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 66, 172, -1));
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
 
-        // image labels (from Vista_copia)
-        lbl_libros = new javax.swing.JLabel();
-        lbl_lupa = new javax.swing.JLabel();
-        lbl_curva = new javax.swing.JLabel();
+        lbl_libros.setText("jLabel3");
         jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, -40, 220, 210));
+
+        lbl_lupa.setText("jLabel3");
         jPanel1.add(lbl_lupa, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, -10, 180, 170));
+
+        lbl_curva.setText("jLabel3");
         jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 940, 470));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,7 +147,21 @@ public class Consultas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void CargarLogo(){
+         
+        ImageIcon icn = new ImageIcon(getClass().getResource("/archivos/luis4.png"));
+        Image in = icn.getImage().getScaledInstance(lbl_curva.getWidth(),lbl_curva.getHeight(), Image.SCALE_SMOOTH);
+        lbl_curva.setIcon(new ImageIcon(in));
+        
+        
+        ImageIcon icw = new ImageIcon(getClass().getResource("/archivos/Vizcalla3.png"));
+        Image iw = icw.getImage().getScaledInstance(lbl_libros.getWidth(),lbl_libros.getHeight(), Image.SCALE_SMOOTH);
+        lbl_libros.setIcon(new ImageIcon(iw));
+        
+        ImageIcon icc = new ImageIcon(getClass().getResource("/archivos/lupa.png"));
+        Image ic = icc.getImage().getScaledInstance(lbl_lupa.getWidth(),lbl_lupa.getHeight(), Image.SCALE_SMOOTH);
+        lbl_lupa.setIcon(new ImageIcon(ic));
+    }
     
     private void cargarLibros(){
         
@@ -168,78 +172,31 @@ public class Consultas extends javax.swing.JFrame {
         
         String Titulo = box_titulo.getText().trim();
         
+        DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
+        modelo.setRowCount(0);
+        
+        controlLibro control = new controlLibro(con);
         List<Libro> libros = control.obtenerLibros(Titulo);
-        actualizarTabla(libros);
+        
+       for (Libro l : libros) {
+        modelo.addRow(new Object[]{
+            l.getTitulo(),
+            l.getAutor(),
+            l.getTomo(),
+            l.getN_copias(),
+            l.getPosicion(),
+        });
+        }
     }
     
     private void cargarCategorias(){
         CategoriaDAO dao = new CategoriaDAO();
         try{
-           // añadir opción por defecto que no debe disparar búsqueda
-           combo_categorias.addItem(new Modelo.Categorias(-1, "Seleccione una categoria"));
            for(Categorias c : dao.ListarCategorias()){
               combo_categorias.addItem(c);
            } 
         }catch(Exception e){
             e.printStackTrace();
-        }
-    }
-
-    // Registro del ItemListener en un método separado para mantener el constructor limpio
-    private void setupCategoriaListener() {
-        combo_categorias.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    Object obj = e.getItem();
-                    if (obj instanceof Categorias) {
-                        Categorias c = (Categorias) obj;
-                        int newId = c.getId();
-                        // si es placeholder o la misma categoría que ya estaba seleccionada, no hacer nada
-                        if (newId <= 0 || newId == lastSelectedCategoryId) {
-                            return;
-                        }
-                        // nueva selección válida: limpiar el campo y cargar
-                        box_titulo.setText("");
-                        cargarLibrosPorCategoria();
-                        lastSelectedCategoryId = newId;
-                    }
-                }
-            }
-        });
-    }
-
-    private void cargarLibrosPorCategoria(){
-        if (con == null) {
-            JOptionPane.showMessageDialog(this, "Error de conexión");
-            return;
-        }
-
-        Categorias cat = (Categorias) combo_categorias.getSelectedItem();
-        // si es la opción por defecto, no hacer nada
-        if (cat == null || cat.getId() <= 0) return;
-
-        List<Libro> libros = control.obtenerLibrosPorCategoria(cat.getId());
-        actualizarTabla(libros);
-    }
-
-    // Actualiza la tabla a partir de una lista de libros (null/empty check dentro)
-    private void actualizarTabla(List<Libro> libros) {
-        DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
-        modelo.setRowCount(0);
-
-        if (libros == null || libros.isEmpty()) {
-            return;
-        }
-
-        for (Libro l : libros) {
-            modelo.addRow(new Object[]{
-                l.getTitulo(),
-                l.getAutor(),
-                l.getTomo(),
-                l.getN_copias(),
-                l.getPosicion(),
-            });
         }
     }
     
@@ -302,28 +259,14 @@ public class Consultas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_consulta;
-    private javax.swing.JLabel lbl_titulo;
-    private javax.swing.JTable tb_consulta;
+    private javax.swing.JLabel lbl_curva;
     private javax.swing.JLabel lbl_libros;
     private javax.swing.JLabel lbl_lupa;
-    private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_titulo;
+    private javax.swing.JTable tb_consulta;
     // End of variables declaration//GEN-END:variables
-
-    private void CargarLogo(){
-        lbl_curva.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_curva.getWidth(), lbl_curva.getHeight()));
-        lbl_libros.setIcon(ImageHelper.getScaledIcon("/archivos/Vizcalla3.png", lbl_libros.getWidth(), lbl_libros.getHeight()));
-        lbl_lupa.setIcon(ImageHelper.getScaledIcon("/archivos/lupa.png", lbl_lupa.getWidth(), lbl_lupa.getHeight()));
-    }
 
     public void open() {
         SwingUtilities.invokeLater(() -> setVisible(true));
-    }
-
-    /**
-     * Permite habilitar/deshabilitar el botón "Volver" desde código externo.
-     * Útil para usuarios sin permisos de navegación completa.
-     */
-    public void setVolverEnabled(boolean enabled) {
-        btn_volver.setEnabled(enabled);
     }
 }

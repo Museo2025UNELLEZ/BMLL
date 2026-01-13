@@ -1,30 +1,24 @@
 
-package Vista;
+package Vista.Vista_copia;
 
 import Modelo.Usuario;
-import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import controlador.ControlLogin;
+import java.awt.Image;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
-import java.awt.Cursor;
 
 
 public class Login extends javax.swing.JFrame {
-    // contador simple de intentos fallidos y bloqueo temporal
-    private int failedAttempts = 0;
-    private static final int MAX_ATTEMPTS = 10;
-    private Timer lockoutTimer;
 
  
     public Login() {
+        FlatLightLaf.setup();
         initComponents();
         CargarLogo();
         getRootPane().setDefaultButton(btn_entrar);
-        FlatLightLaf.setup();
 
         
     }
@@ -42,14 +36,15 @@ public class Login extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btn_entrar = new javax.swing.JButton();
         lbl_icono = new javax.swing.JLabel();
-    lbl_difuminado = new javax.swing.JLabel();
         btn_salir = new javax.swing.JButton();
+        lbl_difuminado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lbl_usuario.setBackground(new java.awt.Color(2, 82, 89));
         lbl_usuario.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbl_usuario.setForeground(new java.awt.Color(242, 130, 37));
         lbl_usuario.setText("Usuario:");
@@ -57,7 +52,6 @@ public class Login extends javax.swing.JFrame {
 
         box_usuario.setBackground(new java.awt.Color(244, 226, 222));
         box_usuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        box_usuario.setForeground(new java.awt.Color(0, 113, 114));
         box_usuario.setBorder(null);
         box_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +66,6 @@ public class Login extends javax.swing.JFrame {
 
         box_clave.setBackground(new java.awt.Color(244, 226, 222));
         box_clave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        box_clave.setForeground(new java.awt.Color(0, 113, 114));
         box_clave.setBorder(null);
         jPanel1.add(box_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 310, -1));
 
@@ -85,9 +78,8 @@ public class Login extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(242, 130, 37));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 360, -1));
 
-    btn_entrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-    btn_entrar.setForeground(new java.awt.Color(0, 113, 114));
-    btn_entrar.setText("Entrar");
+        btn_entrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_entrar.setText("Entrar");
         btn_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_entrarActionPerformed(evt);
@@ -100,18 +92,18 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(btn_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 180, -1));
         jPanel1.add(lbl_icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 430, 270));
-        
-    lbl_difuminado.setText("j");
-    jPanel1.add(lbl_difuminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 450, 340));
-    btn_salir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-    btn_salir.setForeground(new java.awt.Color(0, 113, 114));
-    btn_salir.setText("Salir");
+
+        btn_salir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salirActionPerformed(evt);
             }
         });
         jPanel1.add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 180, -1));
+
+        lbl_difuminado.setText("j");
+        jPanel1.add(lbl_difuminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 450, 340));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,9 +123,17 @@ public class Login extends javax.swing.JFrame {
 
     
     private void CargarLogo(){
-        // Use centralized ImageHelper (no BufferedImage, scaled via getScaledInstance under the hood)
-        lbl_icono.setIcon(ImageHelper.getScaledIcon("/archivos/Logod.png", lbl_icono.getWidth(), lbl_icono.getHeight()));
-        lbl_difuminado.setIcon(ImageHelper.getScaledIcon("/archivos/jose.png", lbl_difuminado.getWidth(), lbl_difuminado.getHeight()));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/archivos/Recorte.png"));
+        
+        Image img = icon.getImage().getScaledInstance(lbl_icono.getWidth(),lbl_icono.getHeight(), Image.SCALE_SMOOTH);
+        
+        lbl_icono.setIcon(new ImageIcon(img));
+        
+        ImageIcon ico = new ImageIcon(getClass().getResource("/archivos/jose.png"));
+        
+        Image im = ico.getImage().getScaledInstance(lbl_difuminado.getWidth(),lbl_difuminado.getHeight(), Image.SCALE_SMOOTH);
+        
+        lbl_difuminado.setIcon(new ImageIcon(im));
     }
     private void AbrirMenu(){
         MenuPrincipal menu = new MenuPrincipal();
@@ -147,89 +147,25 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_box_usuarioActionPerformed
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
-        // ejecutar autenticación en background para no bloquear la UI
-        if (lockoutTimer != null && lockoutTimer.isRunning()) {
-            JOptionPane.showMessageDialog(this, "Acceso temporalmente bloqueado. Intenta más tarde.", "Bloqueado", JOptionPane.WARNING_MESSAGE);
-            return;
+        // TODO add your handling code here:
+        
+        try {
+            String user = box_usuario.getText().trim();
+            String pass = new String(box_clave.getPassword());
+
+            ControlLogin control = new ControlLogin();
+            Usuario u = control.autenticar(user, pass); 
+
+            if (u != null) {
+                AbrirMenu();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario o clave incorrectos");
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
         }
-
-        final String user = box_usuario.getText().trim();
-        final char[] passChars = box_clave.getPassword();
-
-        // desactivar botones y mostrar cursor de espera
-        btn_entrar.setEnabled(false);
-        btn_salir.setEnabled(false);
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        new SwingWorker<Usuario, Void>() {
-            @Override
-            protected Usuario doInBackground() throws Exception {
-                try {
-                    ControlLogin control = new ControlLogin();
-                    String pass = new String(passChars);
-                    return control.autenticar(user, pass);
-                } finally {
-                    // limpiar el array de contraseña por seguridad
-                    java.util.Arrays.fill(passChars, '\0');
-                }
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    Usuario u = get();
-                    if (u != null) {
-                        // login correcto
-                        failedAttempts = 0;
-                        // si es admin, abre el menú principal; si no, abrir pantalla Consultas con volver deshabilitado
-                        if (u.getIs_admin() == 1) {
-                            AbrirMenu();
-                        } else {
-                            Consultas consultas = new Consultas();
-                            consultas.setVolverEnabled(false);
-                            consultas.setLocationRelativeTo(null);
-                            consultas.setVisible(true);
-                            // cerrar login
-                            Login.this.dispose();
-                        }
-                        return;
-                    }
-
-                    // fallo en autenticación
-                    failedAttempts++;
-                    if (failedAttempts >= MAX_ATTEMPTS) {
-                        // bloquear por 30 segundos
-                        btn_entrar.setEnabled(false);
-                        lockoutTimer = new Timer(30_000, ev -> {
-                            failedAttempts = 0;
-                            btn_entrar.setEnabled(true);
-                            if (lockoutTimer != null) lockoutTimer.stop();
-                        });
-                        lockoutTimer.setRepeats(false);
-                        lockoutTimer.start();
-                        JOptionPane.showMessageDialog(Login.this, "Usuario o clave incorrectos. Se ha bloqueado el acceso temporalmente por demasiados intentos.", "Bloqueado", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(Login.this, "Usuario o clave incorrectos. Intentos restantes: " + (MAX_ATTEMPTS - failedAttempts), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                } catch (Exception ex) {
-                    Throwable cause = ex.getCause();
-                    if (cause instanceof SQLException) {
-                        JOptionPane.showMessageDialog(Login.this, "Error de base de datos: " + cause.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(Login.this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } finally {
-                    // sólo reactivar si no estamos en bloqueo temporal
-                    if (lockoutTimer == null || !lockoutTimer.isRunning()) {
-                        btn_entrar.setEnabled(true);
-                    }
-                    btn_salir.setEnabled(true);
-                    setCursor(Cursor.getDefaultCursor());
-                    box_clave.setText("");
-                }
-            }
-        }.execute();
     }//GEN-LAST:event_btn_entrarActionPerformed
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
@@ -290,9 +226,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbl_clave;
+    private javax.swing.JLabel lbl_difuminado;
     private javax.swing.JLabel lbl_icono;
     private javax.swing.JLabel lbl_usuario;
-    private javax.swing.JLabel lbl_difuminado;
     // End of variables declaration//GEN-END:variables
     
      public void open() {

@@ -1,0 +1,1 @@
+Get-ChildItem 'src\main\resources\archivos' -Filter '*.png' | Where-Object { -not $_.Name.EndsWith('.opt.png') } | ForEach-Object { & ".\tools\pngquant\pngquant.exe" --quality=90-100 --speed=1 --ext .opt.png --force 256 $_.FullName }

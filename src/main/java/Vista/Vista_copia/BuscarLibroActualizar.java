@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Vista;
+package Vista.Vista_copia;
 
 import DAO.CategoriaDAO;
 import Modelo.Categorias;
@@ -10,11 +10,10 @@ import Modelo.Libro;
 import controlador.LogicaBotonActualizar;
 import controlador.conexionSQL;
 import controlador.controlLibro;
+import java.awt.Image;
 import java.sql.Connection;
 import java.util.List;
-// image loading via ImageHelper
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -26,54 +25,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BuscarLibroActualizar extends javax.swing.JFrame {
     private Connection con;
-    private controlador.controlLibro control;
-    // guarda la última categoria válida seleccionada para evitar borrar accidentalmente
-    private int lastSelectedCategoryId = -1;
     
     public BuscarLibroActualizar() {
         initComponents();
-        CargarLogo();
         con = conexionSQL.getConnection();
-        // crear y reutilizar una sola instancia del controlador para ahorrar recursos
-        control = new controlador.controlLibro(con);
-
         cargarCategorias();
-        // registrar listener después de cargar categorias para evitar disparos en init
-        setupCategoriaListener();
-        // permitir que Enter en el campo de texto dispare el botón Buscar (mejora UX)
-        box_titulo.addActionListener(evt -> btn_buscar.doClick());
-        
-    }
-
-    /**
-     * Constructor que recibe el estado previo de búsqueda para restaurarlo
-     * @param title texto del campo de búsqueda previo (puede ser null/empty)
-     * @param categoryId id de la categoría seleccionada previamente (<=0 para ninguna)
-     */
-    public BuscarLibroActualizar(String title, int categoryId) {
-        this(); // inicializa todo
-        // restaurar título si existe
-        if (title != null && !title.trim().isEmpty()) {
-            box_titulo.setText(title);
-            cargarLibros();
-        }
-
-        // si hay categoría válida, seleccionarla y cargar por categoría
-        if (categoryId > 0) {
-            // buscar el item en el combo y seleccionarlo
-            for (int i = 0; i < combo_categorias.getItemCount(); i++) {
-                Object item = combo_categorias.getItemAt(i);
-                if (item instanceof Categorias) {
-                    Categorias c = (Categorias) item;
-                    if (c.getId() == categoryId) {
-                        // establecer selección; listener cargará los libros por categoría
-                        combo_categorias.setSelectedIndex(i);
-                        lastSelectedCategoryId = categoryId;
-                        break;
-                    }
-                }
-            }
-        }
+        CargarLogo();
     }
 
     /**
@@ -94,17 +51,22 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         btn_buscar = new javax.swing.JButton();
         combo_categorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        lbl_libros = new javax.swing.JLabel();
+        lbl_globo = new javax.swing.JLabel();
+        lbl_curva = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel1.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Actualizar Libro");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 15, -1, -1));
 
-    tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-    tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
+        tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -116,14 +78,14 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
                 "Titulo", "Autor", "Cantidad", "Posicion", "Acción"
             }
         ) {
-            Class<?>[] types = new Class<?> [] {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, true
             };
 
-            public Class<?> getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
@@ -135,9 +97,13 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-    jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-    jLabel2.setForeground(new java.awt.Color(242, 130, 37));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 111, 866, -1));
+        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 69, 395, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(242, 130, 37));
         jLabel2.setText("Titulo de libro: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 65, -1, -1));
 
         btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
@@ -147,34 +113,29 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
                 btn_buscarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 66, 104, -1));
 
-    combo_categorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    combo_categorias.setForeground(new java.awt.Color(0, 113, 114));
+        combo_categorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        combo_categorias.setForeground(new java.awt.Color(0, 113, 114));
+        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 66, 130, -1));
 
-    btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    btn_volver.setForeground(new java.awt.Color(0, 113, 114));
-    btn_volver.setText("Volver");
+        btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
+        btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 15, -1, -1));
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 111, 866, -1));
-        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 69, 395, -1));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 65, -1, -1));
-        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 66, 104, -1));
-        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 66, 130, -1));
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
 
-        // image labels (from Vista_copia)
-        lbl_libros = new javax.swing.JLabel();
-        lbl_globo = new javax.swing.JLabel();
-        lbl_curva = new javax.swing.JLabel();
+        lbl_libros.setText("jLabel3");
         jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, -30, 200, 200));
+
+        lbl_globo.setText("jLabel3");
         jPanel1.add(lbl_globo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 180, 170));
+
+        lbl_curva.setText("jLabel3");
         jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 940, 470));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,7 +151,21 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ private void CargarLogo(){
+         
+        ImageIcon icn = new ImageIcon(getClass().getResource("/archivos/luis4.png"));
+        Image in = icn.getImage().getScaledInstance(lbl_curva.getWidth(),lbl_curva.getHeight(), Image.SCALE_SMOOTH);
+        lbl_curva.setIcon(new ImageIcon(in));
+        
+        
+        ImageIcon icw = new ImageIcon(getClass().getResource("/archivos/globo.png"));
+        Image iw = icw.getImage().getScaledInstance(lbl_globo.getWidth(),lbl_globo.getHeight(), Image.SCALE_SMOOTH);
+        lbl_globo.setIcon(new ImageIcon(iw));
+        
+        ImageIcon icc = new ImageIcon(getClass().getResource("/archivos/Vizcalla2.png"));
+        Image ic = icc.getImage().getScaledInstance(lbl_libros.getWidth(),lbl_libros.getHeight(), Image.SCALE_SMOOTH);
+        lbl_libros.setIcon(new ImageIcon(ic));
+    }
     private void cargarLibros(){
         
         if (con == null) {
@@ -200,119 +175,47 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         
         String Titulo = box_titulo.getText().trim();
         
-        // usar la instancia del controlador creada en el constructor
+        DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
+        modelo.setRowCount(0);
+        
+        controlLibro control = new controlLibro(con);
         List<Libro> libros = control.obtenerLibros(Titulo);
-        actualizarTabla(libros);
+        
+       for (Libro l : libros) {
+        modelo.addRow(new Object[]{
+            l.getId(),
+            l.getTitulo(),
+            l.getAutor(),
+            l.getN_copias(),
+            l.getPosicion(),
+            "Actualizar"  // Botón         
+        });
+        }
+       
+       // Ocultar columna id
+        tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
+        tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
+        tb_consulta.getColumnModel().getColumn(0).setWidth(0);
+
+        int colBoton = tb_consulta.getColumnCount() - 1;
+
+        // Asignar renderer y editor para botón actualizar
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new RenderizarBotonActualizar());
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new LogicaBotonActualizar(new JCheckBox(), tb_consulta, control));
+
+        tb_consulta.setRowHeight(30);
 
     }
     
      private void cargarCategorias(){
         CategoriaDAO dao = new CategoriaDAO();
         try{
-           // añadir opción por defecto que no debe disparar búsqueda
-           combo_categorias.addItem(new Modelo.Categorias(-1, "Seleccione una categoria"));
            for(Categorias c : dao.ListarCategorias()){
               combo_categorias.addItem(c);
            } 
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    // Registra el ItemListener para el combo de categorías
-    private void setupCategoriaListener() {
-        combo_categorias.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    Object obj = e.getItem();
-                    if (obj instanceof Categorias) {
-                        Categorias c = (Categorias) obj;
-                        int newId = c.getId();
-                        // si es placeholder o la misma categoría que ya estaba seleccionada, no hacer nada
-                        if (newId <= 0 || newId == lastSelectedCategoryId) {
-                            return;
-                        }
-                        // nueva selección válida: limpiar el campo y cargar
-                        box_titulo.setText("");
-                        cargarLibrosPorCategoria();
-                        lastSelectedCategoryId = newId;
-                    }
-                }
-            }
-        });
-    }
-
-    private void cargarLibrosPorCategoria(){
-        if (con == null) {
-        JOptionPane.showMessageDialog(this, "Error de conexión");
-        return;
-        }
-
-        Categorias cat = (Categorias) combo_categorias.getSelectedItem();
-        if (cat == null || cat.getId() <= 0) return;
-
-        List<Libro> libros = control.obtenerLibrosPorCategoria(cat.getId());
-        actualizarTabla(libros);
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // existing variables are already declared above by NetBeans; add image label declarations here
-    private javax.swing.JLabel lbl_libros;
-    private javax.swing.JLabel lbl_globo;
-    private javax.swing.JLabel lbl_curva;
-    // End of image variables//GEN-END:variables
-
-    private void CargarLogo(){
-        lbl_curva.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_curva.getWidth(), lbl_curva.getHeight()));
-        lbl_globo.setIcon(ImageHelper.getScaledIcon("/archivos/globo.png", lbl_globo.getWidth(), lbl_globo.getHeight()));
-        lbl_libros.setIcon(ImageHelper.getScaledIcon("/archivos/Vizcalla2.png", lbl_libros.getWidth(), lbl_libros.getHeight()));
-    }
-
-    // getters para permitir que controladores externos lean el estado de búsqueda
-    public String getCurrentSearchTitle() {
-        return box_titulo.getText().trim();
-    }
-
-    public int getCurrentSelectedCategoryId() {
-        Object sel = combo_categorias.getSelectedItem();
-        if (sel instanceof Categorias) return ((Categorias) sel).getId();
-        return -1;
-    }
-
-    // Unifica la actualización de la tabla (incluye configurar renderer/editor del botón)
-    private void actualizarTabla(List<Libro> libros) {
-        DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
-        modelo.setRowCount(0);
-
-        if (libros == null || libros.isEmpty()) {
-            return;
-        }
-
-        for (Libro l : libros) {
-            modelo.addRow(new Object[]{
-                l.getId(),
-                l.getTitulo(),
-                l.getAutor(),
-                l.getN_copias(),
-                l.getPosicion(),
-                "Actualizar"
-            });
-        }
-
-        // Ocultar columna id
-        if (tb_consulta.getColumnModel().getColumnCount() > 0) {
-            tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
-            tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
-            tb_consulta.getColumnModel().getColumn(0).setWidth(0);
-        }
-
-        int colBoton = tb_consulta.getColumnCount() - 1;
-        // Asignar renderer y editor para botón actualizar (reutiliza la instancia control)
-        tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new RenderizarBotonActualizar());
-        tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new LogicaBotonActualizar(new JCheckBox(), tb_consulta, control));
-
-        tb_consulta.setRowHeight(30);
     }
     
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
@@ -376,6 +279,9 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_globo;
+    private javax.swing.JLabel lbl_libros;
     private javax.swing.JTable tb_consulta;
     // End of variables declaration//GEN-END:variables
 
