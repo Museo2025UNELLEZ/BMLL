@@ -61,14 +61,15 @@ public class Consultas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+    jPanel1.setBackground(new java.awt.Color(244, 226, 222));
 
-        lbl_consulta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbl_consulta.setForeground(new java.awt.Color(0, 0, 0));
+    lbl_consulta.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+    lbl_consulta.setForeground(new java.awt.Color(242, 130, 37));
         lbl_consulta.setText("Consulta Libros");
 
-        tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
-        tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
+    tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+    tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
+    tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -98,11 +99,12 @@ public class Consultas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        lbl_titulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbl_titulo.setForeground(new java.awt.Color(0, 0, 0));
+    lbl_titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+    lbl_titulo.setForeground(new java.awt.Color(242, 130, 37));
         lbl_titulo.setText("Titulo de libro: ");
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,9 +112,12 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
-        combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    combo_categorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    combo_categorias.setForeground(new java.awt.Color(0, 113, 114));
 
-        btn_volver.setText("Volver");
+    btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    btn_volver.setForeground(new java.awt.Color(0, 113, 114));
+    btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);

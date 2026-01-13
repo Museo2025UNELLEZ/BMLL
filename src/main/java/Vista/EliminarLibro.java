@@ -60,14 +60,14 @@ public class EliminarLibro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+    jPanel1.setBackground(new java.awt.Color(244, 226, 222));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Eliminar Libros");
+    jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+    jLabel1.setForeground(new java.awt.Color(242, 130, 37));
+    jLabel1.setText("Eliminar Libros");
 
-        tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
-        tb_consulta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+    tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+    tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -98,11 +98,12 @@ public class EliminarLibro extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Titulo de libro: ");
+    jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+    jLabel2.setForeground(new java.awt.Color(242, 130, 37));
+    jLabel2.setText("Titulo de libro: ");
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,9 +111,12 @@ public class EliminarLibro extends javax.swing.JFrame {
             }
         });
 
-    jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+    jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    jComboBox1.setForeground(new java.awt.Color(0, 113, 114));
     jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<Modelo.Categorias>());
 
+        btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -48,17 +48,17 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_usuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbl_usuario.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_usuario.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_usuario.setForeground(new java.awt.Color(242, 130, 37));
         lbl_usuario.setText("Usuario:");
         jPanel1.add(lbl_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, 20));
 
-        box_usuario.setBackground(new java.awt.Color(204, 204, 204));
+        box_usuario.setBackground(new java.awt.Color(244, 226, 222));
         box_usuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        box_usuario.setForeground(new java.awt.Color(0, 0, 0));
+        box_usuario.setForeground(new java.awt.Color(0, 113, 114));
         box_usuario.setBorder(null);
         box_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,25 +67,28 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(box_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 300, -1));
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setBackground(new java.awt.Color(242, 130, 37));
+        jSeparator1.setForeground(new java.awt.Color(242, 130, 37));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 360, 10));
 
-        box_clave.setBackground(new java.awt.Color(204, 204, 204));
+        box_clave.setBackground(new java.awt.Color(244, 226, 222));
         box_clave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        box_clave.setForeground(new java.awt.Color(0, 0, 0));
+        box_clave.setForeground(new java.awt.Color(0, 113, 114));
         box_clave.setBorder(null);
         jPanel1.add(box_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 310, -1));
 
-        lbl_clave.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbl_clave.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_clave.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_clave.setForeground(new java.awt.Color(242, 130, 37));
         lbl_clave.setText("Clave:");
         jPanel1.add(lbl_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setBackground(new java.awt.Color(242, 130, 37));
+        jSeparator2.setForeground(new java.awt.Color(242, 130, 37));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 360, -1));
 
-        btn_entrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_entrar.setText("Entrar");
+    btn_entrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+    btn_entrar.setForeground(new java.awt.Color(0, 113, 114));
+    btn_entrar.setText("Entrar");
         btn_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_entrarActionPerformed(evt);
@@ -99,8 +102,9 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(btn_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 180, -1));
         jPanel1.add(lbl_icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 430, 270));
 
-        btn_salir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_salir.setText("Salir");
+    btn_salir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+    btn_salir.setForeground(new java.awt.Color(0, 113, 114));
+    btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salirActionPerformed(evt);
