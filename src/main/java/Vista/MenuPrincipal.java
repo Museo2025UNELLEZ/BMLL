@@ -167,7 +167,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     private void btn_ajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ajustesActionPerformed
-        Ajustes aj = new Ajustes();
+        Ajuste_func aj = new Ajuste_func();
         aj.setLocationRelativeTo(null);
         aj.setVisible(true);
 
