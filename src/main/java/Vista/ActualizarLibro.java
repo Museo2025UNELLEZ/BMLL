@@ -361,13 +361,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_VolverActionPerformed
 
-    /**
-     * Cargar imágenes decorativas en los JLabels que no forman parte de la
-     * lógica del formulario. Usa ImageHelper para cargar desde recursos.
-     */
+
     private void CargarLogo() {
-        // Si el tamaño aún no está validado, ImageHelper devolverá un icon base
-        // y el layout ajustará visualmente cuando el componente se muestre.
+
         try {
             lbl_curva.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_curva.getWidth(), lbl_curva.getHeight()));
             lbl_libros.setIcon(ImageHelper.getScaledIcon("/archivos/Vizcalla.png", lbl_libros.getWidth(), lbl_libros.getHeight()));

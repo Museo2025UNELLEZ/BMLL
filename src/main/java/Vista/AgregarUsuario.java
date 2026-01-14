@@ -146,7 +146,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, 260, 40));
         jPanel5.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 450, 430));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
