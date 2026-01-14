@@ -1,6 +1,5 @@
 package com.museodelosllanos.bmll;
 
-import Vista.Consultas;
 import Vista.Login;
 /**
  *

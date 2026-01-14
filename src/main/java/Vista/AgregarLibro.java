@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
-import javax.swing.JTextField;
-import java.awt.Font;
 import controlador.conexionSQL;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -119,6 +117,8 @@ public class AgregarLibro extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1360, 720));
+        setMinimumSize(new java.awt.Dimension(1360, 720));
 
         jPanel1.setBackground(new java.awt.Color(244, 226, 222));
         jPanel1.setForeground(new java.awt.Color(244, 226, 222));
@@ -182,7 +182,7 @@ public class AgregarLibro extends javax.swing.JFrame {
                 Btn_guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, 260, 40));
+        jPanel1.add(Btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 630, 260, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(242, 130, 37));
@@ -240,7 +240,7 @@ public class AgregarLibro extends javax.swing.JFrame {
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 630, 260, 40));
+        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 630, 260, 40));
 
         box_codigo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         box_codigo.addActionListener(new java.awt.event.ActionListener() {
@@ -272,11 +272,11 @@ public class AgregarLibro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1301, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1359, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
