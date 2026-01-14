@@ -6,6 +6,10 @@ import controlador.controlLibro;
 import controlador.logicaBoton;
 // image loading via ImageHelper
 import java.util.List;
+import DAO.CategoriaDAO;
+import Modelo.Categorias;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -19,9 +23,13 @@ public class EliminarLibro extends javax.swing.JFrame {
 		initComponents();
 		con = conexionSQL.getConnection();
 		CargarLogo();
+		// cargar categorias en el combo y comportamiento similar a Consultas
+		cargarCategorias();
+		setupCategoriaListener();
+		// permitir que Enter en el campo de texto dispare el botón Buscar
+		box_titulo.addActionListener(evt -> btn_buscar.doClick());
 	}
 
-	@SuppressWarnings("unchecked")
 	private void initComponents() {
 		jPanel1 = new javax.swing.JPanel();
 		jLabel1 = new javax.swing.JLabel();
@@ -97,9 +105,9 @@ public class EliminarLibro extends javax.swing.JFrame {
 		});
 		jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 67, 104, -1));
 
-		jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-		jComboBox1.setForeground(new java.awt.Color(0, 113, 114));
-		jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novela", "historia", "relato", "politica", " " }));
+	jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+	jComboBox1.setForeground(new java.awt.Color(0, 113, 114));
+	jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<Modelo.Categorias>());
 		jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 67, 106, -1));
 
 		btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -139,6 +147,75 @@ public class EliminarLibro extends javax.swing.JFrame {
 		lbl_curva.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_curva.getWidth(), lbl_curva.getHeight()));
 		lbl_x.setIcon(ImageHelper.getScaledIcon("/archivos/xred.png", lbl_x.getWidth(), lbl_x.getHeight()));
 		lbl_delete.setIcon(ImageHelper.getScaledIcon("/archivos/B1.png", lbl_delete.getWidth(), lbl_delete.getHeight()));
+	}
+
+	private void cargarCategorias(){
+		CategoriaDAO dao = new CategoriaDAO();
+		try{
+			// placeholder
+			jComboBox1.addItem(new Categorias(-1, "Seleccione una categoria"));
+			for(Categorias c : dao.ListarCategorias()){
+				jComboBox1.addItem(c);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	private void setupCategoriaListener(){
+		jComboBox1.addItemListener(new ItemListener(){
+			@Override
+			public void itemStateChanged(ItemEvent e){
+				if(e.getStateChange() == ItemEvent.SELECTED){
+					Object obj = e.getItem();
+					if(obj instanceof Categorias){
+						Categorias c = (Categorias) obj;
+						int newId = c.getId();
+						if(newId <= 0) return; // placeholder
+						// limpiar el campo y cargar por categoria
+						box_titulo.setText("");
+						cargarLibrosPorCategoria(newId);
+					}
+				}
+			}
+		});
+	}
+
+	private void cargarLibrosPorCategoria(int categoriaId){
+		if(con == null){
+			JOptionPane.showMessageDialog(this, "Error de conexión");
+			return;
+		}
+
+		DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
+		modelo.setRowCount(0);
+
+		controlLibro control = new controlLibro(con);
+		List<Libro> libros = control.obtenerLibrosPorCategoria(categoriaId);
+
+		for(Libro l : libros){
+			modelo.addRow(new Object[]{
+				l.getId(),
+				l.getTitulo(),
+				l.getAutor(),
+				l.getTomo(),
+				l.getN_copias(),
+				l.getPosicion(),
+				"eliminar"
+			});
+		}
+
+		// ocultar columna id
+		tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
+		tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
+		tb_consulta.getColumnModel().getColumn(0).setWidth(0);
+
+		int colBoton = tb_consulta.getColumnCount() - 1;
+		// Asignar renderer y editor
+		tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
+		tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta, control));
+
+		tb_consulta.setRowHeight(30);
 	}
 
 	private void cargarLibros(){
@@ -217,7 +294,7 @@ public class EliminarLibro extends javax.swing.JFrame {
 	private javax.swing.JTextField box_titulo;
 	private javax.swing.JButton btn_buscar;
 	private javax.swing.JButton btn_volver;
-	private javax.swing.JComboBox<String> jComboBox1;
+	private javax.swing.JComboBox<Modelo.Categorias> jComboBox1;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JPanel jPanel1;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JOptionPane;
+
 
 public class LibrosDAO {
     
@@ -87,7 +87,7 @@ public List<Libro> ListarLibros(String titulo){
 
     StringBuilder sql = new StringBuilder(
         "SELECT l.id, l.titulo, l.autor, l.n_copias, l.tomo, " +
-        "CONCAT(e.codigo, '-', e.n_filas) AS posicion " +
+        "CONCAT(e.codigo, '-', l.fila) AS posicion " +
         "FROM libros l " +
         "JOIN estanterias e ON l.estante_id = e.id " +
         "WHERE 1=1"
@@ -128,7 +128,7 @@ public List<Libro> ListarLibrosPorCategoria(int categoriaId){
     List<Libro> lista = new ArrayList<>();
 
     String sql = "SELECT l.id, l.titulo, l.autor, l.n_copias, l.tomo, " +
-                 "CONCAT(e.codigo, '-', e.n_filas) AS posicion " +
+                 "CONCAT(e.codigo, '-', l.fila) AS posicion " +
                  "FROM libros l " +
                  "JOIN estanterias e ON l.estante_id = e.id " +
                  "WHERE l.categoria_id = ? LIMIT 50";
