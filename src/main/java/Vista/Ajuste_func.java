@@ -93,6 +93,7 @@ public class Ajuste_func extends javax.swing.JFrame {
 
     private void bnt_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_usuariosActionPerformed
         // TODO add your handling code here:
+        onAgregarUsuario ();
     }//GEN-LAST:event_bnt_usuariosActionPerformed
 
     private void onGenerarRespaldo() {
@@ -273,6 +274,21 @@ public class Ajuste_func extends javax.swing.JFrame {
         }
         this.dispose();
     }
+    private void onAgregarUsuario() {
+    try {
+        AgregarUsuario ventana = new AgregarUsuario();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
+    } catch (Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "No se pudo abrir la ventana de agregar usuario: " + ex.getMessage(), 
+            "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    this.dispose();
+}
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnt_usuarios;
