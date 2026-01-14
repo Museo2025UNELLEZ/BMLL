@@ -11,6 +11,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import Modelo.Libro;
+
 
 /**
  *
@@ -68,12 +70,12 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(242, 130, 37));
         jLabel6.setText("Contraseña");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, -1, 30));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, -1, 30));
 
         lbl_Nombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbl_Nombre.setForeground(new java.awt.Color(242, 130, 37));
         lbl_Nombre.setText("Nombre");
-        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
         lblCedula.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCedula.setForeground(new java.awt.Color(242, 130, 37));
@@ -88,7 +90,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(242, 130, 37));
         jLabel8.setText("Usuario");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 110, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(242, 130, 37));
@@ -144,7 +146,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, 260, 40));
         jPanel5.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 450, 430));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -273,44 +275,20 @@ public class AgregarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonGuardar;
-    private javax.swing.JButton BotonGuardar1;
-    private javax.swing.JButton BotonGuardar2;
-    private javax.swing.JButton BotonGuardar3;
     private javax.swing.JButton Btn_guardar;
-    private javax.swing.JComboBox<String> ComboAdmin;
-    private javax.swing.JComboBox<String> ComboAdmin1;
-    private javax.swing.JComboBox<String> ComboAdmin2;
-    private javax.swing.JComboBox<String> ComboAdmin3;
     private javax.swing.JLabel LblApellido;
     private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox<String> jComboBoxEstanterias;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jtfApellido;
     private javax.swing.JTextField jtfCedula;
     private javax.swing.JTextField jtfContraseña;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfUsuario;
-    private javax.swing.JTextField jtfcontraseña;
-    private javax.swing.JTextField jtfcontraseña1;
-    private javax.swing.JTextField jtfcontraseña2;
-    private javax.swing.JTextField jtfcontraseña3;
-    private javax.swing.JTextField jtfusuario;
-    private javax.swing.JTextField jtfusuario1;
-    private javax.swing.JTextField jtfusuario2;
-    private javax.swing.JTextField jtfusuario3;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lbl_Nombre;
     private javax.swing.JLabel lbl_libro;
