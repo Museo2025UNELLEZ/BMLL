@@ -20,7 +20,9 @@ public class Ajuste_func extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btn_respaldo = new javax.swing.JButton();
         btn_volver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_respaldo = new javax.swing.JLabel();
+        bnt_usuarios = new javax.swing.JButton();
+        lbl_usuarios = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,10 +49,25 @@ public class Ajuste_func extends javax.swing.JFrame {
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 640, 290, 50));
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("1. Boton para generar respaldo de la base de datos y guardarlo donde quiera");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        lbl_respaldo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lbl_respaldo.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_respaldo.setText("1. Boton para generar respaldo de la base de datos y guardarlo donde quiera");
+        jPanel1.add(lbl_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        bnt_usuarios.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        bnt_usuarios.setForeground(new java.awt.Color(0, 113, 114));
+        bnt_usuarios.setText("Crear Usuario");
+        bnt_usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnt_usuariosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bnt_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 370, 140));
+
+        lbl_usuarios.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lbl_usuarios.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_usuarios.setText("2. Crear Nuevos Usuarios que puedan acceder al sistema");
+        jPanel1.add(lbl_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,6 +90,10 @@ public class Ajuste_func extends javax.swing.JFrame {
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         onVolver();
     }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void bnt_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_usuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bnt_usuariosActionPerformed
 
     private void onGenerarRespaldo() {
         String time = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
@@ -254,9 +275,11 @@ public class Ajuste_func extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bnt_usuarios;
     private javax.swing.JButton btn_respaldo;
     private javax.swing.JButton btn_volver;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_respaldo;
+    private javax.swing.JLabel lbl_usuarios;
     // End of variables declaration//GEN-END:variables
 }
