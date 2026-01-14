@@ -10,6 +10,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Modelo.Libro;
+
 
 
 
@@ -104,6 +106,7 @@ public class AgregarLibro extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         FECHA = new com.toedter.calendar.JDateChooser();
         lbl_libro = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,7 +120,6 @@ public class AgregarLibro extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1360, 720));
         setMinimumSize(new java.awt.Dimension(1360, 720));
 
         jPanel1.setBackground(new java.awt.Color(244, 226, 222));
@@ -268,11 +270,16 @@ public class AgregarLibro extends javax.swing.JFrame {
         jPanel1.add(FECHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 320, 30));
         jPanel1.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 450, 430));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("BORRAR ESTO");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1359, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1360, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,6 +486,7 @@ public class AgregarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
