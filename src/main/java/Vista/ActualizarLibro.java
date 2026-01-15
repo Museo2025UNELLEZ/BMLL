@@ -26,7 +26,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
         initComponents(); // inicializa los textfields y combobox
         // Cargar elementos gráficos (imágenes decorativas)
         CargarLogo();
-        
+        /*
         jDayChooser1.setVisible(false);
         jMonthChooser3.setVisible(false);
         jYearChooser1.setVisible(false);
@@ -48,7 +48,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
         // Listeners
         jYearChooser1.addPropertyChangeListener("year", e -> actualizar.run());
         jMonthChooser3.addPropertyChangeListener("month", e -> actualizar.run());
-        jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());
+        jDayChooser1.addPropertyChangeListener("day", e -> actualizar.run());*/
         
         this.control = control;
         this.libro = libro;
@@ -79,7 +79,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
         txtAutor.setText(libro.getAutor());
         txtEditorial.setText(libro.getEditorial());
         txtCopias.setText(String.valueOf(libro.getN_copias()));
-        txtFecha.setText(libro.getFecha_publicacion().toString());
+        jDateChooser1.setDate(libro.getFecha_publicacion());
         txtTomo.setText(libro.getTomo());
         txtIsbn.setText(libro.getIsbn());
         txtFila.setText(String.valueOf(libro.getFila()));
@@ -141,13 +141,11 @@ public class ActualizarLibro extends javax.swing.JFrame {
         txtEdicion = new javax.swing.JTextField();
         txtAutor = new javax.swing.JTextField();
         txtCopias = new javax.swing.JTextField();
-        txtFecha = new javax.swing.JTextField();
         comboCategoria = new javax.swing.JComboBox<>();
-        btn_volver = new javax.swing.JButton();
-        jDayChooser1 = new com.toedter.calendar.JDayChooser();
-        jMonthChooser3 = new com.toedter.calendar.JMonthChooser();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
-        fechaBoton = new javax.swing.JButton();
+        lbl_lapiz = new javax.swing.JLabel();
+        lbl_libros = new javax.swing.JLabel();
+        lbl_curva = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -162,62 +160,60 @@ public class ActualizarLibro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setForeground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 38)); // NOI18N
-    jLabel1.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 38)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Actualizar Libro");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
-    jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel2.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(242, 130, 37));
         jLabel2.setText("Numero de copias");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, -1, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 240, 40));
 
-    jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel3.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(242, 130, 37));
         jLabel3.setText("Titulo");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 110, 60));
 
-    jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel4.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(242, 130, 37));
         jLabel4.setText("ISBN");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 100, 60));
 
-    comboEstanteria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    comboEstanteria.setForeground(new java.awt.Color(0, 113, 114));
-    comboEstanteria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
-        jPanel1.add(comboEstanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 410, 40));
+        comboEstanteria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboEstanteria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTANTERIA", " " }));
+        jPanel1.add(comboEstanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, 450, 40));
 
-    jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel6.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(242, 130, 37));
         jLabel6.setText("Autor");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 70, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 120, 90, 50));
 
-    jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel8.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(242, 130, 37));
         jLabel8.setText("Fila");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 370, 110, 50));
 
-    jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel9.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(242, 130, 37));
         jLabel9.setText("Fecha de publicacion");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 290, 270, 40));
 
-    jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel10.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(242, 130, 37));
         jLabel10.setText("tomo");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 110, 50));
 
-    jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel11.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(242, 130, 37));
         jLabel11.setText("Editorial");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 140, 50));
 
-    btn_actualizar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    btn_actualizar.setForeground(new java.awt.Color(0, 113, 114));
-    btn_actualizar.setText("Guardar");
+        btn_actualizar.setText("Guardar");
         btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_actualizarActionPerformed(evt);
@@ -233,87 +229,58 @@ public class ActualizarLibro extends javax.swing.JFrame {
         });
         jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 280, -1));
 
-    jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel5.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(242, 130, 37));
         jLabel5.setText("Edicion");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 480, 120, 40));
 
         txtFila.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtFila.setText("jTextField1");
-        jPanel1.add(txtFila, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 320, -1));
+        jPanel1.add(txtFila, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 380, 350, 30));
 
         txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTitulo.setText("jTextField1");
-        jPanel1.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 320, -1));
+        jPanel1.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 370, 30));
 
         txtEditorial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtEditorial.setText("jTextField1");
-        jPanel1.add(txtEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 320, -1));
+        jPanel1.add(txtEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 370, 30));
 
         txtIsbn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtIsbn.setText("jTextField1");
-        jPanel1.add(txtIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 320, -1));
+        jPanel1.add(txtIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 370, 30));
 
         txtTomo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtTomo.setText("jTextField1");
-        jPanel1.add(txtTomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 320, -1));
+        jPanel1.add(txtTomo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 370, 30));
 
         txtEdicion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtEdicion.setText("jTextField1");
-        jPanel1.add(txtEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 410, 320, -1));
+        jPanel1.add(txtEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 350, 30));
 
         txtAutor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtAutor.setText("jTextField1");
-        jPanel1.add(txtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 320, -1));
+        jPanel1.add(txtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 350, 30));
 
         txtCopias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtCopias.setText("jTextField1");
-        jPanel1.add(txtCopias, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 320, -1));
+        jPanel1.add(txtCopias, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 300, 350, 30));
 
-        txtFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtFecha.setText("jTextField1");
-        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 255, 120, 40));
+        comboCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
+        jPanel1.add(comboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 450, 40));
 
-    comboCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    comboCategoria.setForeground(new java.awt.Color(0, 113, 114));
-    comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
-        jPanel1.add(comboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 400, 40));
+        lbl_lapiz.setText("jLabel7");
+        jPanel1.add(lbl_lapiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 60, -1, -1));
 
-    btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    btn_volver.setForeground(new java.awt.Color(0, 113, 114));
-    btn_volver.setText("volver");
-        btn_volver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_volverActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        jPanel1.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 250, -1, 160));
-        jPanel1.add(jMonthChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 130, 50));
-        jPanel1.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 110, 50));
+        lbl_libros.setText("jLabel7");
+        jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 100, -1, -1));
 
-        fechaBoton.setText("Fecha");
-        jPanel1.add(fechaBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, -1, -1));
-
-    // Imagenes decorativas (copiadas desde Vista_copia)
-    lbl_libros = new javax.swing.JLabel();
-    lbl_lapiz = new javax.swing.JLabel();
-    lbl_curva = new javax.swing.JLabel();
-    jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 590, 510));
-    jPanel1.add(lbl_lapiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 320, 310));
-    jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1120, 570));
+        lbl_curva.setText("jLabel7");
+        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 70, -1, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 210, 350, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1360, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -321,21 +288,18 @@ public class ActualizarLibro extends javax.swing.JFrame {
 
     
     
-    private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
-        // TODO add your handling code here:
-        BuscarLibroActualizar buscar = new BuscarLibroActualizar();
-        buscar.setVisible(true);
-        buscar.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btn_volverActionPerformed
-
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
         // Actualizar los datos del objeto libro con lo que el usuario editó
         libro.setTitulo(txtTitulo.getText());
         libro.setAutor(txtAutor.getText());
         libro.setEditorial(txtEditorial.getText());
         libro.setN_copias(Integer.parseInt(txtCopias.getText()));
-        libro.setFecha_publicacion(java.sql.Date.valueOf(txtFecha.getText())); // formato yyyy-MM-dd
+        java.util.Date fecha = jDateChooser1.getDate();
+            java.sql.Date fechaSQL = null;
+            if (fecha != null) {
+                fechaSQL = new java.sql.Date(fecha.getTime());
+                libro.setFecha_publicacion(fechaSQL); // formato yyyy-MM-dd
+            }        
         libro.setTomo(txtTomo.getText());
         libro.setIsbn(txtIsbn.getText());
         libro.setFila(Integer.parseInt(txtFila.getText()));
@@ -397,13 +361,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_VolverActionPerformed
 
-    /**
-     * Cargar imágenes decorativas en los JLabels que no forman parte de la
-     * lógica del formulario. Usa ImageHelper para cargar desde recursos.
-     */
+
     private void CargarLogo() {
-        // Si el tamaño aún no está validado, ImageHelper devolverá un icon base
-        // y el layout ajustará visualmente cuando el componente se muestre.
+
         try {
             lbl_curva.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_curva.getWidth(), lbl_curva.getHeight()));
             lbl_libros.setIcon(ImageHelper.getScaledIcon("/archivos/Vizcalla.png", lbl_libros.getWidth(), lbl_libros.getHeight()));
@@ -455,11 +415,9 @@ public class ActualizarLibro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_actualizar;
-    private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox<String> comboCategoria;
     private javax.swing.JComboBox<String> comboEstanteria;
-    private javax.swing.JButton fechaBoton;
-    private com.toedter.calendar.JDayChooser jDayChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -470,21 +428,18 @@ public class ActualizarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private com.toedter.calendar.JMonthChooser jMonthChooser3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
+    private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_lapiz;
+    private javax.swing.JLabel lbl_libros;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCopias;
     private javax.swing.JTextField txtEdicion;
     private javax.swing.JTextField txtEditorial;
-    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtFila;
     private javax.swing.JTextField txtIsbn;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtTomo;
-    private javax.swing.JLabel lbl_curva;
-    private javax.swing.JLabel lbl_lapiz;
-    private javax.swing.JLabel lbl_libros;
     // End of variables declaration//GEN-END:variables
 }

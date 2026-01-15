@@ -45,11 +45,8 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         
     }
 
-    /**
-     * Constructor que recibe el estado previo de búsqueda para restaurarlo
-     * @param title texto del campo de búsqueda previo (puede ser null/empty)
-     * @param categoryId id de la categoría seleccionada previamente (<=0 para ninguna)
-     */
+  
+
     public BuscarLibroActualizar(String title, int categoryId) {
         this(); // inicializa todo
         // restaurar título si existe
@@ -94,17 +91,22 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         btn_buscar = new javax.swing.JButton();
         combo_categorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
+        lbl_curva = new javax.swing.JLabel();
+        lbl_globo = new javax.swing.JLabel();
+        lbl_libros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-    jLabel1.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Actualizar Libro");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
 
-    tb_consulta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-    tb_consulta.setForeground(new java.awt.Color(0, 113, 114));
+        tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
+        tb_consulta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -116,14 +118,14 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
                 "Titulo", "Autor", "Cantidad", "Posicion", "Acción"
             }
         ) {
-            Class<?>[] types = new Class<?> [] {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, true
             };
 
-            public Class<?> getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
@@ -135,47 +137,44 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-    jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-    jLabel2.setForeground(new java.awt.Color(242, 130, 37));
-        jLabel2.setText("Titulo de libro: ");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 1210, 530));
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
+        box_titulo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 660, -1));
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Titulo de libro: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 210, -1));
+
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 70, 80, -1));
 
-    combo_categorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    combo_categorias.setForeground(new java.awt.Color(0, 113, 114));
+        combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 70, 220, -1));
 
-    btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-    btn_volver.setForeground(new java.awt.Color(0, 113, 114));
-    btn_volver.setText("Volver");
+        btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 15, -1, -1));
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 111, 866, -1));
-        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 69, 395, -1));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 65, -1, -1));
-        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 66, 104, -1));
-        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 66, 130, -1));
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
 
-        // image labels (from Vista_copia)
-        lbl_libros = new javax.swing.JLabel();
-        lbl_globo = new javax.swing.JLabel();
-        lbl_curva = new javax.swing.JLabel();
-        jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, -30, 200, 200));
-        jPanel1.add(lbl_globo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 180, 170));
-        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 940, 470));
+        lbl_curva.setText("jLabel3");
+        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1310, 510));
+
+        lbl_globo.setText("jLabel3");
+        jPanel1.add(lbl_globo, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, -30, 200, 180));
+
+        lbl_libros.setText("jLabel3");
+        jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 170, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,12 +255,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         actualizarTabla(libros);
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // existing variables are already declared above by NetBeans; add image label declarations here
-    private javax.swing.JLabel lbl_libros;
-    private javax.swing.JLabel lbl_globo;
-    private javax.swing.JLabel lbl_curva;
-    // End of image variables//GEN-END:variables
+          
 
     private void CargarLogo(){
         lbl_curva.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_curva.getWidth(), lbl_curva.getHeight()));
@@ -376,6 +370,9 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_globo;
+    private javax.swing.JLabel lbl_libros;
     private javax.swing.JTable tb_consulta;
     // End of variables declaration//GEN-END:variables
 

@@ -15,15 +15,7 @@ import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 
-/**
- * Simple image optimizer that rescales large images and recompresses JPEG/PNG
- * to reduce file size while preserving visual quality.
- *
- * Usage:
- *   java -cp target/classes tools.ImageOptimizer <dir> [maxDim] [jpegQuality]
- * Example:
- *   java -cp target/classes tools.ImageOptimizer src/main/resources/archivos 800 0.85
- */
+
 public class ImageOptimizer {
     public static void main(String[] args) throws Exception {
         if (args.length < 1) {

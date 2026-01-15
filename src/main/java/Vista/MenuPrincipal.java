@@ -56,7 +56,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Biblioteca del Museo de los Llanos");
+<<<<<<< HEAD
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
+=======
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+>>>>>>> e7372ea03362cc5c8492c8e3f005482cf7038aec
 
         btn_consultar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_consultar.setForeground(new java.awt.Color(0, 113, 114));
@@ -185,7 +189,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     private void btn_ajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ajustesActionPerformed
-        Ajustes aj = new Ajustes();
+        Ajuste_func aj = new Ajuste_func();
         aj.setLocationRelativeTo(null);
         aj.setVisible(true);
 
