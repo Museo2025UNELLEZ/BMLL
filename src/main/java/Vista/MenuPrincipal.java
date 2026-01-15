@@ -40,6 +40,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btn_actualizar = new javax.swing.JButton();
         btn_ajustes = new javax.swing.JButton();
         lbl_amarillo = new javax.swing.JLabel();
+        btn_agregar_categoria = new javax.swing.JButton();
+        btn_agregar_estanteria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(901, 634));
@@ -54,7 +56,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Biblioteca del Museo de los Llanos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
         btn_consultar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_consultar.setForeground(new java.awt.Color(0, 113, 114));
@@ -96,7 +98,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 300, 200));
 
-        btn_ajustes.setBackground(new java.awt.Color(255, 255, 255));
         btn_ajustes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_ajustes.setForeground(new java.awt.Color(0, 113, 114));
         btn_ajustes.setText("Ajustes");
@@ -106,7 +107,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, 120, 50));
-        jPanel1.add(lbl_amarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 200, 960, 470));
+        jPanel1.add(lbl_amarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 960, 470));
+
+        btn_agregar_categoria.setText("Agregar categoria");
+        btn_agregar_categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregar_categoriaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_agregar_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
+
+        btn_agregar_estanteria.setText("Agregar Estanteria");
+        btn_agregar_estanteria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregar_estanteriaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_agregar_estanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,12 +152,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         // TODO add your handling code here:
-        
+  
         AgregarLibro ag = new AgregarLibro();
         ag.setLocationRelativeTo(null);
         ag.setVisible(true);
         
         this.dispose();
+       
         
     }//GEN-LAST:event_btn_agregarActionPerformed
 
@@ -173,6 +191,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_btn_ajustesActionPerformed
+
+    private void btn_agregar_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_categoriaActionPerformed
+        // TODO add your handling code here:
+         Agregar_categoria ca= new Agregar_categoria();
+        ca.setLocationRelativeTo(null);
+        ca.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_btn_agregar_categoriaActionPerformed
+
+    private void btn_agregar_estanteriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregar_estanteriaActionPerformed
+        // TODO add your handling code here:
+         Agregar_estanteria es= new Agregar_estanteria();
+        es.setLocationRelativeTo(null);
+        es.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_btn_agregar_estanteriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +248,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_actualizar;
     private javax.swing.JButton btn_agregar;
+    private javax.swing.JButton btn_agregar_categoria;
+    private javax.swing.JButton btn_agregar_estanteria;
     private javax.swing.JButton btn_ajustes;
     private javax.swing.JButton btn_consultar;
     private javax.swing.JButton btn_eliminar;
