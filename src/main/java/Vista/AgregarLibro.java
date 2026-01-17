@@ -127,7 +127,7 @@ public class AgregarLibro extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1190, 700));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 38)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 38)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Agregar Libro");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, -1));

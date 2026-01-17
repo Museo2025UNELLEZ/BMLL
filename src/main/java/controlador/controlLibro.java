@@ -54,5 +54,13 @@ public class controlLibro {
     public int actualizarLibro(Libro libro){
         return dao.actualizarLibro(libro);
     }
+
+    public List<String> listarEditoriales(){
+        return dao.listarEditoriales();
+    }
+
+    public List<Libro> obtenerLibrosPorEditorial(String editorial){
+        return dao.ListarLibrosPorEditorial(editorial);
+    }
     
 }

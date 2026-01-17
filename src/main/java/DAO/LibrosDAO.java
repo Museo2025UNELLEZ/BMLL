@@ -154,6 +154,54 @@ public List<Libro> ListarLibrosPorCategoria(int categoriaId){
 
     return lista;
 }
+
+// Listar editoriales (distinct)
+public List<String> listarEditoriales(){
+    List<String> lista = new ArrayList<>();
+    String sql = "SELECT DISTINCT editorial FROM libros WHERE editorial IS NOT NULL AND editorial <> '' ORDER BY editorial";
+
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            lista.add(rs.getString("editorial"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
+
+// Listar libros por editorial
+public List<Libro> ListarLibrosPorEditorial(String editorial){
+    List<Libro> lista = new ArrayList<>();
+
+    String sql = "SELECT l.id, l.titulo, l.autor, l.n_copias, l.tomo, " +
+                 "CONCAT(e.codigo, '-', l.fila) AS posicion " +
+                 "FROM libros l " +
+                 "JOIN estanterias e ON l.estante_id = e.id " +
+                 "WHERE l.editorial = ? LIMIT 50";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, editorial);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Libro l = new Libro();
+                l.setId(rs.getInt("id"));
+                l.setTitulo(rs.getString("titulo"));
+                l.setAutor(rs.getString("autor"));
+                l.setTomo(rs.getString("tomo"));
+                l.setN_copias(rs.getInt("n_copias"));
+                l.setPosicion(rs.getString("posicion"));
+                lista.add(l);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+}
 public int eliminarlibro(int id){
     int res = 0;
     StringBuilder sql = new StringBuilder("DELETE FROM libros WHERE id = ?");

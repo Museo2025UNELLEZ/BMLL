@@ -11,6 +11,7 @@ import java.util.List;
 // image loading via ImageHelper
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.DefaultComboBoxModel;
 // image loading via ImageHelper
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -34,6 +35,7 @@ public class Consultas extends javax.swing.JFrame {
         control = new controlador.controlLibro(con);
 
         cargarCategorias();
+    cargarEditoriales();
 
         // registrar el listener desde un método separado para mantener el constructor limpio
         // (se registra después de cargar las categorías para evitar disparos en la inicialización)
@@ -62,16 +64,21 @@ public class Consultas extends javax.swing.JFrame {
         combo_categorias = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
         lbl_curva = new javax.swing.JLabel();
-        lbl_lupa = new javax.swing.JLabel();
         lbl_libros = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        lbl_categoria = new javax.swing.JLabel();
+        lbl_editorial = new javax.swing.JLabel();
+        lbl_lupa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(244, 226, 222));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_consulta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbl_consulta.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_consulta.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        lbl_consulta.setForeground(new java.awt.Color(242, 130, 37));
         lbl_consulta.setText("Consulta Libros");
+        jPanel1.add(lbl_consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
         tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,98 +111,54 @@ public class Consultas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        lbl_titulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbl_titulo.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_titulo.setText("Titulo de libro: ");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 161, 1280, 520));
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        box_titulo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 510, 30));
+
+        lbl_titulo.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        lbl_titulo.setForeground(new java.awt.Color(242, 130, 37));
+        lbl_titulo.setText("Titulo de libro");
+        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+
+        btn_buscar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscarActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 140, 30));
 
-        combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        combo_categorias.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, 250, 30));
 
+        btn_volver.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
+        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 320, 1360, 400));
+        jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 210, 140));
 
-        lbl_curva.setText("jLabel1");
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 120, 330, 30));
 
-        lbl_lupa.setText("jLabel1");
+        lbl_categoria.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        lbl_categoria.setForeground(new java.awt.Color(242, 130, 37));
+        lbl_categoria.setText("Categorias");
+        jPanel1.add(lbl_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, -1, -1));
 
-        lbl_libros.setText("jLabel1");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_volver)
-                        .addGap(308, 308, 308)
-                        .addComponent(lbl_consulta))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbl_titulo)
-                                .addGap(18, 18, 18)
-                                .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbl_lupa))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(121, 121, 121)
-                                                .addComponent(lbl_curva))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(140, 140, 140)
-                                                .addComponent(lbl_libros)))
-                                        .addGap(0, 134, Short.MAX_VALUE)))))))
-                .addGap(65, 65, 65))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_consulta)
-                    .addComponent(btn_volver))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(box_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_titulo)
-                    .addComponent(btn_buscar)
-                    .addComponent(combo_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(lbl_curva)
-                        .addGap(69, 69, 69)
-                        .addComponent(lbl_lupa)
-                        .addGap(97, 97, 97)
-                        .addComponent(lbl_libros)))
-                .addContainerGap(120, Short.MAX_VALUE))
-        );
+        lbl_editorial.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        lbl_editorial.setForeground(new java.awt.Color(242, 130, 37));
+        lbl_editorial.setText("Editoriales");
+        jPanel1.add(lbl_editorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 80, -1, -1));
+        jPanel1.add(lbl_lupa, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, -10, 210, 200));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,9 +168,7 @@ public class Consultas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -238,6 +199,48 @@ public class Consultas extends javax.swing.JFrame {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void cargarEditoriales(){
+        try{
+            List<String> editoriales = control.listarEditoriales();
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            model.addElement("Seleccione una editorial");
+            if(editoriales != null){
+                for(String ed : editoriales){
+                    model.addElement(ed);
+                }
+            }
+            jComboBox1.setModel(model);
+
+            // listener para filtrar por editorial
+            jComboBox1.addItemListener(new ItemListener(){
+                @Override
+                public void itemStateChanged(ItemEvent e){
+                    if(e.getStateChange() == ItemEvent.SELECTED){
+                        Object o = e.getItem();
+                        if(o instanceof String){
+                            String sel = (String) o;
+                            if(sel == null || sel.equals("Seleccione una editorial")) return;
+                            // limpiar búsqueda por título
+                            box_titulo.setText("");
+                            cargarLibrosPorEditorial(sel);
+                        }
+                    }
+                }
+            });
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    private void cargarLibrosPorEditorial(String editorial){
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "Error de conexión");
+            return;
+        }
+        List<Libro> libros = control.obtenerLibrosPorEditorial(editorial);
+        actualizarTabla(libros);
     }
 
     // Registro del ItemListener en un método separado para mantener el constructor limpio
@@ -354,10 +357,13 @@ public class Consultas extends javax.swing.JFrame {
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox<Categorias> combo_categorias;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_categoria;
     private javax.swing.JLabel lbl_consulta;
     private javax.swing.JLabel lbl_curva;
+    private javax.swing.JLabel lbl_editorial;
     private javax.swing.JLabel lbl_libros;
     private javax.swing.JLabel lbl_lupa;
     private javax.swing.JLabel lbl_titulo;
@@ -374,10 +380,7 @@ public class Consultas extends javax.swing.JFrame {
         SwingUtilities.invokeLater(() -> setVisible(true));
     }
 
-    /**
-     * Permite habilitar/deshabilitar el botón "Volver" desde código externo.
-     * Útil para usuarios sin permisos de navegación completa.
-     */
+ 
     public void setVolverEnabled(boolean enabled) {
         btn_volver.setEnabled(enabled);
     }
