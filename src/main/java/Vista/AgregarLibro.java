@@ -106,7 +106,6 @@ public class AgregarLibro extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         FECHA = new com.toedter.calendar.JDateChooser();
         lbl_libro = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -269,11 +268,6 @@ public class AgregarLibro extends javax.swing.JFrame {
         FECHA.setDateFormatString("yyyy-MM-dd");
         jPanel1.add(FECHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 320, 30));
         jPanel1.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 290, 450, 430));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("BORRAR ESTO");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -486,7 +480,6 @@ public class AgregarLibro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

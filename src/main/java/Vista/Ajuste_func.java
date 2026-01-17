@@ -23,6 +23,8 @@ public class Ajuste_func extends javax.swing.JFrame {
         lbl_respaldo = new javax.swing.JLabel();
         bnt_usuarios = new javax.swing.JButton();
         lbl_usuarios = new javax.swing.JLabel();
+        btn_EliminarUsuario = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +71,22 @@ public class Ajuste_func extends javax.swing.JFrame {
         lbl_usuarios.setText("2. Crear Nuevos Usuarios que puedan acceder al sistema");
         jPanel1.add(lbl_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
+        btn_EliminarUsuario.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_EliminarUsuario.setForeground(new java.awt.Color(0, 113, 114));
+        btn_EliminarUsuario.setText("Eliminar Usuario");
+        btn_EliminarUsuario.setMinimumSize(new java.awt.Dimension(173, 34));
+        btn_EliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_EliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, 340, 140));
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("3. Eliminar usuario del sistema");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, 340, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,6 +113,11 @@ public class Ajuste_func extends javax.swing.JFrame {
         // TODO add your handling code here:
         onAgregarUsuario ();
     }//GEN-LAST:event_bnt_usuariosActionPerformed
+
+    private void btn_EliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarUsuarioActionPerformed
+        // TODO add your handling code here:
+         onEliminarUsuario ();
+    }//GEN-LAST:event_btn_EliminarUsuarioActionPerformed
 
     private void onGenerarRespaldo() {
         String time = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
@@ -285,6 +308,21 @@ public class Ajuste_func extends javax.swing.JFrame {
             "Error", 
             javax.swing.JOptionPane.ERROR_MESSAGE);
     }
+    
+    this.dispose();
+    }
+    
+    private void onEliminarUsuario() {
+    try {
+        EliminarUsuario ventana = new EliminarUsuario();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
+    } catch (Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "No se pudo abrir la ventana de eliminar usuario: " + ex.getMessage(), 
+            "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
     this.dispose();
 }
 
@@ -292,8 +330,10 @@ public class Ajuste_func extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnt_usuarios;
+    private javax.swing.JButton btn_EliminarUsuario;
     private javax.swing.JButton btn_respaldo;
     private javax.swing.JButton btn_volver;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_respaldo;
     private javax.swing.JLabel lbl_usuarios;
