@@ -15,11 +15,10 @@ import javax.swing.JOptionPane;
 public class Agregar_estanteria extends javax.swing.JFrame {
     private Connection con;
 
-    /**
-     * Creates new form Agregar_estanteria
-     */
+   
     public Agregar_estanteria() {
         initComponents();
+        box_nombre.addActionListener(evt -> btn_guardar.doClick());
     }
 
     /**
@@ -33,11 +32,12 @@ public class Agregar_estanteria extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        box_nombre = new javax.swing.JTextField();
         btn_guardar = new javax.swing.JButton();
         btn_volver = new javax.swing.JButton();
         numero_filas = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -49,9 +49,9 @@ public class Agregar_estanteria extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Agregar estanteria");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        box_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                box_nombreActionPerformed(evt);
             }
         });
 
@@ -81,6 +81,10 @@ public class Agregar_estanteria extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(242, 130, 37));
         jLabel2.setText("Numero de filas");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(242, 130, 37));
+        jLabel3.setText("Letra estanteria");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,10 +93,11 @@ public class Agregar_estanteria extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(177, 177, 177)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(numero_filas, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(box_nombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -108,8 +113,10 @@ public class Agregar_estanteria extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(61, 61, 61)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -126,13 +133,13 @@ public class Agregar_estanteria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void box_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_box_nombreActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
  
-      String codigoEstanteria = jTextField1.getText().trim();
+      String codigoEstanteria = box_nombre.getText().trim();
     String filasTexto = numero_filas.getText().trim();
 
     // Validar que sea UNA sola letra
@@ -180,7 +187,7 @@ public class Agregar_estanteria extends javax.swing.JFrame {
                 "Estantería guardada exitosamente", 
                 "Éxito", 
                 JOptionPane.INFORMATION_MESSAGE);
-            jTextField1.setText("");
+            box_nombre.setText("");
             numero_filas.setText("");
         }
 
@@ -247,12 +254,13 @@ public class Agregar_estanteria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField box_nombre;
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField numero_filas;
     // End of variables declaration//GEN-END:variables
 

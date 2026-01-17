@@ -19,6 +19,7 @@ public class Agregar_categoria extends javax.swing.JFrame{
      */
     public Agregar_categoria() {
         initComponents();
+        box_nombre.addActionListener(evt -> btn_guardar.doClick());
     }
 
     /**
@@ -31,10 +32,11 @@ public class Agregar_categoria extends javax.swing.JFrame{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        box_nombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btn_guardar = new javax.swing.JButton();
         btn_volver = new javax.swing.JButton();
+        lbl_nombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -42,12 +44,12 @@ public class Agregar_categoria extends javax.swing.JFrame{
         jPanel1.setBackground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        box_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                box_nombreActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 250, 30));
+        jPanel1.add(box_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 250, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
@@ -61,7 +63,7 @@ public class Agregar_categoria extends javax.swing.JFrame{
                 btn_guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, -1, -1));
+        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
 
         btn_volver.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_volver.setText("Volver");
@@ -70,21 +72,26 @@ public class Agregar_categoria extends javax.swing.JFrame{
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
+        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
+
+        lbl_nombre.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lbl_nombre.setForeground(new java.awt.Color(242, 130, 37));
+        lbl_nombre.setText("Nombre Categoria");
+        jPanel1.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void box_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_box_nombreActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
                                             
     // Obtener el texto ingresado en el campo
-    String nombreCategorias = jTextField1.getText().trim();
+    String nombreCategorias = box_nombre.getText().trim();
 
     // Validar que no esté vacío
     if (nombreCategorias.isEmpty()) {
@@ -115,7 +122,7 @@ public class Agregar_categoria extends javax.swing.JFrame{
                 javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
             // Limpiar el campo de texto
-            jTextField1.setText("");
+            box_nombre.setText("");
         }
 
     } catch (SQLException e) {
@@ -178,11 +185,12 @@ public class Agregar_categoria extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField box_nombre;
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbl_nombre;
     // End of variables declaration//GEN-END:variables
   }
 
