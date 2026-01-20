@@ -4,10 +4,15 @@
  */
 package Vista;
 import controlador.conexionSQL;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 /**
  *
  * @author jq523
@@ -19,6 +24,19 @@ public class Agregar_estanteria extends javax.swing.JFrame {
     public Agregar_estanteria() {
         initComponents();
         box_nombre.addActionListener(evt -> btn_guardar.doClick());
+        
+        // Bind Escape key to call the same handler as the Volver button.
+        // The NetBeans-generated code declares the button as a local variable inside initComponents(),
+        // so we invoke the existing action method directly instead of calling doClick() on the button instance.
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getRootPane().getActionMap().put("volver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Reuse the generated action handler so behavior stays in one place
+                btn_volverActionPerformed(new ActionEvent(Agregar_estanteria.this, ActionEvent.ACTION_PERFORMED, "escape"));
+            }
+        });
     }
 
     /**

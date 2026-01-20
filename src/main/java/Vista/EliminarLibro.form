@@ -228,7 +228,7 @@
         <Component class="javax.swing.JLabel" name="lbl_x">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="170" y="10" width="340" height="200"/>
+              <AbsoluteConstraints x="250" y="-10" width="220" height="160"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -258,7 +258,7 @@
         <Component class="javax.swing.JLabel" name="lbl_delete">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="880" y="0" width="360" height="170"/>
+              <AbsoluteConstraints x="880" y="-10" width="180" height="160"/>
             </Constraint>
           </Constraints>
         </Component>

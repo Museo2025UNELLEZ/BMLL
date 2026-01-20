@@ -1,7 +1,7 @@
 package controlador;
 
 import Modelo.Libro;
-import Vista.ActualizarLibro;
+import Vista.DatosLibro;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Window;
@@ -71,9 +71,8 @@ public class LogicaBotonVer extends DefaultCellEditor {
                     parentWindow.dispose();
                 }
 
-                // Abrir la ventana de actualización pasando el estado previo
-                ActualizarLibro ventana = new ActualizarLibro(control, libro, prevTitle, prevCategoryId);
-                ventana.setReadOnly(true); // bloquear campos para solo lectura
+                // Abrir la ventana de datos de libro (solo lectura)
+                DatosLibro ventana = new DatosLibro(control, libro, prevTitle, prevCategoryId);
                 ventana.setLocationRelativeTo(null);
                 ventana.setVisible(true);
             } else {

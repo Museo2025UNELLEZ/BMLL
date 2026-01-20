@@ -8,15 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-/**
- * Renderer para el botón "Ver" en la tabla (color verde).
- */
+
 public class RenderizarBotonVer extends JButton implements TableCellRenderer {
     public RenderizarBotonVer(){
         setOpaque(true);
         setBackground(new Color(34, 139, 34)); // forest green
         setForeground(Color.WHITE);
-        setFont(new Font("Segoe UI", Font.BOLD, 12));
+        setFont(new Font("Verdana", Font.BOLD, 18));
         setText("Ver");
         setBorder(BorderFactory.createLineBorder(new Color(60, 179, 113), 2, true));
         setFocusPainted(false);

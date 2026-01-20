@@ -5,7 +5,6 @@ import DAO.CategoriaDAO;
 import Modelo.Categorias;
 import Modelo.Libro;
 import controlador.conexionSQL;
-import controlador.controlLibro;
 import java.sql.Connection;
 import java.util.List;
 // image loading via ImageHelper
@@ -59,8 +58,7 @@ public class Consultas extends javax.swing.JFrame {
         tb_consulta.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
         
         // Bind Escape key to act as the "Volver" button (improves UX)
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
         getRootPane().getActionMap().put("volver", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

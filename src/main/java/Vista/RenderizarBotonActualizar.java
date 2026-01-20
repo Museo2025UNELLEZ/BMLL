@@ -18,7 +18,7 @@ public class RenderizarBotonActualizar extends JButton implements TableCellRende
         setOpaque(true);
         setBackground(Color.blue);
         setForeground(Color.WHITE);
-        setFont(new Font("Segoe UI", Font.BOLD, 12));
+        setFont(new Font("Verdana", Font.BOLD, 18));
         setText("Actualizar");
         setBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2, true));
         setFocusPainted(false);

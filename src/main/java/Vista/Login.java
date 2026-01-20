@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
 
  
     public Login() {
+        this.setUndecorated(true);
         initComponents();
         CargarLogo();
         getRootPane().setDefaultButton(btn_entrar);

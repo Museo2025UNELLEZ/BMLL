@@ -146,14 +146,14 @@ public class EliminarLibro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 60));
-        jPanel1.add(lbl_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 340, 200));
+        jPanel1.add(lbl_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, -10, 220, 160));
         jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 1360, 480));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(242, 130, 37));
         jLabel3.setText("Categorias");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 40, 150, -1));
-        jPanel1.add(lbl_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 360, 170));
+        jPanel1.add(lbl_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -10, 180, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
