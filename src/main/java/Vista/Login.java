@@ -50,13 +50,13 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_usuario.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_usuario.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         lbl_usuario.setForeground(new java.awt.Color(242, 130, 37));
         lbl_usuario.setText("Usuario:");
-        jPanel1.add(lbl_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, 20));
+        jPanel1.add(lbl_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, 30));
 
         box_usuario.setBackground(new java.awt.Color(244, 226, 222));
-        box_usuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        box_usuario.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         box_usuario.setForeground(new java.awt.Color(0, 0, 0));
         box_usuario.setBorder(null);
         box_usuario.addActionListener(new java.awt.event.ActionListener() {
@@ -70,12 +70,12 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 360, 10));
 
         box_clave.setBackground(new java.awt.Color(244, 226, 222));
-        box_clave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        box_clave.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         box_clave.setForeground(new java.awt.Color(0, 0, 0));
         box_clave.setBorder(null);
         jPanel1.add(box_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 360, -1));
 
-        lbl_clave.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_clave.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         lbl_clave.setForeground(new java.awt.Color(242, 130, 37));
         lbl_clave.setText("Clave:");
         jPanel1.add(lbl_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
@@ -108,8 +108,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 180, -1));
-
-        lbl_difuminado.setText("jLabel1");
         jPanel1.add(lbl_difuminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 340, 220));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

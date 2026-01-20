@@ -89,10 +89,34 @@ public class LogicaBotonActualizar extends DefaultCellEditor {
 
     @Override
     public Object getCellEditorValue() {
-        int id = (int) tabla.getValueAt(row, 0);
+        try {
+            // Try to get ID from the visible table cell first
+            Integer id = null;
+            Object val = tabla.getValueAt(row, 0);
+            if (val instanceof Number) {
+                id = ((Number) val).intValue();
+            } else if (val instanceof String) {
+                try { id = Integer.parseInt((String) val); } catch (NumberFormatException ex) { id = null; }
+            }
+            // Fallback: use the rowIds client property stored by the table updater
+            if (id == null) {
+                Object prop = tabla.getClientProperty("rowIds");
+                if (prop instanceof java.util.List) {
+                    java.util.List<?> ids = (java.util.List<?>) prop;
+                    if (row >= 0 && row < ids.size()) {
+                        Object rid = ids.get(row);
+                        if (rid instanceof Number) id = ((Number) rid).intValue();
+                        else if (rid instanceof String) {
+                            try { id = Integer.parseInt((String) rid); } catch (NumberFormatException ex) { id = null; }
+                        }
+                    }
+                }
+            }
 
-        // Obtener datos completos del libro
-        Libro libro = control.obtenerLibroPorId(id);
+            if (id == null) throw new IllegalStateException("ID de libro no disponible para la fila seleccionada");
+
+            // Obtener datos completos del libro
+            Libro libro = control.obtenerLibroPorId(id);
 
         if(libro != null){
             // intentar obtener el estado de búsqueda de la ventana padre (si es BuscarLibroActualizar)
@@ -113,8 +137,12 @@ public class LogicaBotonActualizar extends DefaultCellEditor {
             ActualizarLibro ventana = new ActualizarLibro(control, libro, prevTitle, prevCategoryId);
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(tabla,"No se pudo cargar el libro","Error",JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(tabla,"No se pudo cargar el libro","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            // Mostrar el error para facilitar diagnóstico en tiempo de ejecución
+            JOptionPane.showMessageDialog(tabla, "Error al procesar la fila: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         return null;
