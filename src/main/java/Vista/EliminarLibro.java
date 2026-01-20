@@ -250,10 +250,10 @@ public class EliminarLibro extends javax.swing.JFrame {
 	// store the ids in a client property so editors can access them without modifying the visible columns
 	tb_consulta.putClientProperty("rowIds", rowIds);
 
-		int colBoton = tb_consulta.getColumnCount() - 1;
+	int colBoton = tb_consulta.getColumnCount() - 1;
 		// Asignar renderer y editor
-	tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
-	tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta, control));
+		tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
+		tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta, control, "libro"));
 
 		tb_consulta.setRowHeight(30);
 	}
@@ -293,7 +293,7 @@ public class EliminarLibro extends javax.swing.JFrame {
 
 		// Asignar renderer y editor
 		tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
-		tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta,control));
+		tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta,control, "libro"));
 
 		tb_consulta.setRowHeight(30);
 	}

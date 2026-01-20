@@ -3,18 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
+import controlador.conexionSQL;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author luise
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    private Connection con;
 
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
+        
+        
     }
 
     @Override
@@ -22,6 +30,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
         super.setVisible(b);
         // ensure logos are loaded when the window is shown (labels have size)
         CargarLogo();
+        
+        try {
+            con = conexionSQL.getConnection();
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(
+                "SELECT " +
+                "(SELECT COUNT(*) FROM categorias) AS cat_count, " +
+                "(SELECT COUNT(*) FROM estanterias) AS est_count, " +
+                "(SELECT COUNT(*) FROM libros) AS lib_count," +
+                "(SELECT COUNT(*) FROM revistas) AS rev_count"
+            );
+
+            if (rs.next()) {
+                categoriasCount.setText(rs.getString("cat_count"));
+                estanteriasCount.setText(rs.getString("est_count"));
+                librosCount.setText(rs.getString("lib_count"));
+                revistasCount.setText(rs.getString("rev_count"));
+            }
+
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar combos: " + e.getMessage());
+        }    
     }
 
     /**
@@ -39,9 +73,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btn_eliminar = new javax.swing.JButton();
         btn_actualizar = new javax.swing.JButton();
         btn_ajustes = new javax.swing.JButton();
-        lbl_amarillo = new javax.swing.JLabel();
+        btn_categoriaEliminar = new javax.swing.JButton();
+        btn_estanteriaEliminar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        librosCount = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        categoriasCount = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        estanteriasCount = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        revistasCount = new javax.swing.JLabel();
         btn_categoria = new javax.swing.JButton();
+        btn_categoriaEditar = new javax.swing.JButton();
         btn_estanteria = new javax.swing.JButton();
+        btn_estanteriaEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(901, 634));
@@ -58,7 +107,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Biblioteca del Museo de los Llanos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
-        btn_consultar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_consultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_consultar.setForeground(new java.awt.Color(0, 113, 114));
         btn_consultar.setText("Consultar Libro");
         btn_consultar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,9 +115,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_consultarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 300, 200));
+        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 200, 50));
 
-        btn_agregar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_agregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(0, 113, 114));
         btn_agregar.setText("Agregar Libros");
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,9 +125,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_agregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 310, 200));
+        jPanel1.add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 50));
 
-        btn_eliminar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_eliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(0, 113, 114));
         btn_eliminar.setText("Eliminar Libro");
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,17 +135,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_eliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 310, 200));
+        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 200, 50));
 
-        btn_actualizar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_actualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_actualizar.setForeground(new java.awt.Color(0, 113, 114));
-        btn_actualizar.setText("Actualizar posicion Libro");
+        btn_actualizar.setText("Actualizar libro");
         btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_actualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 300, 200));
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 200, 50));
 
         btn_ajustes.setBackground(new java.awt.Color(255, 255, 255));
         btn_ajustes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -108,9 +157,169 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, 120, 50));
-        jPanel1.add(lbl_amarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 330, 1370, 390));
 
-        btn_categoria.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_categoriaEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_categoriaEliminar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_categoriaEliminar.setText("Eliminar Categoria");
+        btn_categoriaEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_categoriaEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_categoriaEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 200, 50));
+
+        btn_estanteriaEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_estanteriaEliminar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_estanteriaEliminar.setText("Eliminar Estanteria");
+        btn_estanteriaEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_estanteriaEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_estanteriaEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 200, 50));
+
+        jPanel2.setBackground(new java.awt.Color(0, 113, 114));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Libros");
+
+        librosCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        librosCount.setForeground(new java.awt.Color(255, 255, 255));
+        librosCount.setText("00");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(74, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(librosCount)))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(librosCount)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 200, 100));
+
+        jPanel3.setBackground(new java.awt.Color(0, 113, 114));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Categorías");
+
+        categoriasCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        categoriasCount.setForeground(new java.awt.Color(255, 255, 255));
+        categoriasCount.setText("00");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(categoriasCount)))
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(categoriasCount)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 200, -1));
+
+        jPanel4.setBackground(new java.awt.Color(0, 113, 114));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Estanterías");
+
+        estanteriasCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        estanteriasCount.setForeground(new java.awt.Color(255, 255, 255));
+        estanteriasCount.setText("00");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(estanteriasCount)))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(estanteriasCount)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 120, 200, -1));
+
+        jPanel5.setBackground(new java.awt.Color(0, 113, 114));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Revistas");
+
+        revistasCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        revistasCount.setForeground(new java.awt.Color(255, 255, 255));
+        revistasCount.setText("00");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addComponent(revistasCount)
+                .addGap(85, 85, 85))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(revistasCount)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 120, 200, -1));
+
+        btn_categoria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_categoria.setForeground(new java.awt.Color(0, 113, 114));
         btn_categoria.setText("Agregar Categoria");
         btn_categoria.addActionListener(new java.awt.event.ActionListener() {
@@ -118,9 +327,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_categoriaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 170, 300, 200));
+        jPanel1.add(btn_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 200, 50));
 
-        btn_estanteria.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_categoriaEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_categoriaEditar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_categoriaEditar.setText("Editar Categoria");
+        btn_categoriaEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_categoriaEditarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_categoriaEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 200, 50));
+
+        btn_estanteria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_estanteria.setForeground(new java.awt.Color(0, 113, 114));
         btn_estanteria.setText("Agregar Estanteria");
         btn_estanteria.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +347,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_estanteriaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_estanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 400, 300, 200));
+        jPanel1.add(btn_estanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 200, 50));
+
+        btn_estanteriaEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_estanteriaEditar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_estanteriaEditar.setText("Editar Estanteria");
+        btn_estanteriaEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_estanteriaEditarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_estanteriaEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 200, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,26 +425,62 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_ajustesActionPerformed
 
-    private void btn_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_categoriaActionPerformed
+    private void btn_categoriaEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_categoriaEliminarActionPerformed
        
+        EliminarCategoria EC = new EliminarCategoria();
+        EC.setLocationRelativeTo(null);
+        EC.setVisible(true);
+
+        this.dispose();
+        
+    }//GEN-LAST:event_btn_categoriaEliminarActionPerformed
+
+    private void btn_estanteriaEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estanteriaEliminarActionPerformed
+        // TODO add your handling code here:
+        
+        EliminarEstanteria EE = new EliminarEstanteria();
+        EE.setLocationRelativeTo(null);
+        EE.setVisible(true);
+
+        this.dispose();
+        
+    }//GEN-LAST:event_btn_estanteriaEliminarActionPerformed
+
+    private void btn_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_categoriaActionPerformed
+        // TODO add your handling code here:
         Agregar_categoria AC = new Agregar_categoria();
         AC.setLocationRelativeTo(null);
         AC.setVisible(true);
 
         this.dispose();
-        
     }//GEN-LAST:event_btn_categoriaActionPerformed
+
+    private void btn_categoriaEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_categoriaEditarActionPerformed
+        // TODO add your handling code here:
+        BuscarCategoriaActualizar AC = new BuscarCategoriaActualizar();
+        AC.setLocationRelativeTo(null);
+        AC.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btn_categoriaEditarActionPerformed
 
     private void btn_estanteriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estanteriaActionPerformed
         // TODO add your handling code here:
-        
         Agregar_estanteria AG = new Agregar_estanteria();
         AG.setLocationRelativeTo(null);
         AG.setVisible(true);
 
         this.dispose();
-        
     }//GEN-LAST:event_btn_estanteriaActionPerformed
+
+    private void btn_estanteriaEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_estanteriaEditarActionPerformed
+        // TODO add your handling code here:
+        BuscarEstanteriaActualizar AC = new BuscarEstanteriaActualizar();
+        AC.setLocationRelativeTo(null);
+        AC.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btn_estanteriaEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,18 +522,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_ajustes;
     private javax.swing.JButton btn_categoria;
+    private javax.swing.JButton btn_categoriaEditar;
+    private javax.swing.JButton btn_categoriaEliminar;
     private javax.swing.JButton btn_consultar;
     private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_estanteria;
+    private javax.swing.JButton btn_estanteriaEditar;
+    private javax.swing.JButton btn_estanteriaEliminar;
+    private javax.swing.JLabel categoriasCount;
+    private javax.swing.JLabel estanteriasCount;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lbl_amarillo;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel librosCount;
+    private javax.swing.JLabel revistasCount;
     // End of variables declaration//GEN-END:variables
 
     private void CargarLogo(){
-       
-        if (lbl_amarillo != null) {
-            lbl_amarillo.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_amarillo.getWidth(), lbl_amarillo.getHeight()));
-        }
+        // Logo loading logic can be added here if needed
     }
 }
