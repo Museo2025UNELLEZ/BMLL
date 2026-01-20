@@ -18,7 +18,7 @@ public class Renderizarboton extends JButton implements TableCellRenderer {
         setOpaque(true);
         setBackground(Color.red);
         setForeground(Color.WHITE);
-        setFont(new Font("Segoe UI", Font.BOLD, 12));
+        setFont(new Font("Verdana", Font.BOLD, 18));
         setText("Eliminar");
         
         // Bordes redondeados

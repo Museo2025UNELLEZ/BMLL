@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -72,21 +73,35 @@ public class logicaBoton extends DefaultCellEditor {
             if (opcion == JOptionPane.YES_OPTION) {
                 if (tabla.getColumnCount() > 0 && row >= 0 && row < tabla.getRowCount()) {
                     Object val = tabla.getValueAt(row, 0);
-                    int id;
-                    
+                    Integer id = null;
+                    // Try the table cell first
                     if (val instanceof Number) {
                         id = ((Number) val).intValue();
                     } else if (val instanceof String) {
                         try {
                             id = Integer.parseInt((String) val);
                         } catch (NumberFormatException nfe) {
-                            JOptionPane.showMessageDialog(tabla, 
-                                "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
-                            return null;
+                            id = null;
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(tabla, 
-                            "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    // Fallback: try the rowIds client property (keeps visual columns as designed)
+                    if (id == null) {
+                        Object prop = tabla.getClientProperty("rowIds");
+                        if (prop instanceof List) {
+                            List<?> ids = (List<?>) prop;
+                            if (row >= 0 && row < ids.size()) {
+                                Object rid = ids.get(row);
+                                if (rid instanceof Number) {
+                                    id = ((Number) rid).intValue();
+                                } else if (rid instanceof String) {
+                                    try { id = Integer.parseInt((String) rid); } catch (NumberFormatException ex) { id = null; }
+                                }
+                            }
+                        }
+                    }
+
+                    if (id == null) {
+                        JOptionPane.showMessageDialog(tabla, "No se pudo obtener el ID del libro (valor inválido)", "Error", JOptionPane.ERROR_MESSAGE);
                         return null;
                     }
                     
@@ -126,7 +141,14 @@ public class logicaBoton extends DefaultCellEditor {
                     if (eliminado) {
                         JOptionPane.showMessageDialog(tabla, mensajeExito, "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
                         ((DefaultTableModel) tabla.getModel()).removeRow(row);
-                        
+                        // also remove the id from the rowIds list if present so indices stay aligned
+                        Object prop = tabla.getClientProperty("rowIds");
+                        if (prop instanceof List) {
+                            try {
+                                ((List) prop).remove(row);
+                            } catch (Exception ignore) {}
+                        }
+                        // ejecutar callback opcional después de eliminar para que la UI pueda reaccionar
                         if (onDeleted != null) {
                             try { onDeleted.run(); } catch (Exception ex) { }
                         }

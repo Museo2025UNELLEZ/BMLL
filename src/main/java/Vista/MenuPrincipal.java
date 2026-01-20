@@ -102,10 +102,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(901, 634));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 50)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Biblioteca del Museo de los Llanos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
         btn_consultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_consultar.setForeground(new java.awt.Color(0, 113, 114));
@@ -156,7 +156,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_ajustesActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, 120, 50));
+        jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, 120, 50));
 
         btn_categoriaEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_categoriaEliminar.setForeground(new java.awt.Color(0, 113, 114));
@@ -546,10 +546,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void CargarLogo(){
-        Object lbl_amarillo = null;
-       
-        if (lbl_amarillo != null) {
-            //lbl_amarillo.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_amarillo.getWidth(), lbl_amarillo.getHeight()));
-        }
+        // Logo loading logic can be added here if needed
     }
 }

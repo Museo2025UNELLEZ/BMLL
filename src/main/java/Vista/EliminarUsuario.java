@@ -4,13 +4,18 @@
  */
 package Vista;
 import controlador.conexionSQL;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import javax.swing.DefaultComboBoxModel;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -24,6 +29,19 @@ public class EliminarUsuario extends javax.swing.JFrame {
     public EliminarUsuario() {
         initComponents();
         cargarUsuarios();
+        
+        // Bind Escape key to call the same handler as the Volver button.
+        // The NetBeans-generated code declares the button as a local variable inside initComponents(),
+        // so we invoke the existing action method directly instead of calling doClick() on the button instance.
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getRootPane().getActionMap().put("volver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Reuse the generated action handler so behavior stays in one place
+                btn_volverActionPerformed(new ActionEvent(EliminarUsuario.this, ActionEvent.ACTION_PERFORMED, "escape"));
+            }
+        });
         
     }
     private void cargarUsuarios() {

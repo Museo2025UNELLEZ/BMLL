@@ -131,7 +131,7 @@ public List<Libro> ListarLibrosPorCategoria(int categoriaId){
                  "CONCAT(e.codigo, '-', l.fila) AS posicion " +
                  "FROM libros l " +
                  "JOIN estanterias e ON l.estante_id = e.id " +
-                 "WHERE l.categoria_id = ? LIMIT 50";
+                 "WHERE l.categoria_id = ?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
         ps.setInt(1, categoriaId);
@@ -179,7 +179,7 @@ public List<Libro> ListarLibrosPorEditorial(String editorial){
                  "CONCAT(e.codigo, '-', l.fila) AS posicion " +
                  "FROM libros l " +
                  "JOIN estanterias e ON l.estante_id = e.id " +
-                 "WHERE l.editorial = ? LIMIT 50";
+                 "WHERE l.editorial = ?";
 
     try (PreparedStatement ps = con.prepareStatement(sql)) {
         ps.setString(1, editorial);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Vista;
 
 import java.awt.Color;
@@ -13,14 +9,14 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 
-public class RenderizarBotonActualizar extends JButton implements TableCellRenderer {
-    public RenderizarBotonActualizar(){
+public class RenderizarBotonVer extends JButton implements TableCellRenderer {
+    public RenderizarBotonVer(){
         setOpaque(true);
-        setBackground(Color.blue);
+        setBackground(new Color(34, 139, 34)); // forest green
         setForeground(Color.WHITE);
         setFont(new Font("Verdana", Font.BOLD, 18));
-        setText("Actualizar");
-        setBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2, true));
+        setText("Ver");
+        setBorder(BorderFactory.createLineBorder(new Color(60, 179, 113), 2, true));
         setFocusPainted(false);
     }
 
@@ -29,4 +25,3 @@ public class RenderizarBotonActualizar extends JButton implements TableCellRende
         return this;
     }
 }
-

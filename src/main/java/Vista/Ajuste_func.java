@@ -4,6 +4,12 @@
  */
 package Vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 /**
  *
  * @author Admin
@@ -12,6 +18,19 @@ public class Ajuste_func extends javax.swing.JFrame {
 
     public Ajuste_func() {
         initComponents();
+        
+        // Bind Escape key to call the same handler as the Volver button.
+        // The NetBeans-generated code declares the button as a local variable inside initComponents(),
+        // so we invoke the existing action method directly instead of calling doClick() on the button instance.
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getRootPane().getActionMap().put("volver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Reuse the generated action handler so behavior stays in one place
+                btn_volverActionPerformed(new ActionEvent(Ajuste_func.this, ActionEvent.ACTION_PERFORMED, "escape"));
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
