@@ -8,6 +8,7 @@ import controlador.logicaBoton;
 import java.util.List;
 import DAO.CategoriaDAO;
 import Modelo.Categorias;
+import controlador.LogicaBotonActualizar;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.Component;
@@ -18,18 +19,20 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JCheckBox;
 
-public class EliminarLibro extends javax.swing.JFrame {
+public class EliminarCategoria extends javax.swing.JFrame {
 	private Connection con;
 
-	public EliminarLibro() {
+	public EliminarCategoria() {
 		initComponents();
 		con = conexionSQL.getConnection();
-		CargarLogo();
 		// cargar categorias en el combo y comportamiento similar a Consultas
 		cargarCategorias();
-		setupCategoriaListener();
 		// permitir que Enter en el campo de texto dispare el botón Buscar
 		box_titulo.addActionListener(evt -> btn_buscar.doClick());
 	}
@@ -44,7 +47,6 @@ public class EliminarLibro extends javax.swing.JFrame {
         box_titulo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btn_buscar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         btn_volver = new javax.swing.JButton();
         lbl_x = new javax.swing.JLabel();
         lbl_curva = new javax.swing.JLabel();
@@ -57,27 +59,27 @@ public class EliminarLibro extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
-        jLabel1.setText("Eliminar Libros");
+        jLabel1.setText("Eliminar Categoría");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
         tb_consulta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Titulo", "autor", "tomo", "cantidad", "posicion", "accion"
+                "Id", "Nombre", "accion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -95,11 +97,11 @@ public class EliminarLibro extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 1230, 570));
 
         box_titulo.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 510, -1));
+        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 510, -1));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(242, 130, 37));
-        jLabel2.setText("Titulo de libro: ");
+        jLabel2.setText("Nombre: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         btn_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -110,10 +112,6 @@ public class EliminarLibro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 160, 30));
-
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novela", "historia", "relato", "politica", " " }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, 280, -1));
 
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -140,136 +138,78 @@ public class EliminarLibro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void CargarLogo(){
-		lbl_curva.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_curva.getWidth(), lbl_curva.getHeight()));
-		lbl_x.setIcon(ImageHelper.getScaledIcon("/archivos/xred.png", lbl_x.getWidth(), lbl_x.getHeight()));
-		lbl_delete.setIcon(ImageHelper.getScaledIcon("/archivos/B1.png", lbl_delete.getWidth(), lbl_delete.getHeight()));
-	}
-
 	private void cargarCategorias(){
-		CategoriaDAO dao = new CategoriaDAO();
-		try{
-			DefaultComboBoxModel model = new DefaultComboBoxModel();
-			// placeholder entry
-			model.addElement(new Categorias(-1, "Seleccione una categoria"));
-			for(Categorias c : dao.ListarCategorias()){
-				model.addElement(c);
-			}
-			jComboBox1.setModel(model);
+ 
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "Error de conexión");
+            return;
+        }
+        
+        String Titulo = box_titulo.getText().trim();
+        
+        // usar la instancia del controlador creada en el constructor
+        List lista = new ArrayList<>();
 
-			// renderer to show the category name explicitly (doesn't rely on toString)
-			jComboBox1.setRenderer(new DefaultListCellRenderer() {
-				@Override
-				public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-					super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-					if (value instanceof Categorias) {
-						setText(((Categorias) value).getNombre());
-					}
-					return this;
-				}
-			});
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+    StringBuilder sql = new StringBuilder(
+        "SELECT id, nombre FROM categorias"
+    ); // Cambio de la sentencia sql para incluir el codigo del estante con la fila
+
+    // Buscar/filtrar por titulo y limita los resultados a 50
+    
+    if (Titulo != null && !Titulo.trim().isEmpty()) {
+        sql.append(" WHERE nombre LIKE ?");
+    } 
+
+    try (PreparedStatement ps = con.prepareStatement(sql.toString())) {
+        if (Titulo != null && !Titulo.trim().isEmpty()) {
+            ps.setString(1, "%" + Titulo + "%");
+        }
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {    
+                Categorias c = new Categorias(rs.getInt("id"), rs.getString("nombre"));
+                lista.add(c);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+        actualizarTabla(lista);
+
 	}
 
-	private void setupCategoriaListener(){
-		jComboBox1.addItemListener(new ItemListener(){
-			@Override
-			public void itemStateChanged(ItemEvent e){
-				if(e.getStateChange() == ItemEvent.SELECTED){
-					Object obj = e.getItem();
-					if(obj instanceof Categorias){
-						Categorias c = (Categorias) obj;
-						int newId = c.getId();
-						if(newId <= 0) return; // placeholder
-						// limpiar el campo y cargar por categoria
-						box_titulo.setText("");
-						cargarLibrosPorCategoria(newId);
-					}
-				}
-			}
-		});
-	}
+           private void actualizarTabla(List<Categorias> libros) {
+        DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
+        modelo.setRowCount(0);
 
-	private void cargarLibrosPorCategoria(int categoriaId){
-		if(con == null){
-			JOptionPane.showMessageDialog(this, "Error de conexión");
-			return;
-		}
+        if (libros == null || libros.isEmpty()) {
+            return;
+        }
 
-		DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
-		modelo.setRowCount(0);
+        for (Categorias l : libros) {
+            modelo.addRow(new Object[]{
+                l.getId(),
+                l.getNombre(),
+                "eliminar"
+            });
+        }
 
-		controlLibro control = new controlLibro(con);
-		List<Libro> libros = control.obtenerLibrosPorCategoria(categoriaId);
+        // Ocultar columna id
+        if (tb_consulta.getColumnModel().getColumnCount() > 0) {
+            tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
+            tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
+            tb_consulta.getColumnModel().getColumn(0).setWidth(0);
+        }
 
-		for(Libro l : libros){
-			modelo.addRow(new Object[]{
-				l.getId(),
-				l.getTitulo(),
-				l.getAutor(),
-				l.getTomo(),
-				l.getN_copias(),
-				l.getPosicion(),
-				"eliminar"
-			});
-		}
+        int colBoton = tb_consulta.getColumnCount() - 1;
+        // Asignar renderer y editor para botón actualizar (reutiliza la instancia control)
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
+        tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta, "categoria"));
 
-		// ocultar columna id
-		tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
-		tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
-		tb_consulta.getColumnModel().getColumn(0).setWidth(0);
-
-		int colBoton = tb_consulta.getColumnCount() - 1;
-		// Asignar renderer y editor
-		tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
-		tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta, control, "libro"));
-
-		tb_consulta.setRowHeight(30);
-	}
-
-	private void cargarLibros(){
-
-		if (con == null) {
-			JOptionPane.showMessageDialog(this, "Error de conexión");
-			return;
-		}
-
-		String Titulo = box_titulo.getText().trim();
-
-		DefaultTableModel modelo = (DefaultTableModel) tb_consulta.getModel();
-		modelo.setRowCount(0);
-
-		controlLibro control = new controlLibro(con);
-		List<Libro> libros = control.obtenerLibros(Titulo);
-
-		for (Libro l : libros) {
-			modelo.addRow(new Object[]{
-				l.getId(),
-				l.getTitulo(),
-				l.getAutor(),
-				l.getTomo(),
-				l.getN_copias(),
-				l.getPosicion(),
-				"eliminar"
-			});
-		}
-
-		//oculta la columna id para pasarla al boton eliminar
-		tb_consulta.getColumnModel().getColumn(0).setMinWidth(0);
-		tb_consulta.getColumnModel().getColumn(0).setMaxWidth(0);
-		tb_consulta.getColumnModel().getColumn(0).setWidth(0);
-
-		int colBoton = tb_consulta.getColumnCount() - 1;
-
-		// Asignar renderer y editor
-		tb_consulta.getColumnModel().getColumn(colBoton).setCellRenderer(new Renderizarboton());
-		tb_consulta.getColumnModel().getColumn(colBoton).setCellEditor(new logicaBoton(new JCheckBox(), tb_consulta,control, "libro"));
-
-		tb_consulta.setRowHeight(30);
-	}
-
+        tb_consulta.setRowHeight(30);
+    }
+    
+        
 	private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {
 		MenuPrincipal menu = new MenuPrincipal();
 		menu.setLocationRelativeTo(null);
@@ -279,7 +219,7 @@ public class EliminarLibro extends javax.swing.JFrame {
 	}
 
 	private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {
-		cargarLibros();
+		cargarCategorias();
 	}
 
 	public static void main(String args[]) {
@@ -305,7 +245,6 @@ public class EliminarLibro extends javax.swing.JFrame {
     private javax.swing.JTextField box_titulo;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_volver;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

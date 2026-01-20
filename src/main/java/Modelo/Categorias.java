@@ -17,6 +17,11 @@ public class Categorias {
         this.id = id;
         this.nombre = nombre;
     }
+    
+    public Categorias() {
+        //this.id = id;
+        //this.nombre = nombre;
+    }
 
     public int getId() {
         return id;

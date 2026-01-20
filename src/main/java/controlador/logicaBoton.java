@@ -4,8 +4,10 @@
  */
 package controlador;
 
-import java.awt.Color;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,80 +19,168 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luise
  */
-public class logicaBoton extends DefaultCellEditor{
+public class logicaBoton extends DefaultCellEditor {
     
     private JButton boton;
     private JTable tabla;
     private int row;
-    private controlLibro control;
+    private Connection conexion;
+    private controlLibro controlLibro; // Solo para libros
     private Runnable onDeleted;
+    private String tipoEntidad; // "libro", "categoria", "estanteria"
     
-    // constructor completo con callback opcional
-    public logicaBoton(JCheckBox checkBox, JTable tabla, controlLibro control, Runnable onDeleted){
+    public logicaBoton(JCheckBox checkBox, JTable tabla, controlLibro controlLibro, String tipoEntidad) {
         super(checkBox);
         this.tabla = tabla;
-        this.control = control;
-        this.onDeleted = onDeleted;
+        this.controlLibro = controlLibro;
+        this.tipoEntidad = tipoEntidad;
         
         boton = new JButton("Eliminar");
-        boton.setBackground(Color.red);
-        boton.setForeground(Color.WHITE);
-        
         boton.addActionListener(e -> fireEditingStopped());
-      
     }
 
-    // sobrecarga para compatibilidad con llamadas que no pasan un callback
-    public logicaBoton(JCheckBox checkBox, JTable tabla, controlLibro control){
-        this(checkBox, tabla, control, null);
+    public logicaBoton(JCheckBox checkBox, JTable tabla, String tipoEntidad) {
+        super(checkBox);
+        this.tabla = tabla;
+        this.tipoEntidad = tipoEntidad;
+        
+        boton = new JButton("Eliminar");
+        boton.addActionListener(e -> fireEditingStopped());
     }
     
-    @Override public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        this.row = row; return boton;
+    @Override 
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        this.row = row; 
+        return boton;
     }
-    @Override public Object getCellEditorValue() {
+    
+    @Override 
+    public Object getCellEditorValue() {
         try {
-            int opcion = JOptionPane.showConfirmDialog(tabla, "¿Seguro que deseas eliminar este libro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+            String nombreEntidad = "";
+            switch (tipoEntidad.toLowerCase()) {
+                case "libro": nombreEntidad = "libro"; break;
+                case "categoria": nombreEntidad = "categoría"; break;
+                case "estanteria": nombreEntidad = "estantería"; break;
+            }
+            
+            int opcion = JOptionPane.showConfirmDialog(tabla, 
+                "¿Seguro que deseas eliminar este " + nombreEntidad + "?", 
+                "Confirmar eliminación", 
+                JOptionPane.YES_NO_OPTION);
+            
             if (opcion == JOptionPane.YES_OPTION) {
-                // safety checks: ensure table has columns and the row is valid
                 if (tabla.getColumnCount() > 0 && row >= 0 && row < tabla.getRowCount()) {
                     Object val = tabla.getValueAt(row, 0);
                     int id;
+                    
                     if (val instanceof Number) {
                         id = ((Number) val).intValue();
                     } else if (val instanceof String) {
                         try {
                             id = Integer.parseInt((String) val);
                         } catch (NumberFormatException nfe) {
-                            JOptionPane.showMessageDialog(tabla, "No se pudo convertir el ID del libro (valor inválido)", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(tabla, 
+                                "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
                             return null;
                         }
                     } else {
-                        JOptionPane.showMessageDialog(tabla, "No se pudo obtener el ID del libro (valor inválido)", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(tabla, 
+                            "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
                         return null;
                     }
-                        int verif = control.eliminarPorId(id);
-
-                        if (verif > 0) {
-                            JOptionPane.showMessageDialog(tabla, "El libro fue eliminado EXISTOSAMENTE", "EXITO", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(tabla, "Hubo un error y no se pudo eliminar el libro seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-
+                    
+                    boolean eliminado = false;
+                    String mensajeExito = "";
+                    String mensajeError = "";
+                    
+                    switch (tipoEntidad.toLowerCase()) {
+                        case "libro":
+                            if (controlLibro != null) {
+                                int resultado = controlLibro.eliminarPorId(id);
+                                eliminado = resultado > 0;
+                                mensajeExito = "El libro fue eliminado EXITOSAMENTE";
+                                mensajeError = "Hubo un error y no se pudo eliminar el libro seleccionado";
+                            }
+                            break;
+                            
+                        case "categoria":
+                            eliminado = eliminarCategoria(id);
+                            mensajeExito = "La categoría fue eliminada EXITOSAMENTE";
+                            mensajeError = "Hubo un error y no se pudo eliminar la categoría seleccionada";
+                            break;
+                            
+                        case "estanteria":
+                            eliminado = eliminarEstanteria(id);
+                            mensajeExito = "La estantería fue eliminada EXITOSAMENTE";
+                            mensajeError = "Hubo un error y no se pudo eliminar la estantería seleccionada";
+                            break;
+                            
+                        default:
+                            JOptionPane.showMessageDialog(tabla, 
+                                "Tipo de entidad no soportado: " + tipoEntidad, 
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                            return null;
+                    }
+                    
+                    if (eliminado) {
+                        JOptionPane.showMessageDialog(tabla, mensajeExito, "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
                         ((DefaultTableModel) tabla.getModel()).removeRow(row);
-                        // ejecutar callback opcional después de eliminar para que la UI pueda reaccionar
+                        
                         if (onDeleted != null) {
-                            try { onDeleted.run(); } catch (Exception ex) { /* swallow callback errors */ }
+                            try { onDeleted.run(); } catch (Exception ex) { }
                         }
-                } else {
-                    JOptionPane.showMessageDialog(tabla, "Fila o columnas inválidas en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(tabla, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         } catch (Exception ex) {
-            // captura y muestra cualquier error inesperado para evitar que la UI falle sin control
-            JOptionPane.showMessageDialog(tabla, "Error al intentar eliminar el libro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(tabla, 
+                "Error al intentar eliminar: " + ex.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
         return null;
     }
     
+    private boolean eliminarCategoria(int id) {
+        try {
+            
+            conexion = conexionSQL.getConnection();
+            
+            // Eliminar la categoría
+            String sqlDelete = "DELETE FROM categorias WHERE id = ?";
+            try (PreparedStatement ps = conexion.prepareStatement(sqlDelete)) {
+                ps.setInt(1, id);
+                int affectedRows = ps.executeUpdate();
+                return affectedRows > 0;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(tabla, 
+                "Error al eliminar categoría: " + ex.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+    
+    private boolean eliminarEstanteria(int id) {
+        try {
+            
+            conexion = conexionSQL.getConnection();
+
+
+            // Eliminar la estantería
+            String sqlDelete = "DELETE FROM estanterias WHERE id = ?";
+            try (PreparedStatement ps = conexion.prepareStatement(sqlDelete)) {
+                ps.setInt(1, id);
+                int affectedRows = ps.executeUpdate();
+                return affectedRows > 0;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(tabla, 
+                "Error al eliminar estantería: " + ex.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
 }
