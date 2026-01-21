@@ -59,20 +59,102 @@ public class LogicaBotonActualizar extends DefaultCellEditor {
     @Override
     public Object getCellEditorValue() {
         try {
-            int id = Integer.parseInt(tabla.getValueAt(row, 0).toString());
-            
+            // If the table stores the real IDs in a client property (pattern used in BuscarLibroActualizar), use it.
+            Object idsProp = tabla.getClientProperty("rowIds");
+            Object idObj = null;
+            if (idsProp instanceof java.util.List) {
+                try {
+                    java.util.List<?> ids = (java.util.List<?>) idsProp;
+                    if (row >= 0 && row < ids.size()) {
+                        Object stored = ids.get(row);
+                        if (stored instanceof Number) {
+                            idObj = stored;
+                        } else if (stored != null) {
+                            String s = stored.toString().trim();
+                            try {
+                                Integer.parseInt(s);
+                                idObj = s;
+                            } catch (NumberFormatException ignore) {
+                                // ignore and fall back to visible columns
+                            }
+                        }
+                    }
+                } catch (Exception ignore) {
+                    // fall back to scanning visible columns below
+                }
+            }
+
+            // If we didn't find an ID in the hidden list, fall back to scanning visible columns.
+            if (idObj == null) {
+                // Robust ID extraction: don't assume column 0 contains the numeric ID.
+                // Try column 0 first, then scan other columns for a Number or a parsable integer string.
+                try {
+                    Object cand = tabla.getValueAt(row, 0);
+                    if (cand instanceof Number) {
+                        idObj = cand;
+                    } else if (cand != null) {
+                        String s = cand.toString().trim();
+                        try {
+                            // If it's numeric text, keep it
+                            Integer.parseInt(s);
+                            idObj = s;
+                        } catch (NumberFormatException ignore) {
+                            // not numeric, will scan below
+                        }
+                    }
+                } catch (Exception ignore) {
+                    // ignore and scan columns
+                }
+
+                if (idObj == null) {
+                    for (int c = 0; c < tabla.getColumnCount(); c++) {
+                        try {
+                            Object cand = tabla.getValueAt(row, c);
+                            if (cand == null) continue;
+                            if (cand instanceof Number) {
+                                idObj = cand;
+                                break;
+                            }
+                            String s = cand.toString().trim();
+                            if (s.length() == 0) continue;
+                            try {
+                                Integer.parseInt(s);
+                                idObj = s;
+                                break;
+                            } catch (NumberFormatException ignore) {
+                                // not numeric, continue scanning
+                            }
+                        } catch (Exception ignore) {
+                            // continue scanning
+                        }
+                    }
+                }
+            }
+
+            if (idObj == null) {
+                mostrarError("No se encontró un ID numérico en la fila seleccionada. Asegúrese de que la tabla incluya la columna ID.");
+                return null;
+            }
+
+            int id;
+            if (idObj instanceof Number) {
+                id = ((Number) idObj).intValue();
+            } else {
+                id = Integer.parseInt(idObj.toString());
+            }
+
             // Obtener datos de búsqueda previos (si existen)
             String prevSearch = null;
             Window parentWindow = SwingUtilities.getWindowAncestor(tabla);
-            
+
             if (parentWindow != null) {
                 // Guardar el estado de búsqueda antes de cerrar
                 prevSearch = obtenerBusquedaPrevia(parentWindow);
-                
+
                 // Cerrar ventana actual
                 parentWindow.dispose();
             }
-            
+
             // Procesar según el tipo de entidad
             switch (tipoEntidad) {
                 case "libro":
@@ -85,14 +167,14 @@ public class LogicaBotonActualizar extends DefaultCellEditor {
                     procesarEstanteria(id, prevSearch);
                     break;
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(tabla, 
-                "Error al procesar la acción: " + e.getMessage(), 
-                "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(tabla,
+                    "Error al procesar la acción: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         return null;
     }
     

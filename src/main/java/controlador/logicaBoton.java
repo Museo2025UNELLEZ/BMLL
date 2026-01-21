@@ -7,7 +7,6 @@ package controlador;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
