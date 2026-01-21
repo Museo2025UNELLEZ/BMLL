@@ -44,6 +44,19 @@ public class AgregarUsuario extends javax.swing.JFrame {
             }
         });
         
+        jtfCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                    return;
+                }
+                if (jtfCedula.getText().length() >= 9) {
+                    evt.consume();
+                }
+            }
+        });
+        
     }
 
     /**
