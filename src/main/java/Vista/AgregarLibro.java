@@ -31,6 +31,17 @@ public class AgregarLibro extends javax.swing.JFrame {
   
     public AgregarLibro() {
         initComponents();
+        box_isbn.addKeyListener(new java.awt.event.KeyAdapter() {
+        @Override
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            char c = evt.getKeyChar();
+            if (!Character.isDigit(c) && c != '-') {
+                evt.consume(); // Bloquea el carácter
+            }
+        }
+    });
+
+        
         // dateChooser will be created in initComponents so it is editable from NetBeans designer
         // load image icon into lbl_libro (same as Consultas)
         CargarLogo();
@@ -412,6 +423,7 @@ public class AgregarLibro extends javax.swing.JFrame {
             int filasAfectadas = ps.executeUpdate();
             if (filasAfectadas > 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Libro guardado correctamente.");
+                limpiarFormulario();
             } else {    
                 javax.swing.JOptionPane.showMessageDialog(this, "No se pudo guardar el libro.");
             }
@@ -448,6 +460,27 @@ public class AgregarLibro extends javax.swing.JFrame {
         // match the behavior in Consultas: scale the image to the label size
         lbl_libro.setIcon(ImageHelper.getScaledIcon("/archivos/Vizcalla3.png", lbl_libro.getWidth(), lbl_libro.getHeight()));
     }
+    private void limpiarFormulario() {
+
+    box_autor.setText("");
+    box_codigo.setText("");
+    box_copias.setText("");
+    box_edicion.setText("");
+    box_editorial.setText("");
+    box_fila.setText("");
+    box_isbn.setText("");
+    box_posicion.setText("");
+    box_titulo.setText("");
+    box_tomo.setText("");
+
+    // Limpiar fecha
+    FECHA.setDate(null);
+
+    // Reiniciar combos
+    jComboBoxCategorias.setSelectedIndex(0);
+    jComboBoxEstanterias.setSelectedIndex(0);
+}
+
 
 
     /**
