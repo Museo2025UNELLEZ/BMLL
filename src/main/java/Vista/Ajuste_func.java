@@ -44,6 +44,8 @@ public class Ajuste_func extends javax.swing.JFrame {
         lbl_usuarios = new javax.swing.JLabel();
         btn_EliminarUsuario = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btn_EditarUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,7 +60,7 @@ public class Ajuste_func extends javax.swing.JFrame {
                 btn_respaldoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 370, 140));
+        jPanel1.add(btn_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 370, 140));
 
         btn_volver.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         btn_volver.setForeground(new java.awt.Color(0, 113, 114));
@@ -73,7 +75,7 @@ public class Ajuste_func extends javax.swing.JFrame {
         lbl_respaldo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_respaldo.setForeground(new java.awt.Color(0, 0, 0));
         lbl_respaldo.setText("1. Boton para generar respaldo de la base de datos y guardarlo donde quiera");
-        jPanel1.add(lbl_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jPanel1.add(lbl_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         bnt_usuarios.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         bnt_usuarios.setForeground(new java.awt.Color(0, 113, 114));
@@ -83,12 +85,12 @@ public class Ajuste_func extends javax.swing.JFrame {
                 bnt_usuariosActionPerformed(evt);
             }
         });
-        jPanel1.add(bnt_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 370, 140));
+        jPanel1.add(bnt_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 370, 140));
 
         lbl_usuarios.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_usuarios.setForeground(new java.awt.Color(0, 0, 0));
         lbl_usuarios.setText("2. Crear Nuevos Usuarios que puedan acceder al sistema");
-        jPanel1.add(lbl_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
+        jPanel1.add(lbl_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         btn_EliminarUsuario.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         btn_EliminarUsuario.setForeground(new java.awt.Color(0, 113, 114));
@@ -99,12 +101,28 @@ public class Ajuste_func extends javax.swing.JFrame {
                 btn_EliminarUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_EliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, 340, 140));
+        jPanel1.add(btn_EliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 340, 140));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("3. Eliminar usuario del sistema");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, 340, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, 340, -1));
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("4. Editar usuario del sistema");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 250, 340, -1));
+
+        btn_EditarUsuario.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_EditarUsuario.setForeground(new java.awt.Color(0, 113, 114));
+        btn_EditarUsuario.setText("Editar Usuario");
+        btn_EditarUsuario.setMinimumSize(new java.awt.Dimension(173, 34));
+        btn_EditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EditarUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_EditarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 280, 340, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,13 +148,18 @@ public class Ajuste_func extends javax.swing.JFrame {
 
     private void bnt_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_usuariosActionPerformed
         // TODO add your handling code here:
-        onAgregarUsuario ();
+        onAgregarUsuario();
     }//GEN-LAST:event_bnt_usuariosActionPerformed
 
     private void btn_EliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarUsuarioActionPerformed
         // TODO add your handling code here:
-         onEliminarUsuario ();
+         onEliminarUsuario();
     }//GEN-LAST:event_btn_EliminarUsuarioActionPerformed
+
+    private void btn_EditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarUsuarioActionPerformed
+        // TODO add your handling code here:
+        onEditarUsuario();
+    }//GEN-LAST:event_btn_EditarUsuarioActionPerformed
 
     private void onGenerarRespaldo() {
         String time = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
@@ -344,15 +367,32 @@ public class Ajuste_func extends javax.swing.JFrame {
     }
     this.dispose();
 }
+    
+    private void onEditarUsuario() {
+        try {
+            EditarUsuario ventana = new EditarUsuario();
+            ventana.setLocationRelativeTo(null);
+            ventana.setVisible(true);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "No se pudo abrir la ventana de editar usuario: " + ex.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.dispose();
+    }
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnt_usuarios;
+    private javax.swing.JButton btn_EditarUsuario;
     private javax.swing.JButton btn_EliminarUsuario;
     private javax.swing.JButton btn_respaldo;
     private javax.swing.JButton btn_volver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_respaldo;
     private javax.swing.JLabel lbl_usuarios;

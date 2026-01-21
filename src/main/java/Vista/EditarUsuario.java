@@ -21,12 +21,12 @@ import javax.swing.KeyStroke;
  *
  * @author DELL
  */
-public class EliminarUsuario extends javax.swing.JFrame {
+public class EditarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form EliminarUsuario
      */
-    public EliminarUsuario() {
+    public EditarUsuario() {
         initComponents();
         cargarUsuarios();
         
@@ -39,37 +39,47 @@ public class EliminarUsuario extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Reuse the generated action handler so behavior stays in one place
-                btn_volverActionPerformed(new ActionEvent(EliminarUsuario.this, ActionEvent.ACTION_PERFORMED, "escape"));
+                btn_volverActionPerformed(new ActionEvent(EditarUsuario.this, ActionEvent.ACTION_PERFORMED, "escape"));
             }
         });
         
     }
     private void cargarUsuarios() {
-    try {
-        Connection con = controlador.conexionSQL.getConnection();
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("SELECT id, usuario, is_admin FROM usuarios");
+        try {
+            Connection con = controlador.conexionSQL.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT id, usuario, is_admin FROM usuarios");
 
-        ComboUsuarios.removeAllItems();
+            ComboUsuarios.removeAllItems();
 
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String usuario = rs.getString("usuario");
-            int admin = rs.getInt("is_admin");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usuario = rs.getString("usuario");
+                int admin = rs.getInt("is_admin");
 
-            String permiso = (admin == 1) ? "Administrador" : "Normal";
+                String permiso = (admin == 1) ? "Administrador" : "Normal";
 
-            ComboUsuarios.addItem(id + " - " + usuario + " - " + permiso);
+                ComboUsuarios.addItem(id + " - " + usuario + " - " + permiso);
+            }
+
+            rs.close();
+            st.close();
+            con.close();
+            
+            cargarRoles();
+            cargarDatosUsuario();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar usuarios: " + e.getMessage());
         }
-
-        rs.close();
-        st.close();
-        con.close();
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al cargar usuarios: " + e.getMessage());
     }
-}
+    
+    private void cargarRoles() {
+        ComboRoles.removeAllItems();
+
+        ComboRoles.addItem("Normal");
+        ComboRoles.addItem("Administrador");
+    }
 
 private void cargarDatosUsuario() {
     try {
@@ -80,17 +90,26 @@ private void cargarDatosUsuario() {
 
         Connection con = controlador.conexionSQL.getConnection();
         PreparedStatement ps = con.prepareStatement(
-            "SELECT nombre, apellido, cedula, usuario FROM usuarios WHERE id = ?"
+            "SELECT nombre, apellido, cedula, usuario, password, is_admin FROM usuarios WHERE id = ?"
         );
         ps.setInt(1, id);
 
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
+            int admin = rs.getInt("is_admin");
+            
             jtfNombre.setText(rs.getString("nombre"));
             jtfApellido.setText(rs.getString("apellido"));
             jtfCedula.setText(rs.getString("cedula"));
             jtfUsuario.setText(rs.getString("usuario"));
+            jtfContraseña.setText(rs.getString("password"));
+            
+            if (admin == 1) {
+                ComboRoles.setSelectedIndex(1); // Administrador
+            } else {
+                ComboRoles.setSelectedIndex(0); // Normal
+            }
         }
 
         rs.close();
@@ -119,13 +138,16 @@ private void cargarDatosUsuario() {
         ComboUsuarios = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         LblApellido = new javax.swing.JLabel();
-        Btn_Eliminar = new javax.swing.JButton();
+        Btn_Editar = new javax.swing.JButton();
         jtfNombre = new javax.swing.JTextField();
         jtfApellido = new javax.swing.JTextField();
         jtfCedula = new javax.swing.JTextField();
         jtfUsuario = new javax.swing.JTextField();
         btn_volver = new javax.swing.JButton();
-        lbl_libro = new javax.swing.JLabel();
+        lblCedula1 = new javax.swing.JLabel();
+        jtfContraseña = new javax.swing.JTextField();
+        lblCedula2 = new javax.swing.JLabel();
+        ComboRoles = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,22 +157,22 @@ private void cargarDatosUsuario() {
         jPanel5.setMinimumSize(new java.awt.Dimension(1190, 700));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 38)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(242, 130, 37));
         jLabel5.setText("Eliminar Usuario");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, -1));
 
-        lbl_Nombre.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        lbl_Nombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbl_Nombre.setForeground(new java.awt.Color(242, 130, 37));
         lbl_Nombre.setText("Nombre");
-        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, -1, -1));
+        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
 
-        lblCedula.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        lblCedula.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCedula.setForeground(new java.awt.Color(242, 130, 37));
         lblCedula.setText("Cedula");
-        jPanel5.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 250, -1, -1));
+        jPanel5.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 290, -1, -1));
 
-        ComboUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ComboUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ComboUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         ComboUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
         ComboUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -158,27 +180,26 @@ private void cargarDatosUsuario() {
                 ComboUsuariosActionPerformed(evt);
             }
         });
-        jPanel5.add(ComboUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 350, 40));
+        jPanel5.add(ComboUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 250, 40));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(242, 130, 37));
         jLabel8.setText("Usuario");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 110, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 110, -1));
 
-        LblApellido.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        LblApellido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LblApellido.setForeground(new java.awt.Color(242, 130, 37));
         LblApellido.setText("Apellido");
-        jPanel5.add(LblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 180, -1, 30));
+        jPanel5.add(LblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 240, -1, 20));
 
-        Btn_Eliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Btn_Eliminar.setForeground(new java.awt.Color(0, 113, 114));
-        Btn_Eliminar.setText("Eliminar");
-        Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Editar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Btn_Editar.setText("Editar");
+        Btn_Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_EliminarActionPerformed(evt);
+                Btn_EditarActionPerformed(evt);
             }
         });
-        jPanel5.add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 250, 40));
+        jPanel5.add(Btn_Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 610, 260, 40));
 
         jtfNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -186,13 +207,13 @@ private void cargarDatosUsuario() {
                 jtfNombreActionPerformed(evt);
             }
         });
-        jPanel5.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 330, -1));
+        jPanel5.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 170, 320, -1));
 
         jtfApellido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel5.add(jtfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 210, 330, -1));
+        jPanel5.add(jtfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 230, 320, -1));
 
         jtfCedula.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel5.add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 330, -1));
+        jPanel5.add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 290, 320, -1));
 
         jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -200,29 +221,48 @@ private void cargarDatosUsuario() {
                 jtfUsuarioActionPerformed(evt);
             }
         });
-        jPanel5.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 330, -1));
+        jPanel5.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 320, -1));
 
         btn_volver.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 260, 40));
-        jPanel5.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 290, 450, 430));
+        jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 610, 260, 40));
+
+        lblCedula1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblCedula1.setForeground(new java.awt.Color(242, 130, 37));
+        lblCedula1.setText("Contraseña");
+        jPanel5.add(lblCedula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 350, -1, -1));
+
+        jtfContraseña.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel5.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 350, 320, -1));
+
+        lblCedula2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblCedula2.setForeground(new java.awt.Color(242, 130, 37));
+        lblCedula2.setText("Admin");
+        jPanel5.add(lblCedula2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 410, -1, -1));
+
+        ComboRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboRoles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboRolesActionPerformed(evt);
+            }
+        });
+        jPanel5.add(ComboRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 410, 320, 40));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
+    private void Btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EditarActionPerformed
         // TODO add your handling code here:                                             
 
     if (ComboUsuarios.getSelectedItem() == null) {
-        JOptionPane.showMessageDialog(this, "No hay usuarios para eliminar.");
+        JOptionPane.showMessageDialog(this, "No hay usuarios para editar.");
         return;
     }
 
@@ -231,7 +271,7 @@ private void cargarDatosUsuario() {
 
     int confirm = JOptionPane.showConfirmDialog(
         this,
-        "¿Seguro que deseas eliminar este usuario?",
+        "¿Seguro que deseas editar este usuario?",
         "Confirmar eliminación",
         JOptionPane.YES_NO_OPTION
     );
@@ -242,14 +282,20 @@ private void cargarDatosUsuario() {
 
     try {
         Connection con = controlador.conexionSQL.getConnection();
-        PreparedStatement ps = con.prepareStatement("DELETE FROM usuarios WHERE id = ?");
-        ps.setInt(1, id);
+        PreparedStatement ps = con.prepareStatement("UPDATE usuarios SET nombre=?, apellido=?, cedula=?, usuario=?, password=?, is_admin=? WHERE id = ?");
+        ps.setString(1, jtfNombre.getText());
+        ps.setString(2, jtfApellido.getText());
+        ps.setString(3, jtfCedula.getText());
+        ps.setString(4, jtfUsuario.getText());
+        ps.setString(5, jtfContraseña.getText());
+        ps.setInt(6, ComboRoles.getSelectedIndex());
+        ps.setInt(7, id);
 
         ps.executeUpdate();
         ps.close();
         con.close();
 
-        JOptionPane.showMessageDialog(this, "Usuario eliminado exitosamente");
+        JOptionPane.showMessageDialog(this, "Usuario editado exitosamente");
 
         // Recargar lista
         cargarUsuarios();
@@ -259,6 +305,8 @@ private void cargarDatosUsuario() {
         jtfApellido.setText("");
         jtfCedula.setText("");
         jtfUsuario.setText("");
+        jtfContraseña.setText("");
+        ComboRoles.setSelectedIndex(0);
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this, "Error al eliminar usuario: " + e.getMessage());
@@ -267,7 +315,7 @@ private void cargarDatosUsuario() {
 
 
         
-    }//GEN-LAST:event_Btn_EliminarActionPerformed
+    }//GEN-LAST:event_Btn_EditarActionPerformed
 
     private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
         // TODO add your handling code here:
@@ -289,8 +337,12 @@ private void cargarDatosUsuario() {
 
     private void ComboUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboUsuariosActionPerformed
         // TODO add your handling code here:
-        cargarDatosUsuario();
     }//GEN-LAST:event_ComboUsuariosActionPerformed
+
+    private void ComboRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboRolesActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_ComboRolesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,26 +361,27 @@ private void cargarDatosUsuario() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarUsuario().setVisible(true);
+                new EditarUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Btn_Eliminar;
+    private javax.swing.JButton Btn_Editar;
+    private javax.swing.JComboBox<String> ComboRoles;
     private javax.swing.JComboBox<String> ComboUsuarios;
     private javax.swing.JLabel LblApellido;
     private javax.swing.JButton btn_volver;
@@ -337,10 +390,12 @@ private void cargarDatosUsuario() {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jtfApellido;
     private javax.swing.JTextField jtfCedula;
+    private javax.swing.JTextField jtfContraseña;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfUsuario;
     private javax.swing.JLabel lblCedula;
+    private javax.swing.JLabel lblCedula1;
+    private javax.swing.JLabel lblCedula2;
     private javax.swing.JLabel lbl_Nombre;
-    private javax.swing.JLabel lbl_libro;
     // End of variables declaration//GEN-END:variables
 }

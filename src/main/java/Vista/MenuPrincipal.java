@@ -156,7 +156,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_ajustesActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, 120, 50));
+        jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, 50));
 
         btn_categoriaEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_categoriaEliminar.setForeground(new java.awt.Color(0, 113, 114));
@@ -181,11 +181,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 113, 114));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Libros");
 
-        librosCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        librosCount.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
         librosCount.setForeground(new java.awt.Color(255, 255, 255));
         librosCount.setText("00");
 
@@ -194,33 +194,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(librosCount)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap(149, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(librosCount)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(59, Short.MAX_VALUE)
                 .addComponent(librosCount)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel3)
-                .addContainerGap())
+                .addGap(62, 62, 62))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 200, 100));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 400, 300));
 
         jPanel3.setBackground(new java.awt.Color(0, 113, 114));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Categorías");
 
-        categoriasCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        categoriasCount.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
         categoriasCount.setForeground(new java.awt.Color(255, 255, 255));
         categoriasCount.setText("00");
 
@@ -229,33 +229,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(categoriasCount)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap(111, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(categoriasCount)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addComponent(categoriasCount)
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel2)
-                .addContainerGap())
+                .addGap(57, 57, 57))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 200, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 400, 300));
 
         jPanel4.setBackground(new java.awt.Color(0, 113, 114));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Estanterías");
 
-        estanteriasCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        estanteriasCount.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
         estanteriasCount.setForeground(new java.awt.Color(255, 255, 255));
         estanteriasCount.setText("00");
 
@@ -263,34 +263,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(estanteriasCount)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(estanteriasCount)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(estanteriasCount)
-                .addGap(18, 18, 18)
+                .addGap(53, 53, 53)
                 .addComponent(jLabel4)
-                .addContainerGap())
+                .addGap(55, 55, 55))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 120, 200, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 400, 400, 300));
 
         jPanel5.setBackground(new java.awt.Color(0, 113, 114));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Revistas");
 
-        revistasCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        revistasCount.setFont(new java.awt.Font("Segoe UI", 1, 60)); // NOI18N
         revistasCount.setForeground(new java.awt.Color(255, 255, 255));
         revistasCount.setText("00");
 
@@ -300,24 +300,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(revistasCount)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
-                .addComponent(revistasCount)
-                .addGap(85, 85, 85))
+                .addContainerGap(131, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(revistasCount)
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel5)
-                .addContainerGap())
+                .addGap(60, 60, 60))
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 120, 200, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 90, 400, 300));
 
         btn_categoria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_categoria.setForeground(new java.awt.Color(0, 113, 114));
