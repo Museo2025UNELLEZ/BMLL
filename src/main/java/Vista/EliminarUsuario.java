@@ -135,22 +135,22 @@ private void cargarDatosUsuario() {
         jPanel5.setMinimumSize(new java.awt.Dimension(1190, 700));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 38)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(242, 130, 37));
         jLabel5.setText("Eliminar Usuario");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, -1));
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
-        lbl_Nombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_Nombre.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         lbl_Nombre.setForeground(new java.awt.Color(242, 130, 37));
         lbl_Nombre.setText("Nombre");
-        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, -1, -1));
+        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, -1, -1));
 
-        lblCedula.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblCedula.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         lblCedula.setForeground(new java.awt.Color(242, 130, 37));
         lblCedula.setText("Cedula");
-        jPanel5.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 290, -1, -1));
+        jPanel5.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 250, -1, -1));
 
-        ComboUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ComboUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ComboUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         ComboUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
         ComboUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -158,26 +158,27 @@ private void cargarDatosUsuario() {
                 ComboUsuariosActionPerformed(evt);
             }
         });
-        jPanel5.add(ComboUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 250, 40));
+        jPanel5.add(ComboUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 350, 40));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(242, 130, 37));
         jLabel8.setText("Usuario");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 110, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 110, -1));
 
-        LblApellido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LblApellido.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         LblApellido.setForeground(new java.awt.Color(242, 130, 37));
         LblApellido.setText("Apellido");
-        jPanel5.add(LblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, -1, 20));
+        jPanel5.add(LblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 180, -1, 30));
 
         Btn_Eliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Btn_Eliminar.setForeground(new java.awt.Color(0, 113, 114));
         Btn_Eliminar.setText("Eliminar");
         Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_EliminarActionPerformed(evt);
             }
         });
-        jPanel5.add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 260, 40));
+        jPanel5.add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 250, 40));
 
         jtfNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -185,13 +186,13 @@ private void cargarDatosUsuario() {
                 jtfNombreActionPerformed(evt);
             }
         });
-        jPanel5.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 170, 320, -1));
+        jPanel5.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 330, -1));
 
         jtfApellido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel5.add(jtfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 230, 320, -1));
+        jPanel5.add(jtfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 210, 330, -1));
 
         jtfCedula.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel5.add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 290, 320, -1));
+        jPanel5.add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 330, -1));
 
         jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -199,17 +200,18 @@ private void cargarDatosUsuario() {
                 jtfUsuarioActionPerformed(evt);
             }
         });
-        jPanel5.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 320, -1));
+        jPanel5.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 330, -1));
 
         btn_volver.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, 260, 40));
-        jPanel5.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 450, 430));
+        jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 260, 40));
+        jPanel5.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 290, 450, 430));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 720));
 

@@ -65,30 +65,32 @@ public class Agregar_categoria extends javax.swing.JFrame{
                 box_nombreActionPerformed(evt);
             }
         });
-        jPanel1.add(box_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 250, 30));
+        jPanel1.add(box_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 260, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Agregar Categoria");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
-        btn_guardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_guardar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_guardar.setForeground(new java.awt.Color(0, 113, 114));
         btn_guardar.setText("Guardar");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
+        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 140, 40));
 
-        btn_volver.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_volver.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
+        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 140, 40));
 
         lbl_nombre.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_nombre.setForeground(new java.awt.Color(242, 130, 37));
