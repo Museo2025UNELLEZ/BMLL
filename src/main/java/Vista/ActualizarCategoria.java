@@ -70,34 +70,38 @@ public class ActualizarCategoria extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 38)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
         jLabel1.setText("Actualizar Categoría");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(242, 130, 37));
         jLabel3.setText("Nombre");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 110, 60));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 120, 60));
 
+        btn_actualizar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_actualizar.setForeground(new java.awt.Color(0, 113, 114));
         btn_actualizar.setText("Guardar");
         btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_actualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 630, 260, -1));
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 260, 50));
 
+        btn_Volver.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_Volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_Volver.setText("Volver");
         btn_Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_VolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 630, 280, -1));
+        jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, 280, 50));
 
-        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 370, 30));
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel1.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 470, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

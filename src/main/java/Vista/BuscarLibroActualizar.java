@@ -151,10 +151,11 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
             }
         });
         tb_consulta.setColumnSelectionAllowed(true);
+        tb_consulta.setShowHorizontalLines(true);
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 1210, 550));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 1260, 550));
 
         box_titulo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 630, -1));
@@ -164,7 +165,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         jLabel2.setText("Titulo de libro: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 210, -1));
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -174,8 +175,8 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         });
         jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, 120, -1));
 
-        combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 70, 220, -1));
+        combo_categorias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 70, 270, -1));
 
         btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_volver.setForeground(new java.awt.Color(0, 113, 114));
@@ -193,7 +194,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(242, 130, 37));
         jLabel3.setText("Categorias");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 150, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -44,6 +44,19 @@ public class AgregarUsuario extends javax.swing.JFrame {
             }
         });
         
+        jtfCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                    return;
+                }
+                if (jtfCedula.getText().length() >= 9) {
+                    evt.consume();
+                }
+            }
+        });
+        
     }
 
     /**
@@ -81,54 +94,55 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jPanel5.setMinimumSize(new java.awt.Dimension(1190, 700));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 1, 38)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(242, 130, 37));
         jLabel5.setText("Agregar Usuario");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, -1));
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(242, 130, 37));
         jLabel6.setText("Contraseña");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, -1, 30));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, -1, 40));
 
         lbl_Nombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbl_Nombre.setForeground(new java.awt.Color(242, 130, 37));
         lbl_Nombre.setText("Nombre");
-        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
+        jPanel5.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, 40));
 
         lblCedula.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCedula.setForeground(new java.awt.Color(242, 130, 37));
         lblCedula.setText("Cedula");
-        jPanel5.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
+        jPanel5.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, 40));
 
-        jComboBoxEstanterias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBoxEstanterias.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxEstanterias.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jComboBoxEstanterias.setForeground(new java.awt.Color(0, 113, 114));
         jComboBoxEstanterias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
-        jPanel5.add(jComboBoxEstanterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 220, 40));
+        jPanel5.add(jComboBoxEstanterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 420, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(242, 130, 37));
         jLabel8.setText("Usuario");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 110, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 110, 40));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(242, 130, 37));
         jLabel10.setText("Permisos");
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, -1, 30));
+        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, -1, 40));
 
         LblApellido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LblApellido.setForeground(new java.awt.Color(242, 130, 37));
         LblApellido.setText("Apellido");
-        jPanel5.add(LblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, 20));
+        jPanel5.add(LblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, -1, 30));
 
-        Btn_guardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Btn_guardar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        Btn_guardar.setForeground(new java.awt.Color(0, 113, 114));
         Btn_guardar.setText("Guardar");
         Btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_guardarActionPerformed(evt);
             }
         });
-        jPanel5.add(Btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 260, 40));
+        jPanel5.add(Btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, 260, 60));
 
         jtfNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -136,13 +150,13 @@ public class AgregarUsuario extends javax.swing.JFrame {
                 jtfNombreActionPerformed(evt);
             }
         });
-        jPanel5.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 320, -1));
+        jPanel5.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 420, -1));
 
         jtfApellido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel5.add(jtfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 320, -1));
+        jPanel5.add(jtfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 420, -1));
 
         jtfCedula.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel5.add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 320, -1));
+        jPanel5.add(jtfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 420, -1));
 
         jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -150,19 +164,20 @@ public class AgregarUsuario extends javax.swing.JFrame {
                 jtfUsuarioActionPerformed(evt);
             }
         });
-        jPanel5.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 320, -1));
+        jPanel5.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, 420, -1));
 
         jtfContraseña.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel5.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, 320, -1));
+        jPanel5.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 220, 420, -1));
 
-        btn_volver.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_volver.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, 260, 40));
+        jPanel5.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 260, 60));
         jPanel5.add(lbl_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 450, 430));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 720));

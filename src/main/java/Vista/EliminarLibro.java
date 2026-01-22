@@ -79,7 +79,7 @@ public class EliminarLibro extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
-        tb_consulta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        tb_consulta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tb_consulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -109,6 +109,7 @@ public class EliminarLibro extends javax.swing.JFrame {
         tb_consulta.setColumnSelectionAllowed(true);
         tb_consulta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tb_consulta.setGridColor(new java.awt.Color(0, 0, 0));
+        tb_consulta.setShowHorizontalLines(true);
         tb_consulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -123,7 +124,7 @@ public class EliminarLibro extends javax.swing.JFrame {
         jLabel2.setText("Titulo de libro: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +134,7 @@ public class EliminarLibro extends javax.swing.JFrame {
         });
         jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 160, 30));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novela", "historia", "relato", "politica", " " }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, 290, -1));
 

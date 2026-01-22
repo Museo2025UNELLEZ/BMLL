@@ -57,7 +57,7 @@ public class LogicaBotonVer extends DefaultCellEditor {
             Libro libro = control.obtenerLibroPorId(id);
 
             if(libro != null){
-                // intentar obtener el estado de búsqueda de la ventana padre (si es BuscarLibroActualizar)
+                // intentar obtener el estado de búsqueda de la ventana padre (si es BuscarLibroActualizar o Consultas)
                 String prevTitle = null;
                 int prevCategoryId = -1;
                 Window parentWindow = SwingUtilities.getWindowAncestor(tabla);
@@ -66,13 +66,23 @@ public class LogicaBotonVer extends DefaultCellEditor {
                         Vista.BuscarLibroActualizar buscar = (Vista.BuscarLibroActualizar) parentWindow;
                         prevTitle = buscar.getCurrentSearchTitle();
                         prevCategoryId = buscar.getCurrentSelectedCategoryId();
+                    } else if (parentWindow instanceof Vista.Consultas) {
+                        Vista.Consultas buscar = (Vista.Consultas) parentWindow;
+                        prevTitle = buscar.getCurrentSearchTitle();
+                        prevCategoryId = buscar.getCurrentSelectedCategoryId();
                     }
                     // cerrar la ventana que contiene la tabla
                     parentWindow.dispose();
                 }
 
                 // Abrir la ventana de datos de libro (solo lectura)
-                DatosLibro ventana = new DatosLibro(control, libro, prevTitle, prevCategoryId);
+                // Si la tabla pertenece a una ventana Consultas, pasar el estado actual del botón "Volver"
+                boolean parentVolverEnabled = true;
+                if (parentWindow instanceof Vista.Consultas) {
+                    Vista.Consultas c = (Vista.Consultas) parentWindow;
+                    parentVolverEnabled = c.isVolverEnabled();
+                }
+                DatosLibro ventana = new DatosLibro(control, libro, prevTitle, prevCategoryId, parentVolverEnabled);
                 ventana.setLocationRelativeTo(null);
                 ventana.setVisible(true);
             } else {

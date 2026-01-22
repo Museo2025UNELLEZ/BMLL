@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
 import Modelo.Libro;
@@ -26,6 +22,8 @@ public class DatosLibro extends javax.swing.JFrame {
     // estado previo de búsqueda para restaurar al volver
     private String prevSearchTitle = null;
     private int prevSearchCategoryId = -1;
+    // Indica si el botón "Volver" de la pantalla Consultas debe quedar habilitado al regresar
+    private boolean volverEnabledOnReturn = true;
 
     public DatosLibro(controlLibro control, Libro libro) {
         initComponents(); 
@@ -85,6 +83,15 @@ public class DatosLibro extends javax.swing.JFrame {
         this(control, libro);
         this.prevSearchTitle = prevTitle;
         this.prevSearchCategoryId = prevCategoryId;
+    }
+
+    /**
+     * Constructor adicional que recibe si el botón "Volver" debe quedar habilitado
+     * cuando se regrese a la ventana Consultas.
+     */
+    public DatosLibro(controlLibro control, Libro libro, String prevTitle, int prevCategoryId, boolean volverEnabledOnReturn) {
+        this(control, libro, prevTitle, prevCategoryId);
+        this.volverEnabledOnReturn = volverEnabledOnReturn;
     }
 
     /**
@@ -290,11 +297,13 @@ public class DatosLibro extends javax.swing.JFrame {
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
         // volver a la pantalla BuscarLibroActualizar restaurando estado previo si lo tenemos
         Consultas buscar;
-        if (prevSearchTitle != null || prevSearchCategoryId > 0) {
-            buscar = new Consultas();
-        } else {
-            buscar = new Consultas();
-        }
+        // Siempre creamos una nueva instancia de Consultas. Restauramos el estado del botón "Volver"
+        buscar = new Consultas();
+        // Si la ventana que abrió DatosLibro nos indicó que el volver debía estar deshabilitado,
+        // aplicamos ese estado aquí (por ejemplo, usuarios normales).
+        buscar.setVolverEnabled(this.volverEnabledOnReturn);
+        // Restaurar búsqueda previa (título o categoría) si disponemos de ella
+        buscar.restoreSearchState(this.prevSearchTitle, this.prevSearchCategoryId);
         buscar.setLocationRelativeTo(null);
         buscar.setVisible(true);
         this.dispose();

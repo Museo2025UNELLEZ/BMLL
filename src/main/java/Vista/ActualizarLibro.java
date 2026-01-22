@@ -389,20 +389,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
     /**
      * Pone los campos en modo sólo lectura/bloqueado cuando se requiere.
      */
-    public void setReadOnly(boolean readOnly) {
-        txtTitulo.setEditable(!readOnly);
-        txtAutor.setEditable(!readOnly);
-        txtEditorial.setEditable(!readOnly);
-        txtCopias.setEditable(!readOnly);
-        txtTomo.setEditable(!readOnly);
-        txtIsbn.setEditable(!readOnly);
-        txtFila.setEditable(!readOnly);
-        txtEdicion.setEditable(!readOnly);
-        comboCategoria.setEnabled(!readOnly);
-        comboEstanteria.setEnabled(!readOnly);
-        jDateChooser1.setEnabled(!readOnly);
-        btn_actualizar.setEnabled(!readOnly);
-    }
+    
 /*public ActualizarLibro() {
     initComponents(); // inicializa los textfields y combobox
 }*/
