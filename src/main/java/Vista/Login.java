@@ -98,7 +98,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 180, -1));
-        jPanel1.add(lbl_icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 430, 270));
+        jPanel1.add(lbl_icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 320, 180));
 
         btn_salir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_salir.setForeground(new java.awt.Color(0, 113, 114));
@@ -109,7 +109,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 180, -1));
-        jPanel1.add(lbl_difuminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 340, 220));
+        jPanel1.add(lbl_difuminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 390, 260));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,7 +130,7 @@ public class Login extends javax.swing.JFrame {
     
     private void CargarLogo(){
         // Use centralized ImageHelper (no BufferedImage, scaled via getScaledInstance under the hood)
-        lbl_icono.setIcon(ImageHelper.getScaledIcon("/archivos/Logod.png", lbl_icono.getWidth(), lbl_icono.getHeight()));
+        lbl_icono.setIcon(ImageHelper.getScaledIcon("/archivos/LogoCO2.png", lbl_icono.getWidth(), lbl_icono.getHeight()));
         lbl_difuminado.setIcon(ImageHelper.getScaledIcon("/archivos/jose.png", lbl_difuminado.getWidth(), lbl_difuminado.getHeight()));
     }
     private void AbrirMenu(){

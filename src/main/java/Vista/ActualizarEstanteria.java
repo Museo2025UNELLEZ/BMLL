@@ -5,11 +5,16 @@
 package Vista;
 
 import controlador.conexionSQL;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -27,6 +32,16 @@ public class ActualizarEstanteria extends javax.swing.JFrame {
   
         txtTitulo.setText(estanteria[1].toString());
         txtFila.setText(estanteria[2].toString());
+        
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getRootPane().getActionMap().put("volver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Reuse the generated action handler so behavior stays in one place
+                btn_VolverActionPerformed(new ActionEvent(ActualizarEstanteria.this, ActionEvent.ACTION_PERFORMED, "escape"));
+            }
+        });
 
     }
     /**
@@ -88,7 +103,7 @@ public class ActualizarEstanteria extends javax.swing.JFrame {
                 btn_actualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, 260, 60));
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 280, 60));
 
         btn_Volver.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         btn_Volver.setForeground(new java.awt.Color(0, 113, 114));
@@ -98,7 +113,7 @@ public class ActualizarEstanteria extends javax.swing.JFrame {
                 btn_VolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 500, 280, 60));
+        jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 280, 60));
 
         txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 530, 30));

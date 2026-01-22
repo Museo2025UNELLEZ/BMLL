@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 /**
@@ -42,8 +43,10 @@ public class Ajuste_func extends javax.swing.JFrame {
         lbl_respaldo = new javax.swing.JLabel();
         bnt_usuarios = new javax.swing.JButton();
         lbl_usuarios = new javax.swing.JLabel();
-        btn_EliminarUsuario = new javax.swing.JButton();
+        btn_Salir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btn_EliminarUsuario1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,8 +75,8 @@ public class Ajuste_func extends javax.swing.JFrame {
 
         lbl_respaldo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_respaldo.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_respaldo.setText("1. Boton para generar respaldo de la base de datos y guardarlo donde quiera");
-        jPanel1.add(lbl_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        lbl_respaldo.setText("1. Boton para generar respaldo de la base de datos y guardarlo");
+        jPanel1.add(lbl_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, -1));
 
         bnt_usuarios.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         bnt_usuarios.setForeground(new java.awt.Color(0, 113, 114));
@@ -90,21 +93,37 @@ public class Ajuste_func extends javax.swing.JFrame {
         lbl_usuarios.setText("2. Crear Nuevos Usuarios que puedan acceder al sistema");
         jPanel1.add(lbl_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
-        btn_EliminarUsuario.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        btn_EliminarUsuario.setForeground(new java.awt.Color(0, 113, 114));
-        btn_EliminarUsuario.setText("Eliminar Usuario");
-        btn_EliminarUsuario.setMinimumSize(new java.awt.Dimension(173, 34));
-        btn_EliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btn_Salir.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_Salir.setForeground(new java.awt.Color(204, 0, 0));
+        btn_Salir.setText("Salir");
+        btn_Salir.setMinimumSize(new java.awt.Dimension(173, 34));
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_EliminarUsuarioActionPerformed(evt);
+                btn_SalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_EliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, 340, 140));
+        jPanel1.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 370, 150));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("3. Eliminar usuario del sistema");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, 340, -1));
+        jLabel1.setText("4. Salir del programa");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 340, 230, -1));
+
+        btn_EliminarUsuario1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_EliminarUsuario1.setForeground(new java.awt.Color(0, 113, 114));
+        btn_EliminarUsuario1.setText("Eliminar Usuario");
+        btn_EliminarUsuario1.setMinimumSize(new java.awt.Dimension(173, 34));
+        btn_EliminarUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarUsuario1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_EliminarUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 110, 340, 140));
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("3. Eliminar usuario del sistema");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 340, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,10 +152,18 @@ public class Ajuste_func extends javax.swing.JFrame {
         onAgregarUsuario ();
     }//GEN-LAST:event_bnt_usuariosActionPerformed
 
-    private void btn_EliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarUsuarioActionPerformed
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
         // TODO add your handling code here:
-         onEliminarUsuario ();
-    }//GEN-LAST:event_btn_EliminarUsuarioActionPerformed
+         int opcion = JOptionPane.showConfirmDialog(this,"Desea Salir de BMLL?","Confirmacion",JOptionPane.YES_NO_OPTION);
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void btn_EliminarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarUsuario1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EliminarUsuario1ActionPerformed
 
     private void onGenerarRespaldo() {
         String time = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
@@ -349,10 +376,12 @@ public class Ajuste_func extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnt_usuarios;
-    private javax.swing.JButton btn_EliminarUsuario;
+    private javax.swing.JButton btn_EliminarUsuario1;
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JButton btn_respaldo;
     private javax.swing.JButton btn_volver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_respaldo;
     private javax.swing.JLabel lbl_usuarios;

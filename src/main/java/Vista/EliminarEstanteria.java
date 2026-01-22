@@ -12,6 +12,9 @@ import controlador.LogicaBotonActualizar;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JList;
@@ -23,7 +26,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class EliminarEstanteria extends javax.swing.JFrame {
 	private Connection con;
@@ -35,6 +43,24 @@ public class EliminarEstanteria extends javax.swing.JFrame {
 		cargarEstanteria();
 		// permitir que Enter en el campo de texto dispare el botón Buscar
 		box_titulo.addActionListener(evt -> btn_buscar.doClick());
+                
+                tb_consulta.getTableHeader().setFont(new Font("Verdana", Font.BOLD, 16));
+                
+                DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+                centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        
+                tb_consulta.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+                
+                getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+                getRootPane().getActionMap().put("volver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Reuse the generated action handler so behavior stays in one place
+                btn_volverActionPerformed(new ActionEvent(EliminarEstanteria.this, ActionEvent.ACTION_PERFORMED, "escape"));
+            }
+        });
+                
 	}
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

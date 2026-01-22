@@ -152,7 +152,7 @@ public class Consultas extends javax.swing.JFrame {
         combo_categorias.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jPanel1.add(combo_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, 250, 30));
 
-        btn_volver.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        btn_volver.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {

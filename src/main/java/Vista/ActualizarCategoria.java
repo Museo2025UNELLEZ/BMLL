@@ -6,13 +6,18 @@ package Vista;
 
 import Modelo.Categorias;
 import controlador.conexionSQL;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -25,6 +30,7 @@ public class ActualizarCategoria extends javax.swing.JFrame {
 
     public ActualizarCategoria(Categorias categoria, int id) {
         initComponents(); // inicializa los textfields y combobox
+        
         this.id = id;
         
         this.categoria = categoria;
@@ -32,7 +38,16 @@ public class ActualizarCategoria extends javax.swing.JFrame {
         
         // Cargar datos en los campos
         txtTitulo.setText(categoria.getNombre());
-
+        
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getRootPane().getActionMap().put("volver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Reuse the generated action handler so behavior stays in one place
+                btn_VolverActionPerformed(new ActionEvent(ActualizarCategoria.this, ActionEvent.ACTION_PERFORMED, "escape"));
+            }
+        });
     }
 
 

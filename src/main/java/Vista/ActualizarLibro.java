@@ -216,7 +216,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
                 btn_actualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 620, 260, 50));
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 620, 260, 50));
 
         btn_Volver.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         btn_Volver.setForeground(new java.awt.Color(0, 113, 114));
@@ -226,7 +226,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
                 btn_VolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 620, 280, 50));
+        jPanel1.add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 620, 280, 50));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(242, 130, 37));
@@ -268,7 +268,7 @@ public class ActualizarLibro extends javax.swing.JFrame {
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 210, 460, 30));
 
         lbl_lapiz.setText("jLabel7");
-        jPanel1.add(lbl_lapiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 200, 220));
+        jPanel1.add(lbl_lapiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 160));
 
         lbl_curva.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_curva.setText("jLabel7");

@@ -6,18 +6,26 @@ package Vista;
 
 import controlador.LogicaBotonActualizar;
 import controlador.conexionSQL;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.util.List;
 // image loading via ImageHelper
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,6 +44,24 @@ public class BuscarEstanteriaActualizar extends javax.swing.JFrame {
         // registrar listener después de cargar categorias para evitar disparos en init
         // permitir que Enter en el campo de texto dispare el botón Buscar (mejora UX)
         box_titulo.addActionListener(evt -> btn_buscar.doClick());
+        
+        tb_consulta.getTableHeader().setFont(new Font("Verdana", Font.BOLD, 16));
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        tb_consulta.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tb_consulta.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getRootPane().getActionMap().put("volver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Reuse the generated action handler so behavior stays in one place
+                btn_volverActionPerformed(new ActionEvent(BuscarEstanteriaActualizar.this, ActionEvent.ACTION_PERFORMED, "escape"));
+            }
+        });
         
     }
 

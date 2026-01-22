@@ -201,7 +201,7 @@ public class DatosLibro extends javax.swing.JFrame {
         jLabel11.setText("Editorial");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 140, 50));
 
-        btn_Volver.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_Volver.setFont(new java.awt.Font("Verdana", 1, 22)); // NOI18N
         btn_Volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_Volver.setText("Volver");
         btn_Volver.addActionListener(new java.awt.event.ActionListener() {
