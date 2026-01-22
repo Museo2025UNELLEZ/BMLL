@@ -102,12 +102,12 @@ public class Ajuste_func extends javax.swing.JFrame {
                 btn_SalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 370, 150));
+        jPanel1.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 370, 350, 150));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("4. Salir del programa");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 340, 230, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 340, 230, -1));
 
         btn_EliminarUsuario1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         btn_EliminarUsuario1.setForeground(new java.awt.Color(0, 113, 114));
@@ -118,12 +118,12 @@ public class Ajuste_func extends javax.swing.JFrame {
                 btn_EliminarUsuario1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_EliminarUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 110, 340, 140));
+        jPanel1.add(btn_EliminarUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 110, 340, 140));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("3. Eliminar usuario del sistema");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 340, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, 340, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +163,13 @@ public class Ajuste_func extends javax.swing.JFrame {
 
     private void btn_EliminarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarUsuario1ActionPerformed
         // TODO add your handling code here:
+        
+        EliminarUsuario eli = new EliminarUsuario();
+        eli.setLocationRelativeTo(null);
+        eli.setVisible(true);
+        
+        this.dispose();
+        
     }//GEN-LAST:event_btn_EliminarUsuario1ActionPerformed
 
     private void onGenerarRespaldo() {
