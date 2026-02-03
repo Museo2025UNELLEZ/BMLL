@@ -188,7 +188,7 @@ public class BuscarLibroActualizar extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 50));
-        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 1310, 510));
+        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 1360, 510));
         jPanel1.add(lbl_globo, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, -30, 230, 220));
         jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, -10, 170, 100));
 

@@ -53,7 +53,7 @@ public class Ajuste_func extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(244, 226, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_respaldo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_respaldo.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btn_respaldo.setForeground(new java.awt.Color(0, 113, 114));
         btn_respaldo.setText("Generar Respaldo");
         btn_respaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -75,10 +75,10 @@ public class Ajuste_func extends javax.swing.JFrame {
 
         lbl_respaldo.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_respaldo.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_respaldo.setText("1. Boton para generar respaldo de la base de datos y guardarlo");
-        jPanel1.add(lbl_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, -1));
+        lbl_respaldo.setText("<html><br>1. Boton para generar respaldo</br><center>de la base de datos</center></html>");
+        jPanel1.add(lbl_respaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 330, 80));
 
-        bnt_usuarios.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        bnt_usuarios.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         bnt_usuarios.setForeground(new java.awt.Color(0, 113, 114));
         bnt_usuarios.setText("Crear Usuario");
         bnt_usuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -90,10 +90,10 @@ public class Ajuste_func extends javax.swing.JFrame {
 
         lbl_usuarios.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lbl_usuarios.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_usuarios.setText("2. Crear Nuevos Usuarios que puedan acceder al sistema");
-        jPanel1.add(lbl_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
+        lbl_usuarios.setText("<html><br>2. Crear Nuevos Usuarios</br> <center>para el sistema</center></html>");
+        jPanel1.add(lbl_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 270, 70));
 
-        btn_Salir.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_Salir.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         btn_Salir.setForeground(new java.awt.Color(204, 0, 0));
         btn_Salir.setText("Salir");
         btn_Salir.setMinimumSize(new java.awt.Dimension(173, 34));
@@ -102,27 +102,28 @@ public class Ajuste_func extends javax.swing.JFrame {
                 btn_SalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 370, 350, 150));
+        jPanel1.add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 370, 370, 140));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("4. Salir del programa");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 340, 230, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 230, -1));
 
-        btn_EliminarUsuario1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        btn_EliminarUsuario1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btn_EliminarUsuario1.setForeground(new java.awt.Color(0, 113, 114));
         btn_EliminarUsuario1.setText("Eliminar Usuario");
         btn_EliminarUsuario1.setMinimumSize(new java.awt.Dimension(173, 34));
+        btn_EliminarUsuario1.setPreferredSize(new java.awt.Dimension(269, 37));
         btn_EliminarUsuario1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_EliminarUsuario1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_EliminarUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 110, 340, 140));
+        jPanel1.add(btn_EliminarUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 370, 140));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("3. Eliminar usuario del sistema");
+        jLabel2.setText("   3. Eliminar usuario del sistema");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, 340, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

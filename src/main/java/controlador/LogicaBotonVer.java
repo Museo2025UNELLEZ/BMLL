@@ -57,17 +57,13 @@ public class LogicaBotonVer extends DefaultCellEditor {
             Libro libro = control.obtenerLibroPorId(id);
 
             if(libro != null){
-                // intentar obtener el estado de búsqueda de la ventana padre (si es BuscarLibroActualizar o Consultas)
+                // intentar obtener el estado de búsqueda de la ventana padre (si es BuscarLibroActualizar)
                 String prevTitle = null;
                 int prevCategoryId = -1;
                 Window parentWindow = SwingUtilities.getWindowAncestor(tabla);
                 if (parentWindow != null) {
                     if (parentWindow instanceof Vista.BuscarLibroActualizar) {
                         Vista.BuscarLibroActualizar buscar = (Vista.BuscarLibroActualizar) parentWindow;
-                        prevTitle = buscar.getCurrentSearchTitle();
-                        prevCategoryId = buscar.getCurrentSelectedCategoryId();
-                    } else if (parentWindow instanceof Vista.Consultas) {
-                        Vista.Consultas buscar = (Vista.Consultas) parentWindow;
                         prevTitle = buscar.getCurrentSearchTitle();
                         prevCategoryId = buscar.getCurrentSelectedCategoryId();
                     }

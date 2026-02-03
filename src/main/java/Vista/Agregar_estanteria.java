@@ -76,7 +76,7 @@ public class Agregar_estanteria extends javax.swing.JFrame {
         });
         jPanel1.add(box_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 134, 185, -1));
 
-        btn_guardar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        btn_guardar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         btn_guardar.setForeground(new java.awt.Color(0, 113, 114));
         btn_guardar.setText("Guardar");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -84,9 +84,9 @@ public class Agregar_estanteria extends javax.swing.JFrame {
                 btn_guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 160, 30));
+        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 160, 40));
 
-        btn_volver.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        btn_volver.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +94,7 @@ public class Agregar_estanteria extends javax.swing.JFrame {
                 btn_volverActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 150, 30));
+        jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 160, 40));
 
         numero_filas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

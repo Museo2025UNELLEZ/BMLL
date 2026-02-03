@@ -9,12 +9,14 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 /**
  *
  * @author luise
  */
 public class MenuPrincipal extends javax.swing.JFrame {
     private Connection con;
+
 
     /**
      * Creates new form MenuPrincipal
@@ -91,9 +93,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btn_categoriaEditar = new javax.swing.JButton();
         btn_estanteria = new javax.swing.JButton();
         btn_estanteriaEditar = new javax.swing.JButton();
+        lbl_degra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(901, 634));
         setMinimumSize(new java.awt.Dimension(901, 634));
 
         jPanel1.setBackground(new java.awt.Color(244, 226, 222));
@@ -107,7 +109,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Biblioteca del Museo de los Llanos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
-        btn_consultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_consultar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         btn_consultar.setForeground(new java.awt.Color(0, 113, 114));
         btn_consultar.setText("Consultar Libro");
         btn_consultar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,9 +117,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_consultarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 200, 50));
+        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 260, 50));
 
-        btn_agregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_agregar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(0, 113, 114));
         btn_agregar.setText("Agregar Libros");
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,9 +127,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_agregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 50));
+        jPanel1.add(btn_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 260, 50));
 
-        btn_eliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_eliminar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(0, 113, 114));
         btn_eliminar.setText("Eliminar Libro");
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +137,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_eliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 200, 50));
+        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 260, 50));
 
-        btn_actualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_actualizar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         btn_actualizar.setForeground(new java.awt.Color(0, 113, 114));
         btn_actualizar.setText("Actualizar libro");
         btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,38 +147,38 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btn_actualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 200, 50));
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 260, 50));
 
         btn_ajustes.setBackground(new java.awt.Color(255, 255, 255));
-        btn_ajustes.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        btn_ajustes.setForeground(new java.awt.Color(0, 113, 114));
+        btn_ajustes.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        btn_ajustes.setForeground(new java.awt.Color(51, 51, 51));
         btn_ajustes.setText("Ajustes");
         btn_ajustes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ajustesActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, 50));
+        jPanel1.add(btn_ajustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 260, 50));
 
-        btn_categoriaEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_categoriaEliminar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_categoriaEliminar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        btn_categoriaEliminar.setForeground(new java.awt.Color(242, 130, 37));
         btn_categoriaEliminar.setText("Eliminar Categoria");
         btn_categoriaEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_categoriaEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_categoriaEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 200, 50));
+        jPanel1.add(btn_categoriaEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 260, 50));
 
-        btn_estanteriaEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_estanteriaEliminar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_estanteriaEliminar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        btn_estanteriaEliminar.setForeground(new java.awt.Color(67, 198, 200));
         btn_estanteriaEliminar.setText("Eliminar Estanteria");
         btn_estanteriaEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_estanteriaEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_estanteriaEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 200, 50));
+        jPanel1.add(btn_estanteriaEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 260, 50));
 
         jPanel2.setBackground(new java.awt.Color(0, 113, 114));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -317,45 +319,48 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 90, 400, 300));
 
-        btn_categoria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_categoria.setForeground(new java.awt.Color(0, 113, 114));
+        btn_categoria.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        btn_categoria.setForeground(new java.awt.Color(242, 130, 37));
         btn_categoria.setText("Agregar Categoria");
         btn_categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_categoriaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 200, 50));
+        jPanel1.add(btn_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 260, 50));
 
-        btn_categoriaEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_categoriaEditar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_categoriaEditar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        btn_categoriaEditar.setForeground(new java.awt.Color(242, 130, 37));
         btn_categoriaEditar.setText("Editar Categoria");
         btn_categoriaEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_categoriaEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_categoriaEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 200, 50));
+        jPanel1.add(btn_categoriaEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 260, 50));
 
-        btn_estanteria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_estanteria.setForeground(new java.awt.Color(0, 113, 114));
+        btn_estanteria.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        btn_estanteria.setForeground(new java.awt.Color(67, 198, 200));
         btn_estanteria.setText("Agregar Estanteria");
         btn_estanteria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_estanteriaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_estanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 200, 50));
+        jPanel1.add(btn_estanteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 260, 50));
 
-        btn_estanteriaEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_estanteriaEditar.setForeground(new java.awt.Color(0, 113, 114));
+        btn_estanteriaEditar.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        btn_estanteriaEditar.setForeground(new java.awt.Color(67, 198, 200));
         btn_estanteriaEditar.setText("Editar Estanteria");
         btn_estanteriaEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_estanteriaEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_estanteriaEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 200, 50));
+        jPanel1.add(btn_estanteriaEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 260, 50));
+
+        lbl_degra.setText("jLabel6");
+        jPanel1.add(lbl_degra, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 130, 1360, 590));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -539,11 +544,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lbl_degra;
     private javax.swing.JLabel librosCount;
     private javax.swing.JLabel revistasCount;
     // End of variables declaration//GEN-END:variables
 
     private void CargarLogo(){
-        // Logo loading logic can be added here if needed
+        // set the lbl_degra icon (keeps the label editable in the form editor)
+        if (lbl_degra != null) {
+            lbl_degra.setIcon(ImageHelper.getScaledIcon("/archivos/luis4.png", lbl_degra.getWidth(), lbl_degra.getHeight()));
+        }
     }
 }

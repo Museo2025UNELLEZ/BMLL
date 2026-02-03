@@ -260,19 +260,14 @@ public class ActualizarLibro extends javax.swing.JFrame {
         comboCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEGORIAS", " " }));
         jPanel1.add(comboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 460, 40));
-
-        lbl_libros.setText("jLabel7");
         jPanel1.add(lbl_libros, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 420, 330, 260));
 
         jDateChooser1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 210, 460, 30));
-
-        lbl_lapiz.setText("jLabel7");
         jPanel1.add(lbl_lapiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 160));
 
         lbl_curva.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        lbl_curva.setText("jLabel7");
-        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 1360, 300));
+        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 1360, 360));
 
         lbl_titulo2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbl_titulo2.setForeground(new java.awt.Color(242, 130, 37));

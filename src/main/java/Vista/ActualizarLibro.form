@@ -405,9 +405,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_libros">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel7"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="1030" y="420" width="330" height="260"/>
@@ -427,9 +424,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_lapiz">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel7"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="160" height="160"/>
@@ -441,11 +435,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Verdana" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="jLabel7"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="420" width="1360" height="300"/>
+              <AbsoluteConstraints x="0" y="340" width="1360" height="360"/>
             </Constraint>
           </Constraints>
         </Component>

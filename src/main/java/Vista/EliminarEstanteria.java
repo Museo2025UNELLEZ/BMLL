@@ -85,7 +85,7 @@ public class EliminarEstanteria extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(242, 130, 37));
-        jLabel1.setText("Eliminar Categoría");
+        jLabel1.setText("Eliminar Estanteria");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         tb_consulta.setBackground(new java.awt.Color(255, 255, 255));
@@ -121,17 +121,17 @@ public class EliminarEstanteria extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_consulta);
         tb_consulta.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 1230, 570));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 1250, 560));
 
         box_titulo.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 540, -1));
+        jPanel1.add(box_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 590, -1));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(242, 130, 37));
         jLabel2.setText("Nombre: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 60));
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +139,7 @@ public class EliminarEstanteria extends javax.swing.JFrame {
                 btn_buscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 160, 30));
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 490, 30));
 
         btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_volver.setForeground(new java.awt.Color(0, 113, 114));
@@ -151,7 +151,7 @@ public class EliminarEstanteria extends javax.swing.JFrame {
         });
         jPanel1.add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 50));
         jPanel1.add(lbl_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 340, 200));
-        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 1360, 480));
+        jPanel1.add(lbl_curva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 1360, 450));
         jPanel1.add(lbl_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 360, 170));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

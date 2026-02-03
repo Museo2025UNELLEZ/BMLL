@@ -131,9 +131,9 @@ public class EliminarCategoria extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(242, 130, 37));
         jLabel2.setText("Nombre: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 60));
 
-        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_buscar.setForeground(new java.awt.Color(0, 113, 114));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
                 btn_buscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 200, 30));
+        jPanel1.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 510, 30));
 
         btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_volver.setForeground(new java.awt.Color(0, 113, 114));

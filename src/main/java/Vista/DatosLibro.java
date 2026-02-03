@@ -302,8 +302,6 @@ public class DatosLibro extends javax.swing.JFrame {
         // Si la ventana que abrió DatosLibro nos indicó que el volver debía estar deshabilitado,
         // aplicamos ese estado aquí (por ejemplo, usuarios normales).
         buscar.setVolverEnabled(this.volverEnabledOnReturn);
-        // Restaurar búsqueda previa (título o categoría) si disponemos de ella
-        buscar.restoreSearchState(this.prevSearchTitle, this.prevSearchCategoryId);
         buscar.setLocationRelativeTo(null);
         buscar.setVisible(true);
         this.dispose();

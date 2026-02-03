@@ -116,7 +116,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
 
         jComboBoxEstanterias.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jComboBoxEstanterias.setForeground(new java.awt.Color(0, 113, 114));
-        jComboBoxEstanterias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
+        jComboBoxEstanterias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Publico" }));
         jPanel5.add(jComboBoxEstanterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 420, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N

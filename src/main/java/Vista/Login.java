@@ -84,7 +84,7 @@ public class Login extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 360, -1));
 
-        btn_entrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_entrar.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btn_entrar.setForeground(new java.awt.Color(0, 113, 114));
         btn_entrar.setText("Entrar");
         btn_entrar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +100,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(btn_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 180, -1));
         jPanel1.add(lbl_icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 320, 180));
 
-        btn_salir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_salir.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btn_salir.setForeground(new java.awt.Color(0, 113, 114));
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {

@@ -57,7 +57,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
             String usuario = rs.getString("usuario");
             int admin = rs.getInt("is_admin");
 
-            String permiso = (admin == 1) ? "Administrador" : "Normal";
+            String permiso = (admin == 1) ? "Administrador" : "Publico";
 
             ComboUsuarios.addItem(id + " - " + usuario + " - " + permiso);
         }
@@ -152,7 +152,7 @@ private void cargarDatosUsuario() {
 
         ComboUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ComboUsuarios.setForeground(new java.awt.Color(0, 0, 0));
-        ComboUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
+        ComboUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Publico" }));
         ComboUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboUsuariosActionPerformed(evt);
@@ -170,7 +170,7 @@ private void cargarDatosUsuario() {
         LblApellido.setText("Apellido");
         jPanel5.add(LblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 180, -1, 30));
 
-        Btn_Eliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Btn_Eliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Btn_Eliminar.setForeground(new java.awt.Color(0, 113, 114));
         Btn_Eliminar.setText("Eliminar");
         Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +202,7 @@ private void cargarDatosUsuario() {
         });
         jPanel5.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 330, -1));
 
-        btn_volver.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_volver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_volver.setForeground(new java.awt.Color(0, 113, 114));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
